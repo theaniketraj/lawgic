@@ -24,7 +24,6 @@ export const ChatProvider = ({ children }) => {
   const [isLoadingChats, setIsLoadingChats] = useState(true);
   const [isLoadingMessages, setIsLoadingMessages] = useState(false);
   const [isLoadingStats, setIsLoadingStats] = useState(true);
-  const [isOptimisticUpdate, setIsOptimisticUpdate] = useState(false);
 
   // Chat session management
   const [chatSessions, setChatSessions] = useState({});
@@ -400,19 +399,13 @@ export const ChatProvider = ({ children }) => {
     return "New Chat";
   };
 
-  const addMessage = (text, sender, isOptimistic = false) => {
+  const addMessage = (text, sender) => {
     const newMessage = {
       id: Date.now(),
       text,
       sender,
       timestamp: new Date().toISOString(),
-      isOptimistic, // Flag for optimistic updates
     };
-
-    // For optimistic updates, show immediately
-    if (isOptimistic) {
-      setIsOptimisticUpdate(true);
-    }
 
     setMessages((prev) => {
       const updatedMessages = [...prev, newMessage];
@@ -752,7 +745,6 @@ export const ChatProvider = ({ children }) => {
     isLoadingChats,
     isLoadingMessages,
     isLoadingStats,
-    isOptimisticUpdate,
     // Enhanced sidebar state
     chatSearchQuery,
     setChatSearchQuery,
