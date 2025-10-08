@@ -70,5 +70,31 @@
     left: 10px;
     min-width: unset;
     max-width: unset;
+    padding: 12px 14px;
+    font-size: 14px;
+    border-radius: 8px;
+  }
+
+  .toast-container {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .toast {
+    right: 8px;
+    left: 8px;
+    padding: 10px 12px;
+    font-size: 13px;
+    border-radius: 6px;
+  }
+}
+
+@media (max-width: 360px) {
+  .toast {
+    right: 5px;
+    left: 5px;
+    padding: 8px 10px;
+    font-size: 12px;
   }
 }
