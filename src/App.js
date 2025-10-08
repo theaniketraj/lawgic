@@ -4,19 +4,23 @@ import ChatSection from "./components/ChatSection";
 import ToastContainer from "./components/ToastContainer";
 import WelcomeScreen from "./components/WelcomeScreen";
 import { ChatProvider, useChatContext } from "./context/ChatContext";
+import { ThemeProvider, useTheme } from "./context/ThemeContext";
 import "./App.css";
 
 function App() {
   return (
-    <ChatProvider>
-      <AppContent />
-    </ChatProvider>
+    <ThemeProvider>
+      <ChatProvider>
+        <AppContent />
+      </ChatProvider>
+    </ThemeProvider>
   );
 }
 
 function AppContent() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { showWelcomeScreen } = useChatContext();
+  const { theme } = useTheme();
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
@@ -43,7 +47,7 @@ function AppContent() {
   }, [sidebarOpen]);
 
   return (
-    <div className="app">
+    <div className="app" style={{ background: theme.colors.primaryBg }}>
       {/* Welcome Screen */}
       {showWelcomeScreen && <WelcomeScreen show={showWelcomeScreen} />}
 
