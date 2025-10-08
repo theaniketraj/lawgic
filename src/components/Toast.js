@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import './Toast.css';
+import React, { useState, useEffect } from "react";
+import { useTheme } from "../context/ThemeContext";
+import "./Toast.css";
 
-const Toast = ({ message, type = 'info', duration = 3000, onClose }) => {
+const Toast = ({ message, type = "info", duration = 3000, onClose }) => {
   const [isVisible, setIsVisible] = useState(true);
+  const { theme } = useTheme();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -15,11 +17,11 @@ const Toast = ({ message, type = 'info', duration = 3000, onClose }) => {
 
   const getIcon = () => {
     switch (type) {
-      case 'success':
+      case "success":
         return <i className="fas fa-check-circle"></i>;
-      case 'error':
+      case "error":
         return <i className="fas fa-times-circle"></i>;
-      case 'warning':
+      case "warning":
         return <i className="fas fa-exclamation-triangle"></i>;
       default:
         return <i className="fas fa-info-circle"></i>;
@@ -27,7 +29,10 @@ const Toast = ({ message, type = 'info', duration = 3000, onClose }) => {
   };
 
   return (
-    <div className={`toast ${type} ${isVisible ? 'visible' : 'hidden'}`}>
+    <div
+      className={`toast ${type} ${isVisible ? "visible" : "hidden"}`}
+      data-theme={theme.name}
+    >
       <div className="toast-content">
         <span className="toast-icon">{getIcon()}</span>
         <span className="toast-message">{message}</span>
