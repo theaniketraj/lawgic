@@ -1,9 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { useChatContext } from '../context/ChatContext';
-import './ChatSection.css';
+import React, { useState, useRef, useEffect } from "react";
+import { useChatContext } from "../context/ChatContext";
+import SkeletonLoader from "./SkeletonLoader";
+import "./ChatSection.css";
 
 const ChatSection = () => {
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
   const [isVoiceModalOpen, setIsVoiceModalOpen] = useState(false);
   const [isListening, setIsListening] = useState(false);
   const messagesEndRef = useRef(null);
@@ -11,7 +12,15 @@ const ChatSection = () => {
   const photoUploadRef = useRef(null);
   const documentUploadRef = useRef(null);
 
-  const { messages, isTyping, addMessage, processMessage, setStatus } = useChatContext();
+  const {
+    messages,
+    isTyping,
+    addMessage,
+    processMessage,
+    setStatus,
+    isLoadingMessages,
+    userSettings,
+  } = useChatContext();
 
   useEffect(() => {
     scrollToBottom();
@@ -24,7 +33,7 @@ const ChatSection = () => {
       setTimeout(() => {
         const message = e.detail.trim();
         if (message) {
-          addMessage(message, 'user');
+          addMessage(message, "user");
           processMessage(message);
         }
         setIsVoiceModalOpen(false);
@@ -32,36 +41,43 @@ const ChatSection = () => {
       }, 100);
     };
 
-    window.addEventListener('voiceInput', handleVoiceInput);
-    return () => window.removeEventListener('voiceInput', handleVoiceInput);
+    window.addEventListener("voiceInput", handleVoiceInput);
+    return () => window.removeEventListener("voiceInput", handleVoiceInput);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   const handleSendMessage = (messageText = null) => {
     const message = messageText || inputValue.trim();
 
     if (message) {
-      addMessage(message, 'user');
-      setInputValue('');
-      processMessage(message);
+      // Optimistic update - show message immediately
+      addMessage(message, "user", true);
+      setInputValue("");
+
+      // Process message in background and update when complete
+      setTimeout(() => {
+        // Remove optimistic flag and process
+        addMessage(message, "user", false);
+        processMessage(message);
+      }, 100);
     }
   };
 
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       handleSendMessage();
     }
   };
 
   const formatTimestamp = (timestamp) => {
     const date = new Date(timestamp);
-    return date.toLocaleTimeString('en-US', { 
-      hour: '2-digit', 
-      minute: '2-digit' 
+    return date.toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
     });
   };
 
@@ -76,36 +92,42 @@ const ChatSection = () => {
 
   const startVoiceInput = () => {
     if (!window.webkitSpeechRecognition && !window.SpeechRecognition) {
-      window.showToast?.('Speech recognition not supported in this browser', 'error');
+      window.showToast?.(
+        "Speech recognition not supported in this browser",
+        "error"
+      );
       return;
     }
 
-    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
     const recognition = new SpeechRecognition();
 
     recognition.continuous = false;
     recognition.interimResults = false;
-    recognition.lang = 'en-US';
+    recognition.lang = "en-US";
 
     recognition.onstart = () => {
-      setStatus('Listening...');
+      setStatus("Listening...");
       setIsListening(true);
     };
 
     recognition.onresult = (event) => {
       const transcript = event.results[0][0].transcript;
-      window.dispatchEvent(new CustomEvent('voiceInput', { detail: transcript }));
+      window.dispatchEvent(
+        new CustomEvent("voiceInput", { detail: transcript })
+      );
     };
 
     recognition.onerror = (event) => {
-      console.error('Speech recognition error:', event.error);
+      console.error("Speech recognition error:", event.error);
       setIsListening(false);
       setIsVoiceModalOpen(false);
-      window.showToast?.('Voice input error: ' + event.error, 'error');
+      window.showToast?.("Voice input error: " + event.error, "error");
     };
 
     recognition.onend = () => {
-      setStatus('Ready');
+      setStatus("Ready");
       setIsListening(false);
       setIsVoiceModalOpen(false);
     };
@@ -127,8 +149,8 @@ const ChatSection = () => {
     if (file) {
       const reader = new FileReader();
       reader.onload = (event) => {
-        addMessage("I've received your photo!", 'bot');
-        window.showToast?.('Photo uploaded successfully!', 'success');
+        addMessage("I've received your photo!", "bot");
+        window.showToast?.("Photo uploaded successfully!", "success");
       };
       reader.readAsDataURL(file);
     }
@@ -137,32 +159,35 @@ const ChatSection = () => {
   const handleDocumentUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
-      window.showToast?.(`Processing ${file.name}...`, 'info');
+      window.showToast?.(`Processing ${file.name}...`, "info");
       setTimeout(() => {
-        addMessage(`I've received your document: ${file.name}. I can help you analyze it!`, 'bot');
-        window.showToast?.('Document uploaded successfully!', 'success');
+        addMessage(
+          `I've received your document: ${file.name}. I can help you analyze it!`,
+          "bot"
+        );
+        window.showToast?.("Document uploaded successfully!", "success");
       }, 1000);
     }
   };
 
   const handleAttachmentClick = () => {
     // Create a hidden file input that accepts both images and documents
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = 'image/*,.pdf,.doc,.docx,.txt';
-    input.style.display = 'none';
-    
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = "image/*,.pdf,.doc,.docx,.txt";
+    input.style.display = "none";
+
     input.onchange = (e) => {
       const file = e.target.files[0];
       if (file) {
-        if (file.type.startsWith('image/')) {
+        if (file.type.startsWith("image/")) {
           handlePhotoUpload(e);
         } else {
           handleDocumentUpload(e);
         }
       }
     };
-    
+
     input.click();
   };
 
@@ -170,12 +195,34 @@ const ChatSection = () => {
     <div className="chat-section">
       {/* Chat Messages Area */}
       <div className="chat-messages">
-        {messages.map((message) => (
-          <div key={message.id} className={`message ${message.sender}-message`}>
-            <div className="message-text">{message.text}</div>
-            <div className="message-timestamp">{formatTimestamp(message.timestamp)}</div>
-          </div>
-        ))}
+        {isLoadingMessages ? (
+          <SkeletonLoader type="message" count={3} />
+        ) : (
+          messages.map((message, index) => (
+            <div
+              key={message.id}
+              className={`message ${message.sender}-message ${
+                message.isOptimistic ? "optimistic" : ""
+              }`}
+              style={{
+                animationDelay: userSettings?.animationsEnabled
+                  ? `${index * 0.1}s`
+                  : "0s",
+                opacity: message.isOptimistic ? 0.7 : 1,
+              }}
+            >
+              <div className="message-text">{message.text}</div>
+              <div className="message-timestamp">
+                {formatTimestamp(message.timestamp)}
+                {message.isOptimistic && (
+                  <span className="sending-indicator">
+                    <i className="fas fa-clock" title="Sending..."></i>
+                  </span>
+                )}
+              </div>
+            </div>
+          ))
+        )}
         {isTyping && (
           <div className="typing-indicator">
             AI is thinking
@@ -196,19 +243,19 @@ const ChatSection = () => {
             ref={photoUploadRef}
             accept="image/*"
             onChange={handlePhotoUpload}
-            style={{ display: 'none' }}
+            style={{ display: "none" }}
           />
           <input
             type="file"
             ref={documentUploadRef}
             accept=".pdf,.doc,.docx,.txt"
             onChange={handleDocumentUpload}
-            style={{ display: 'none' }}
+            style={{ display: "none" }}
           />
 
           {/* Attachment icon */}
           <div className="attachment-icons">
-            <button 
+            <button
               className="attachment-btn"
               onClick={handleAttachmentClick}
               title="Upload File"
@@ -230,15 +277,15 @@ const ChatSection = () => {
 
           {/* Voice and send buttons */}
           <div className="control-buttons">
-            <button 
-              className={`voice-btn ${isVoiceModalOpen ? 'active' : ''}`}
+            <button
+              className={`voice-btn ${isVoiceModalOpen ? "active" : ""}`}
               onClick={toggleVoiceModal}
               title="Voice Input"
             >
               <i className="fas fa-microphone"></i>
             </button>
-            <button 
-              className="send-btn" 
+            <button
+              className="send-btn"
               onClick={() => handleSendMessage()}
               title="Send Message"
             >
@@ -250,7 +297,10 @@ const ChatSection = () => {
 
       {/* Voice Modal */}
       {isVoiceModalOpen && (
-        <div className="voice-modal-overlay" onClick={() => setIsVoiceModalOpen(false)}>
+        <div
+          className="voice-modal-overlay"
+          onClick={() => setIsVoiceModalOpen(false)}
+        >
           <div className="voice-modal" onClick={(e) => e.stopPropagation()}>
             <div className="voice-modal-header">
               <h3>Voice Input</h3>
@@ -259,10 +309,19 @@ const ChatSection = () => {
               </button>
             </div>
             <div className="voice-modal-content">
-              <div className={`voice-indicator ${isListening ? 'listening' : ''}`}>
-                <i className="fas fa-microphone" style={{ fontSize: '60px' }}></i>
+              <div
+                className={`voice-indicator ${isListening ? "listening" : ""}`}
+              >
+                <i
+                  className="fas fa-microphone"
+                  style={{ fontSize: "60px" }}
+                ></i>
               </div>
-              <p>{isListening ? 'Listening... Speak now!' : 'Click to start speaking'}</p>
+              <p>
+                {isListening
+                  ? "Listening... Speak now!"
+                  : "Click to start speaking"}
+              </p>
               {!isListening && (
                 <button className="voice-start-btn" onClick={startVoiceInput}>
                   Start Recording
