@@ -1,11 +1,11 @@
 .sidebar {
   width: 280px;
-  background: rgba(0, 0, 0, 0.4);
+  background: var(--color-sidebar-bg);
   backdrop-filter: blur(25px);
   display: flex;
   flex-direction: column;
   padding: 20px;
-  border-right: 1px solid rgba(255, 255, 255, 0.2);
+  border-right: 1px solid var(--color-border);
   gap: 15px;
   position: fixed;
   left: 0;
@@ -26,13 +26,13 @@
   text-align: center;
   margin-bottom: 15px;
   padding-bottom: 15px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .sidebar-header h2 {
   margin: 0;
   font-size: 24px;
-  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+  background: var(--color-accent);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -45,7 +45,7 @@
 .sidebar-section h3 {
   margin: 0 0 10px 0;
   font-size: 16px;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--color-text-secondary);
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 600;
@@ -75,48 +75,49 @@
 }
 
 .memory-panel {
-  background: rgba(0, 0, 0, 0.2);
+  background: var(--color-chat-bg);
   border-radius: 10px;
   padding: 15px;
   max-height: 120px;
   overflow-y: auto;
   font-size: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--color-border);
 }
 
 .memory-panel h4 {
   margin: 0 0 8px 0;
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--color-text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
 
 .memory-content {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--color-text-muted);
   line-height: 1.4;
 }
 
 .status-panel {
   padding: 10px 15px;
-  background: rgba(0, 0, 0, 0.2);
+  background: var(--color-chat-bg);
   border-radius: 8px;
   font-size: 13px;
+  border: 1px solid var(--color-border);
 }
 
 .status-display {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--color-text-primary);
   font-weight: 500;
 }
 
 .emotion-status {
   margin-top: 5px;
   font-size: 11px;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--color-text-faded);
 }
 
 .emotion-status span {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--color-text-secondary);
   font-weight: 500;
 }
 
@@ -215,6 +216,20 @@
   border-color: rgba(34, 197, 94, 0.6) !important;
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(34, 197, 94, 0.3);
+}
+
+/* Theme Toggle Button */
+.theme-toggle-btn {
+  background: var(--color-accent-solid) !important;
+  border: 1px solid var(--color-accent-solid) !important;
+  color: white !important;
+}
+
+.theme-toggle-btn:hover {
+  background: var(--color-accent-hover) !important;
+  border-color: var(--color-accent-secondary) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(139, 92, 246, 0.3);
 }
 
 /* Danger Button */
