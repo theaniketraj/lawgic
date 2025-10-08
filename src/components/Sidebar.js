@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { useChatContext } from "../context/ChatContext";
 import { useTheme } from "../context/ThemeContext";
+import SkeletonLoader from "./SkeletonLoader";
 import "./Sidebar.css";
 
 const Sidebar = ({ isOpen, onClose }) => {
@@ -19,6 +20,8 @@ const Sidebar = ({ isOpen, onClose }) => {
     userSettings,
     chatCategories,
     conversationTemplates,
+    isLoadingChats,
+    isLoadingStats,
     clearMemory,
     clearChatHistory,
     toggleTTS,
@@ -155,68 +158,79 @@ const Sidebar = ({ isOpen, onClose }) => {
           <div className="chat-history-section">
             <h4>Conversations</h4>
             <div className="chat-history-list">
-              {getFilteredChats()
-                .slice(0, 15)
-                .map((chat) => (
-                  <div
-                    key={chat.id}
-                    className={`chat-history-item ${
-                      currentChatId === chat.id ? "active" : ""
-                    }`}
-                  >
+              {isLoadingChats ? (
+                <SkeletonLoader type="chat" count={5} />
+              ) : (
+                getFilteredChats()
+                  .slice(0, 15)
+                  .map((chat, index) => (
                     <div
-                      className="chat-item-content"
-                      onClick={() => {
-                        switchToChat(chat.id);
-                        window.showToast?.(
-                          `Switched to: ${chat.title}`,
-                          "info"
-                        );
+                      key={chat.id}
+                      className={`chat-history-item ${
+                        currentChatId === chat.id ? "active" : ""
+                      }`}
+                      style={{
+                        animationDelay: userSettings.animationsEnabled
+                          ? `${index * 0.05}s`
+                          : "0s",
                       }}
                     >
-                      <div className="chat-header">
-                        <div className="chat-title">{chat.title}</div>
-                        {chat.category && chat.category !== "all" && (
-                          <span
-                            className={`chat-category-badge ${chat.category}`}
-                          >
-                            {chat.category}
-                          </span>
-                        )}
-                      </div>
-                      <div className="chat-preview">{chat.preview}</div>
-                      <div className="chat-time">
-                        {new Date(chat.lastActive).toLocaleDateString()}
-                      </div>
-                    </div>
-                    <div className="chat-actions">
-                      <button
-                        className="chat-action-btn"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          if (chat.category === "archived") {
-                            unarchiveChat(chat.id);
-                            window.showToast?.("Chat unarchived", "success");
-                          } else {
-                            archiveChat(chat.id);
-                            window.showToast?.("Chat archived", "success");
-                          }
+                      <div
+                        className="chat-item-content"
+                        onClick={() => {
+                          switchToChat(chat.id);
+                          window.showToast?.(
+                            `Switched to: ${chat.title}`,
+                            "info"
+                          );
                         }}
-                        title={
-                          chat.category === "archived" ? "Unarchive" : "Archive"
-                        }
                       >
-                        <i
-                          className={`fas ${
+                        <div className="chat-header">
+                          <div className="chat-title">{chat.title}</div>
+                          {chat.category && chat.category !== "all" && (
+                            <span
+                              className={`chat-category-badge ${chat.category}`}
+                            >
+                              {chat.category}
+                            </span>
+                          )}
+                        </div>
+                        <div className="chat-preview">{chat.preview}</div>
+                        <div className="chat-time">
+                          {new Date(chat.lastActive).toLocaleDateString()}
+                        </div>
+                      </div>
+                      <div className="chat-actions">
+                        <button
+                          className="chat-action-btn"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            if (chat.category === "archived") {
+                              unarchiveChat(chat.id);
+                              window.showToast?.("Chat unarchived", "success");
+                            } else {
+                              archiveChat(chat.id);
+                              window.showToast?.("Chat archived", "success");
+                            }
+                          }}
+                          title={
                             chat.category === "archived"
-                              ? "fa-undo"
-                              : "fa-archive"
-                          }`}
-                        ></i>
-                      </button>
+                              ? "Unarchive"
+                              : "Archive"
+                          }
+                        >
+                          <i
+                            className={`fas ${
+                              chat.category === "archived"
+                                ? "fa-undo"
+                                : "fa-archive"
+                            }`}
+                          ></i>
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))
+              )}
             </div>
           </div>
 
@@ -276,44 +290,80 @@ const Sidebar = ({ isOpen, onClose }) => {
         <div className="sidebar-content">
           <div className="stats-section">
             <h3>Usage Statistics</h3>
-            <div className="stats-grid">
-              <div className="stat-item">
-                <div className="stat-icon">
-                  <i className="fas fa-comments"></i>
+            {isLoadingStats ? (
+              <SkeletonLoader type="stats" />
+            ) : (
+              <div className="stats-grid">
+                <div
+                  className="stat-item"
+                  style={{
+                    animationDelay: userSettings.animationsEnabled
+                      ? "0s"
+                      : "0s",
+                  }}
+                >
+                  <div className="stat-icon">
+                    <i className="fas fa-comments"></i>
+                  </div>
+                  <div className="stat-content">
+                    <div className="stat-number">{usageStats.totalChats}</div>
+                    <div className="stat-label">Total Chats</div>
+                  </div>
                 </div>
-                <div className="stat-content">
-                  <div className="stat-number">{usageStats.totalChats}</div>
-                  <div className="stat-label">Total Chats</div>
+                <div
+                  className="stat-item"
+                  style={{
+                    animationDelay: userSettings.animationsEnabled
+                      ? "0.1s"
+                      : "0s",
+                  }}
+                >
+                  <div className="stat-icon">
+                    <i className="fas fa-comment-dots"></i>
+                  </div>
+                  <div className="stat-content">
+                    <div className="stat-number">
+                      {usageStats.totalMessages}
+                    </div>
+                    <div className="stat-label">Total Messages</div>
+                  </div>
+                </div>
+                <div
+                  className="stat-item"
+                  style={{
+                    animationDelay: userSettings.animationsEnabled
+                      ? "0.2s"
+                      : "0s",
+                  }}
+                >
+                  <div className="stat-icon">
+                    <i className="fas fa-robot"></i>
+                  </div>
+                  <div className="stat-content">
+                    <div className="stat-number">{currentEmotion}</div>
+                    <div className="stat-label">Current Mood</div>
+                  </div>
+                </div>
+                <div
+                  className="stat-item"
+                  style={{
+                    animationDelay: userSettings.animationsEnabled
+                      ? "0.3s"
+                      : "0s",
+                  }}
+                >
+                  <div className="stat-icon">
+                    <i className="fas fa-volume-up"></i>
+                  </div>
+                  <div className="stat-content">
+                    <div className="stat-number">
+                      {ttsEnabled ? "ON" : "OFF"}
+                    </div>
+                    <div className="stat-label">Voice Output</div>
+                  </div>
                 </div>
               </div>
-              <div className="stat-item">
-                <div className="stat-icon">
-                  <i className="fas fa-comment-dots"></i>
-                </div>
-                <div className="stat-content">
-                  <div className="stat-number">{usageStats.totalMessages}</div>
-                  <div className="stat-label">Total Messages</div>
-                </div>
-              </div>
-              <div className="stat-item">
-                <div className="stat-icon">
-                  <i className="fas fa-robot"></i>
-                </div>
-                <div className="stat-content">
-                  <div className="stat-number">{currentEmotion}</div>
-                  <div className="stat-label">Current Mood</div>
-                </div>
-              </div>
-              <div className="stat-item">
-                <div className="stat-icon">
-                  <i className="fas fa-volume-up"></i>
-                </div>
-                <div className="stat-content">
-                  <div className="stat-number">{ttsEnabled ? "ON" : "OFF"}</div>
-                  <div className="stat-label">Voice Output</div>
-                </div>
-              </div>
-            </div>
+            )}
 
             {/* Bot Status */}
             <div className="bot-status-section">
