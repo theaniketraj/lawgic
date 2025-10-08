@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useChatContext } from "../context/ChatContext";
 import SkeletonLoader from "./SkeletonLoader";
+import Message from "./Message";
+import TypingIndicator from "./TypingIndicator";
 import "./ChatSection.css";
 
 const ChatSection = () => {
@@ -54,16 +56,10 @@ const ChatSection = () => {
     const message = messageText || inputValue.trim();
 
     if (message) {
-      // Optimistic update - show message immediately
-      addMessage(message, "user", true);
+      // Simply add the message once - no duplicates
+      addMessage(message, "user");
       setInputValue("");
-
-      // Process message in background and update when complete
-      setTimeout(() => {
-        // Remove optimistic flag and process
-        addMessage(message, "user", false);
-        processMessage(message);
-      }, 100);
+      processMessage(message);
     }
   };
 
@@ -71,14 +67,6 @@ const ChatSection = () => {
     if (e.key === "Enter") {
       handleSendMessage();
     }
-  };
-
-  const formatTimestamp = (timestamp) => {
-    const date = new Date(timestamp);
-    return date.toLocaleTimeString("en-US", {
-      hour: "2-digit",
-      minute: "2-digit",
-    });
   };
 
   const toggleVoiceModal = () => {
@@ -191,6 +179,43 @@ const ChatSection = () => {
     input.click();
   };
 
+  // Message action handlers
+  const handleRegenerate = (message) => {
+    // Remove the message and regenerate
+    const messageIndex = messages.findIndex((msg) => msg.id === message.id);
+    if (messageIndex > 0) {
+      const previousMessage = messages[messageIndex - 1];
+      if (previousMessage.sender === "user") {
+        processMessage(previousMessage.text);
+      }
+    }
+  };
+
+  const handleCopy = (text) => {
+    navigator.clipboard.writeText(text);
+    window.showToast?.("Message copied!", "success");
+  };
+
+  const handleLike = (message, isLiked) => {
+    // Update message in context or send feedback
+    console.log(`Message ${message.id} ${isLiked ? "liked" : "unliked"}`);
+    window.showToast?.(
+      isLiked ? "👍 Feedback sent!" : "Feedback removed",
+      "info"
+    );
+  };
+
+  const handleDislike = (message, isDisliked) => {
+    // Update message in context or send feedback
+    console.log(
+      `Message ${message.id} ${isDisliked ? "disliked" : "undisliked"}`
+    );
+    window.showToast?.(
+      isDisliked ? "👎 Feedback sent!" : "Feedback removed",
+      "info"
+    );
+  };
+
   return (
     <div className="chat-section">
       {/* Chat Messages Area */}
@@ -199,37 +224,26 @@ const ChatSection = () => {
           <SkeletonLoader type="message" count={3} />
         ) : (
           messages.map((message, index) => (
-            <div
+            <Message
               key={message.id}
-              className={`message ${message.sender}-message ${
-                message.isOptimistic ? "optimistic" : ""
-              }`}
-              style={{
-                animationDelay: userSettings?.animationsEnabled
-                  ? `${index * 0.1}s`
-                  : "0s",
-                opacity: message.isOptimistic ? 0.7 : 1,
-              }}
-            >
-              <div className="message-text">{message.text}</div>
-              <div className="message-timestamp">
-                {formatTimestamp(message.timestamp)}
-                {message.isOptimistic && (
-                  <span className="sending-indicator">
-                    <i className="fas fa-clock" title="Sending..."></i>
-                  </span>
-                )}
-              </div>
-            </div>
+              message={message}
+              index={index}
+              animationDelay={
+                userSettings?.animationsEnabled ? `${index * 0.1}s` : "0s"
+              }
+              onRegenerate={handleRegenerate}
+              onCopy={handleCopy}
+              onLike={handleLike}
+              onDislike={handleDislike}
+            />
           ))
         )}
         {isTyping && (
-          <div className="typing-indicator">
-            AI is thinking
-            <div className="dot"></div>
-            <div className="dot"></div>
-            <div className="dot"></div>
-          </div>
+          <TypingIndicator
+            showAvatar={true}
+            animationType="dots"
+            size="medium"
+          />
         )}
         <div ref={messagesEndRef} />
       </div>
