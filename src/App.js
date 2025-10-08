@@ -19,6 +19,7 @@ function App() {
 
 function AppContent() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const { showWelcomeScreen } = useChatContext();
   const { theme } = useTheme();
 
@@ -29,6 +30,72 @@ function AppContent() {
   const closeSidebar = () => {
     setSidebarOpen(false);
   };
+
+  // Mobile detection and orientation handling
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    const handleResize = () => {
+      checkMobile();
+      // Close sidebar on desktop if opened on mobile
+      if (window.innerWidth > 768 && sidebarOpen) {
+        setSidebarOpen(false);
+      }
+    };
+
+    const handleOrientationChange = () => {
+      // Close sidebar on orientation change for better UX
+      if (isMobile) {
+        setSidebarOpen(false);
+      }
+    };
+
+    checkMobile();
+    window.addEventListener("resize", handleResize);
+    window.addEventListener("orientationchange", handleOrientationChange);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("orientationchange", handleOrientationChange);
+    };
+  }, [sidebarOpen, isMobile]);
+
+  // Touch handling for mobile sidebar
+  useEffect(() => {
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    const handleTouchStart = (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    };
+
+    const handleTouchEnd = (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+
+      if (isMobile) {
+        // Swipe right to open sidebar (from left edge)
+        if (touchStartX < 50 && touchEndX - touchStartX > 100) {
+          setSidebarOpen(true);
+        }
+        // Swipe left to close sidebar
+        else if (sidebarOpen && touchStartX - touchEndX > 100) {
+          setSidebarOpen(false);
+        }
+      }
+    };
+
+    if (isMobile) {
+      document.addEventListener("touchstart", handleTouchStart);
+      document.addEventListener("touchend", handleTouchEnd);
+    }
+
+    return () => {
+      document.removeEventListener("touchstart", handleTouchStart);
+      document.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, [isMobile, sidebarOpen]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
