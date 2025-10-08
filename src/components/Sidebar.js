@@ -1,5 +1,6 @@
 import React from "react";
 import { useChatContext } from "../context/ChatContext";
+import { useTheme } from "../context/ThemeContext";
 import "./Sidebar.css";
 
 const Sidebar = ({ isOpen, onClose }) => {
@@ -16,6 +17,8 @@ const Sidebar = ({ isOpen, onClose }) => {
     createNewChat,
     switchToChat,
   } = useChatContext();
+
+  const { currentTheme, toggleTheme } = useTheme();
 
   const getRecentMemory = () => {
     if (conversationMemory.length === 0) {
@@ -149,6 +152,26 @@ const Sidebar = ({ isOpen, onClose }) => {
             <i className="fas fa-cog"></i>
           </span>{" "}
           Profile Settings
+        </button>
+      </div>
+
+      {/* Advanced */}
+      <div className="sidebar-section">
+        <h3>Appearance</h3>
+        <button
+          className={`btn theme-toggle-btn`}
+          onClick={() => {
+            toggleTheme();
+            window.showToast?.(
+              `Switched to ${currentTheme === 'dark' ? 'light' : 'dark'} mode`,
+              "info"
+            );
+          }}
+        >
+          <span className="btn-icon">
+            <i className={`fas ${currentTheme === 'dark' ? 'fa-sun' : 'fa-moon'}`}></i>
+          </span>{" "}
+          {currentTheme === 'dark' ? 'Light Mode' : 'Dark Mode'}
         </button>
       </div>
 
