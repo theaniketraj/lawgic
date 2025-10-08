@@ -25,6 +25,73 @@ export const ChatProvider = ({ children }) => {
   const [currentChatId, setCurrentChatId] = useState(null);
   const [chatHistory, setChatHistory] = useState([]);
 
+  // Enhanced sidebar features
+  const [chatSearchQuery, setChatSearchQuery] = useState("");
+  const [selectedChatCategory, setSelectedChatCategory] = useState("all");
+  const [usageStats, setUsageStats] = useState({
+    totalChats: 0,
+    totalMessages: 0,
+    averageResponseTime: 0,
+    favoriteTopics: [],
+    timeSpent: 0,
+  });
+  const [userSettings, setUserSettings] = useState({
+    fontSize: "medium", // small, medium, large
+    animationsEnabled: true,
+    autoScrollEnabled: true,
+    soundEffectsEnabled: false,
+    keyboardShortcutsEnabled: true,
+  });
+
+  // Chat categories/tags
+  const chatCategories = [
+    { id: "all", name: "All Chats", icon: "fa-comments" },
+    { id: "work", name: "Work", icon: "fa-briefcase" },
+    { id: "personal", name: "Personal", icon: "fa-user" },
+    { id: "learning", name: "Learning", icon: "fa-graduation-cap" },
+    { id: "creative", name: "Creative", icon: "fa-lightbulb" },
+    { id: "archived", name: "Archived", icon: "fa-archive" },
+  ];
+
+  // Conversation templates
+  const conversationTemplates = [
+    {
+      id: "brainstorm",
+      title: "Brainstorming Session",
+      description: "Generate creative ideas",
+      initialMessage: "Let's brainstorm some creative ideas about...",
+      category: "creative",
+    },
+    {
+      id: "problem-solving",
+      title: "Problem Solving",
+      description: "Work through a problem step by step",
+      initialMessage: "I need help solving this problem:",
+      category: "work",
+    },
+    {
+      id: "learning",
+      title: "Learning Assistant",
+      description: "Learn something new",
+      initialMessage: "I want to learn about...",
+      category: "learning",
+    },
+    {
+      id: "planning",
+      title: "Project Planning",
+      description: "Plan a project or task",
+      initialMessage: "Help me plan this project:",
+      category: "work",
+    },
+    {
+      id: "casual",
+      title: "Casual Chat",
+      description: "Just have a friendly conversation",
+      initialMessage: "Hey! Let's chat about...",
+      category: "personal",
+    },
+  ];
+
   // Load chat sessions and history from localStorage on mount
   useEffect(() => {
     const initializeApp = () => {
@@ -81,6 +148,16 @@ export const ChatProvider = ({ children }) => {
           setConversationMemory(JSON.parse(savedMemory));
         } catch (e) {
           console.error("Error loading memory:", e);
+        }
+      }
+
+      // Load user settings
+      const savedSettings = localStorage.getItem("userSettings");
+      if (savedSettings) {
+        try {
+          setUserSettings(JSON.parse(savedSettings));
+        } catch (e) {
+          console.error("Error loading user settings:", e);
         }
       }
     };
@@ -506,6 +583,122 @@ export const ChatProvider = ({ children }) => {
     }
   };
 
+  // Enhanced sidebar functions
+  const filterChatsBySearch = () => {
+    if (!chatSearchQuery) return chatHistory;
+    return chatHistory.filter(
+      (chat) =>
+        chat.title.toLowerCase().includes(chatSearchQuery.toLowerCase()) ||
+        chat.preview.toLowerCase().includes(chatSearchQuery.toLowerCase())
+    );
+  };
+
+  const filterChatsByCategory = (chats) => {
+    if (selectedChatCategory === "all") return chats;
+    return chats.filter((chat) => chat.category === selectedChatCategory);
+  };
+
+  const getFilteredChats = () => {
+    const searchFiltered = filterChatsBySearch();
+    return filterChatsByCategory(searchFiltered);
+  };
+
+  const createChatFromTemplate = (template) => {
+    const newChatId = `chat_${Date.now()}`;
+    const initialMessage = {
+      id: "template-message",
+      text: template.initialMessage,
+      sender: "user",
+      timestamp: new Date().toISOString(),
+    };
+
+    const newSession = {
+      id: newChatId,
+      title: template.title,
+      messages: [initialMessage],
+      memory: [],
+      category: template.category,
+      createdAt: new Date().toISOString(),
+      lastActive: new Date().toISOString(),
+    };
+
+    // Update sessions
+    setChatSessions((prev) => ({ ...prev, [newChatId]: newSession }));
+
+    // Update history list
+    setChatHistory((prev) => [
+      {
+        id: newChatId,
+        title: newSession.title,
+        lastActive: newSession.lastActive,
+        preview: template.description,
+        category: template.category,
+      },
+      ...prev,
+    ]);
+
+    // Set as current chat
+    setCurrentChatId(newChatId);
+    setMessages([initialMessage]);
+    setConversationMemory([]);
+
+    // Save to localStorage
+    setTimeout(() => saveToLocalStorage(newChatId, newSession), 0);
+
+    // Process the template message
+    processMessage(template.initialMessage);
+
+    return newChatId;
+  };
+
+  const updateUsageStats = () => {
+    setUsageStats((prev) => ({
+      ...prev,
+      totalChats: Object.keys(chatSessions).length,
+      totalMessages: Object.values(chatSessions).reduce(
+        (total, session) => total + session.messages.length,
+        0
+      ),
+      // Add more complex stats calculations here
+    }));
+  };
+
+  const updateUserSettings = (newSettings) => {
+    setUserSettings((prev) => ({ ...prev, ...newSettings }));
+    localStorage.setItem(
+      "userSettings",
+      JSON.stringify({ ...userSettings, ...newSettings })
+    );
+  };
+
+  const archiveChat = (chatId) => {
+    const chatToArchive = chatHistory.find((chat) => chat.id === chatId);
+    if (chatToArchive) {
+      setChatHistory((prev) =>
+        prev.map((chat) =>
+          chat.id === chatId ? { ...chat, category: "archived" } : chat
+        )
+      );
+    }
+  };
+
+  const unarchiveChat = (chatId) => {
+    const chatToUnarchive = chatHistory.find((chat) => chat.id === chatId);
+    if (chatToUnarchive) {
+      setChatHistory((prev) =>
+        prev.map((chat) =>
+          chat.id === chatId ? { ...chat, category: "personal" } : chat
+        )
+      );
+    }
+  };
+
+  const setChatCategory = (chatId, category) => {
+    setChatHistory((prev) =>
+      prev.map((chat) => (chat.id === chatId ? { ...chat, category } : chat))
+    );
+  };
+
   const value = {
     messages,
     conversationMemory,
@@ -517,6 +710,18 @@ export const ChatProvider = ({ children }) => {
     showWelcomeScreen,
     chatHistory,
     currentChatId,
+    // Enhanced sidebar state
+    chatSearchQuery,
+    setChatSearchQuery,
+    selectedChatCategory,
+    setSelectedChatCategory,
+    usageStats,
+    setUsageStats,
+    userSettings,
+    setUserSettings,
+    chatCategories,
+    conversationTemplates,
+    // Original functions
     setStatus,
     setIsListening,
     setCurrentEmotion,
@@ -528,6 +733,14 @@ export const ChatProvider = ({ children }) => {
     analyzeEmotion,
     createNewChat,
     switchToChat,
+    // Enhanced sidebar functions
+    getFilteredChats,
+    createChatFromTemplate,
+    updateUsageStats,
+    updateUserSettings,
+    archiveChat,
+    unarchiveChat,
+    setChatCategory,
   };
 
   return <ChatContext.Provider value={value}>{children}</ChatContext.Provider>;
