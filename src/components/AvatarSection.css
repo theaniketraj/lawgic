@@ -14,7 +14,11 @@
   height: 400px;
   border-radius: 50%;
   border: 3px solid rgba(255, 255, 255, 0.3);
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0.2) 100%);
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
 }
 
 .avatar-controls {
@@ -40,8 +44,104 @@
 }
 
 @media (max-width: 768px) {
+  .avatar-section {
+    padding: 20px;
+    justify-content: flex-start;
+    padding-top: 80px; /* Account for mobile header */
+  }
+
   #avatar-canvas {
-    width: 300px;
-    height: 300px;
+    width: 250px;
+    height: 250px;
+  }
+
+  .avatar-controls {
+    margin-top: 15px;
+    font-size: 13px;
+    max-width: 300px;
+    padding: 0 15px;
+  }
+
+  .emotion-indicator {
+    bottom: 15px;
+    padding: 6px 16px;
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .avatar-section {
+    padding: 15px;
+    padding-top: 70px;
+    min-height: auto;
+  }
+
+  #avatar-canvas {
+    width: 200px;
+    height: 200px;
+    border-width: 2px;
+  }
+
+  .avatar-controls {
+    margin-top: 12px;
+    font-size: 12px;
+    max-width: 250px;
+    padding: 0 10px;
+  }
+
+  .emotion-indicator {
+    bottom: 12px;
+    padding: 5px 12px;
+    font-size: 14px;
+    border-radius: 15px;
+  }
+}
+
+@media (max-width: 360px) {
+  .avatar-section {
+    padding: 10px;
+    padding-top: 60px;
+  }
+
+  #avatar-canvas {
+    width: 160px;
+    height: 160px;
+  }
+
+  .avatar-controls {
+    margin-top: 10px;
+    font-size: 11px;
+    max-width: 200px;
+    padding: 0 8px;
+  }
+
+  .emotion-indicator {
+    bottom: 10px;
+    padding: 4px 10px;
+    font-size: 13px;
+  }
+}
+
+/* Landscape mode adjustments */
+@media (max-width: 768px) and (orientation: landscape) {
+  .avatar-section {
+    padding-top: 50px;
+    justify-content: center;
+  }
+
+  #avatar-canvas {
+    width: 180px;
+    height: 180px;
+  }
+
+  .avatar-controls {
+    margin-top: 8px;
+    font-size: 11px;
+  }
+
+  .emotion-indicator {
+    bottom: 8px;
+    padding: 4px 12px;
+    font-size: 12px;
   }
 }
