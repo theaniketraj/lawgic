@@ -1,0 +1,32 @@
+import React, { useState, useEffect } from "react";
+import "./WelcomeScreen.css";
+
+const WelcomeScreen = ({ show }) => {
+  const [showTagline, setShowTagline] = useState(false);
+
+  useEffect(() => {
+    if (show) {
+      // Show tagline after a delay
+      const timer = setTimeout(() => {
+        setShowTagline(true);
+      }, 1500); // 1.5 second delay
+
+      return () => clearTimeout(timer);
+    } else {
+      setShowTagline(false);
+    }
+  }, [show]);
+  
+  return (
+    <div className="welcome-screen">
+      <div className="welcome-content">
+        <h1 className="brand-title">RIZZ.ie</h1>
+        <p className={`tagline ${showTagline ? "visible" : ""}`}>
+          Intelligence Evolved with rizz
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default WelcomeScreen;
