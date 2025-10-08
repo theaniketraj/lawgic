@@ -73,6 +73,11 @@ export const themes = {
       // Skeleton loader colors
       skeletonBase: "rgba(255, 255, 255, 0.1)",
       skeletonHighlight: "rgba(255, 255, 255, 0.2)",
+
+      // Toast colors
+      toastBg: "rgba(0, 0, 0, 0.85)",
+      toastBorder: "rgba(255, 255, 255, 0.2)",
+      toastText: "#ffffff",
     },
   },
   light: {
@@ -130,6 +135,11 @@ export const themes = {
       // Skeleton loader colors
       skeletonBase: "rgba(0, 0, 0, 0.05)",
       skeletonHighlight: "rgba(0, 0, 0, 0.1)",
+
+      // Toast colors
+      toastBg: "rgba(255, 255, 255, 0.95)",
+      toastBorder: "rgba(0, 0, 0, 0.1)",
+      toastText: "#1e293b",
     },
   },
 };
