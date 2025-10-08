@@ -1,0 +1,428 @@
+/* Enhanced Typing Indicator Styles */
+
+.typing-indicator {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 20px;
+  background: var(--color-bot-message);
+  border: 1px solid var(--color-bot-message-border);
+  border-radius: 20px;
+  max-width: 70%;
+  margin-bottom: 12px;
+  animation: typingSlideIn 0.4s ease-out forwards;
+  position: relative;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.typing-indicator-small {
+  padding: 12px 16px;
+  max-width: 60%;
+}
+
+.typing-indicator-medium {
+  padding: 16px 20px;
+  max-width: 70%;
+}
+
+.typing-indicator-large {
+  padding: 20px 24px;
+  max-width: 80%;
+}
+
+/* Avatar Section */
+.typing-avatar-container {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.typing-avatar,
+.typing-avatar-placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.typing-avatar {
+  object-fit: cover;
+  border: 2px solid var(--color-primary);
+}
+
+.typing-avatar-placeholder {
+  background: var(--color-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 18px;
+}
+
+/* Lip Sync Animation */
+.lip-sync-0 {
+  transform: scale(1);
+}
+
+.lip-sync-1 {
+  transform: scale(1.05) scaleY(0.95);
+}
+
+.lip-sync-2 {
+  transform: scale(0.95) scaleY(1.05);
+}
+
+.avatar-status-indicator {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 12px;
+  height: 12px;
+  background: var(--color-background);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--color-success);
+  border-radius: 50%;
+  animation: statusPulse 2s infinite;
+}
+
+/* Content Section */
+.typing-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.typing-text {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+.typing-animation {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 4px 0;
+}
+
+.typing-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--color-text-secondary);
+  opacity: 0.8;
+}
+
+.typing-status i {
+  color: var(--color-primary);
+  animation: brainPulse 1.5s infinite;
+}
+
+/* Dots Animation */
+.typing-dots {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.typing-dots-small .dot {
+  width: 6px;
+  height: 6px;
+}
+
+.typing-dots-medium .dot {
+  width: 8px;
+  height: 8px;
+}
+
+.typing-dots-large .dot {
+  width: 10px;
+  height: 10px;
+}
+
+.typing-dots .dot {
+  background: var(--color-primary);
+  border-radius: 50%;
+  animation: dotBounce 1.4s infinite ease-in-out;
+}
+
+.typing-dots .dot:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.typing-dots .dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dots .dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* Wave Animation */
+.typing-wave {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+.typing-wave-small .wave-bar {
+  width: 3px;
+  height: 12px;
+}
+
+.typing-wave-medium .wave-bar {
+  width: 4px;
+  height: 16px;
+}
+
+.typing-wave-large .wave-bar {
+  width: 5px;
+  height: 20px;
+}
+
+.typing-wave .wave-bar {
+  background: var(--color-primary);
+  border-radius: 2px;
+  animation: waveGrow 1.2s infinite ease-in-out;
+}
+
+.typing-wave .wave-bar:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.typing-wave .wave-bar:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.typing-wave .wave-bar:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.typing-wave .wave-bar:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+.typing-wave .wave-bar:nth-child(5) {
+  animation-delay: 0.4s;
+}
+
+/* Pulse Animation */
+.typing-pulse {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.typing-pulse-small {
+  width: 24px;
+  height: 24px;
+}
+
+.typing-pulse-medium {
+  width: 30px;
+  height: 30px;
+}
+
+.typing-pulse-large {
+  width: 36px;
+  height: 36px;
+}
+
+.pulse-ring {
+  position: absolute;
+  border: 2px solid var(--color-primary);
+  border-radius: 50%;
+  animation: pulseExpand 2s infinite ease-out;
+}
+
+.pulse-ring:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.pulse-ring:nth-child(2) {
+  animation-delay: 0.7s;
+}
+
+.pulse-ring:nth-child(3) {
+  animation-delay: 1.4s;
+}
+
+/* Keyframe Animations */
+@keyframes typingSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes dotBounce {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.7;
+  }
+  30% {
+    transform: translateY(-8px);
+    opacity: 1;
+  }
+}
+
+@keyframes waveGrow {
+  0%,
+  40%,
+  100% {
+    transform: scaleY(0.4);
+    opacity: 0.7;
+  }
+  20% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulseExpand {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes statusPulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: scale(0.8);
+  }
+}
+
+@keyframes brainPulse {
+  0%,
+  100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+/* Dark Theme Adjustments */
+[data-theme="dark"] .typing-indicator {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .avatar-status-indicator {
+  background: var(--color-background-secondary);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .typing-indicator {
+    max-width: 85%;
+    padding: 12px 16px;
+    gap: 10px;
+  }
+
+  .typing-avatar,
+  .typing-avatar-placeholder {
+    width: 32px;
+    height: 32px;
+  }
+
+  .typing-avatar-placeholder {
+    font-size: 14px;
+  }
+
+  .typing-text {
+    font-size: 13px;
+  }
+
+  .typing-status {
+    font-size: 10px;
+  }
+
+  .avatar-status-indicator {
+    width: 10px;
+    height: 10px;
+  }
+
+  .status-dot {
+    width: 6px;
+    height: 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .typing-indicator {
+    max-width: 90%;
+    padding: 10px 14px;
+    gap: 8px;
+  }
+
+  .typing-avatar,
+  .typing-avatar-placeholder {
+    width: 28px;
+    height: 28px;
+  }
+
+  .typing-avatar-placeholder {
+    font-size: 12px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .typing-indicator,
+  .dot,
+  .wave-bar,
+  .pulse-ring,
+  .typing-avatar,
+  .typing-avatar-placeholder,
+  .status-dot,
+  .typing-status i {
+    animation: none;
+  }
+
+  .typing-indicator {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Focus states for accessibility */
+.typing-indicator:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
