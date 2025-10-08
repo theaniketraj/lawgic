@@ -3,7 +3,7 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.1);
+  background: var(--color-chat-bg);
   backdrop-filter: blur(20px);
   position: relative;
 }
@@ -30,17 +30,19 @@
 }
 
 .user-message {
-  background: rgba(59, 130, 246, 0.8);
-  border: 1px solid rgba(59, 130, 246, 0.3);
+  background: var(--color-user-message);
+  border: 1px solid var(--color-user-message-border);
   margin-left: auto;
   text-align: right;
-  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.2);
+  box-shadow: 0 4px 20px rgba(139, 92, 246, 0.2);
+  color: white;
 }
 
 .bot-message {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: var(--color-bot-message);
+  border: 1px solid var(--color-bot-message-border);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  color: var(--color-text-primary);
 }
 
 .message-text {
@@ -50,29 +52,31 @@
 }
 
 .message-timestamp {
-  font-size: 11px;
-  opacity: 0.6;
+  font-size: 12px;
+  opacity: 0.8;
   margin-top: 6px;
+  font-weight: 500;
 }
 
 .typing-indicator {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--color-text-muted);
   font-style: italic;
   padding: 12px 18px;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--color-bot-message);
   border-radius: 20px;
   max-width: 200px;
   backdrop-filter: blur(10px);
+  border: 1px solid var(--color-border);
 }
 
 .dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.7);
+  background: var(--color-text-muted);
   animation: typing 1.4s infinite;
 }
 
@@ -98,9 +102,9 @@
 .search-bar {
   display: flex;
   align-items: center;
-  background: rgba(0, 0, 0, 0.4);
+  background: var(--color-search-bar-bg);
   backdrop-filter: blur(25px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--color-border);
   border-radius: 50px;
   padding: 8px;
   gap: 12px;
@@ -109,13 +113,13 @@
 }
 
 .search-bar:hover {
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: var(--color-border-hover);
   box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
 }
 
 .search-bar:focus-within {
-  border-color: rgba(59, 130, 246, 0.5);
-  box-shadow: 0 15px 50px rgba(59, 130, 246, 0.2);
+  border-color: var(--color-accent-solid);
+  box-shadow: 0 15px 50px rgba(139, 92, 246, 0.2);
 }
 
 .attachment-icons {
@@ -127,8 +131,8 @@
 .attachment-btn {
   width: 40px;
   height: 40px;
-  border: none;
-  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--color-border);
+  background: var(--color-button-bg);
   border-radius: 50%;
   cursor: pointer;
   font-size: 14px;
@@ -136,11 +140,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--color-text-secondary);
 }
 
 .attachment-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--color-button-hover);
+  border-color: var(--color-border-hover);
   transform: scale(1.1);
 }
 
@@ -148,14 +153,14 @@
   flex: 1;
   border: none;
   background: transparent;
-  color: white;
+  color: var(--color-text-primary);
   font-size: 16px;
   padding: 15px 0;
   outline: none;
 }
 
 .search-input::placeholder {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--color-text-muted);
 }
 
 .control-buttons {
@@ -178,12 +183,14 @@
 }
 
 .voice-btn {
-  background: rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.8);
+  background: var(--color-button-bg);
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
 }
 
 .voice-btn:hover {
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--color-button-hover);
+  border-color: var(--color-border-hover);
   transform: scale(1.1);
 }
 
@@ -194,12 +201,12 @@
 }
 
 .send-btn {
-  background: rgba(59, 130, 246, 0.8);
+  background: var(--color-accent-solid);
   color: white;
 }
 
 .send-btn:hover {
-  background: rgba(59, 130, 246, 1);
+  background: var(--color-accent-secondary);
   transform: scale(1.1);
 }
 
@@ -219,9 +226,9 @@
 }
 
 .voice-modal {
-  background: rgba(0, 0, 0, 0.8);
+  background: var(--color-sidebar-bg);
   backdrop-filter: blur(25px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--color-border);
   border-radius: 20px;
   padding: 30px;
   text-align: center;
@@ -238,13 +245,13 @@
 
 .voice-modal-header h3 {
   margin: 0;
-  color: white;
+  color: var(--color-text-primary);
 }
 
 .voice-modal-header button {
   background: none;
   border: none;
-  color: white;
+  color: var(--color-text-primary);
   font-size: 24px;
   cursor: pointer;
   width: 30px;
@@ -257,7 +264,7 @@
 }
 
 .voice-modal-header button:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--color-button-bg);
 }
 
 .voice-modal-content {
@@ -278,7 +285,7 @@
 }
 
 .voice-modal-content p {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--color-text-muted);
   margin: 20px 0;
   font-size: 16px;
 }
