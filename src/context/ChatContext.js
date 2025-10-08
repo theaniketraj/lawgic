@@ -20,6 +20,12 @@ export const ChatProvider = ({ children }) => {
   const [isTyping, setIsTyping] = useState(false);
   const [showWelcomeScreen, setShowWelcomeScreen] = useState(true); // Always start with welcome screen
 
+  // Loading states for performance enhancement
+  const [isLoadingChats, setIsLoadingChats] = useState(true);
+  const [isLoadingMessages, setIsLoadingMessages] = useState(false);
+  const [isLoadingStats, setIsLoadingStats] = useState(true);
+  const [isOptimisticUpdate, setIsOptimisticUpdate] = useState(false);
+
   // Chat session management
   const [chatSessions, setChatSessions] = useState({});
   const [currentChatId, setCurrentChatId] = useState(null);
@@ -94,11 +100,36 @@ export const ChatProvider = ({ children }) => {
 
   // Load chat sessions and history from localStorage on mount
   useEffect(() => {
-    const initializeApp = () => {
+    const initializeApp = async () => {
+      setIsLoadingChats(true);
+      setIsLoadingStats(true);
+
+      // Simulate progressive loading with small delays for smoother UX
       const savedChatSessions = localStorage.getItem("chatSessions");
       const savedChatHistory = localStorage.getItem("chatHistoryList");
       const savedCurrentChatId = localStorage.getItem("currentChatId");
       const savedMemory = localStorage.getItem("conversationMemory");
+
+      // Load recent chats first (progressive loading)
+      if (savedChatHistory) {
+        try {
+          const parsedHistory = JSON.parse(savedChatHistory);
+          // Load recent chats first (last 5)
+          const recentChats = parsedHistory.slice(0, 5);
+          setChatHistory(recentChats);
+
+          // Load remaining chats after a short delay
+          setTimeout(() => {
+            setChatHistory(parsedHistory);
+            setIsLoadingChats(false);
+          }, 200);
+        } catch (e) {
+          console.error("Error loading chat history list:", e);
+          setIsLoadingChats(false);
+        }
+      } else {
+        setIsLoadingChats(false);
+      }
 
       // Load chat sessions
       if (savedChatSessions) {
@@ -107,16 +138,6 @@ export const ChatProvider = ({ children }) => {
           setChatSessions(parsedSessions);
         } catch (e) {
           console.error("Error loading chat sessions:", e);
-        }
-      }
-
-      // Load chat history list
-      if (savedChatHistory) {
-        try {
-          const parsedHistory = JSON.parse(savedChatHistory);
-          setChatHistory(parsedHistory);
-        } catch (e) {
-          console.error("Error loading chat history list:", e);
         }
       }
 
@@ -160,6 +181,11 @@ export const ChatProvider = ({ children }) => {
           console.error("Error loading user settings:", e);
         }
       }
+
+      // Simulate stats calculation with delay for smooth loading
+      setTimeout(() => {
+        setIsLoadingStats(false);
+      }, 500);
     };
 
     const createNewChatInternal = () => {
@@ -302,13 +328,19 @@ export const ChatProvider = ({ children }) => {
   const switchToChat = (chatId) => {
     const session = chatSessions[chatId];
     if (session) {
-      setCurrentChatId(chatId);
-      setMessages(session.messages);
-      setConversationMemory(session.memory);
-      setShowWelcomeScreen(
-        session.messages.length === 1 &&
-          session.messages[0].id === "welcome-message"
-      );
+      setIsLoadingMessages(true);
+
+      // Simulate loading delay for smooth transition
+      setTimeout(() => {
+        setCurrentChatId(chatId);
+        setMessages(session.messages);
+        setConversationMemory(session.memory);
+        setShowWelcomeScreen(
+          session.messages.length === 1 &&
+            session.messages[0].id === "welcome-message"
+        );
+        setIsLoadingMessages(false);
+      }, 150);
 
       // Update last active time
       const updatedSession = {
@@ -368,13 +400,19 @@ export const ChatProvider = ({ children }) => {
     return "New Chat";
   };
 
-  const addMessage = (text, sender) => {
+  const addMessage = (text, sender, isOptimistic = false) => {
     const newMessage = {
       id: Date.now(),
       text,
       sender,
       timestamp: new Date().toISOString(),
+      isOptimistic, // Flag for optimistic updates
     };
+
+    // For optimistic updates, show immediately
+    if (isOptimistic) {
+      setIsOptimisticUpdate(true);
+    }
 
     setMessages((prev) => {
       const updatedMessages = [...prev, newMessage];
@@ -710,6 +748,11 @@ export const ChatProvider = ({ children }) => {
     showWelcomeScreen,
     chatHistory,
     currentChatId,
+    // Loading states for performance
+    isLoadingChats,
+    isLoadingMessages,
+    isLoadingStats,
+    isOptimisticUpdate,
     // Enhanced sidebar state
     chatSearchQuery,
     setChatSearchQuery,
