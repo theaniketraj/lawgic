@@ -392,8 +392,14 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .message {
-    max-width: 85%;
+    max-width: 90%;
     padding: 10px 14px;
+    border-radius: 16px;
+  }
+
+  .message-text {
+    font-size: 14px;
+    line-height: 1.5;
   }
 
   .message-actions {
@@ -409,40 +415,212 @@
     padding: 0;
   }
 
+  .action-btn {
+    width: 34px;
+    height: 34px;
+    font-size: 14px;
+    border-radius: 8px;
+  }
+
   .code-block-header {
-    flex-direction: column;
-    gap: 4px;
-    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    padding: 8px 12px;
   }
 
   .syntax-highlighter {
-    font-size: 12px !important;
+    font-size: 13px !important;
+    overflow-x: auto;
+  }
+
+  .code-block-container {
+    border-radius: 12px;
   }
 
   .message-table {
     font-size: 12px;
+    overflow-x: auto;
+    display: block;
+    white-space: nowrap;
   }
 
   .message-table th,
   .message-table td {
     padding: 6px 8px;
   }
+
+  .message-timestamp {
+    font-size: 12px;
+  }
+
+  .status-icon {
+    width: 14px;
+    height: 14px;
+  }
 }
 
 @media (max-width: 480px) {
   .message {
-    max-width: 90%;
+    max-width: 95%;
     padding: 8px 12px;
+    border-radius: 14px;
   }
 
   .message-text {
-    font-size: 14px;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .message-text h1 {
+    font-size: 1.3em;
+  }
+  .message-text h2 {
+    font-size: 1.2em;
+  }
+  .message-text h3 {
+    font-size: 1.1em;
+  }
+  .message-text h4 {
+    font-size: 1.05em;
   }
 
   .action-btn {
-    width: 32px;
-    height: 32px;
-    font-size: 14px;
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+    border-radius: 6px;
+  }
+
+  .message-actions {
+    gap: 4px;
+    margin-top: 6px;
+  }
+
+  .code-block-header {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .syntax-highlighter {
+    font-size: 11px !important;
+    padding: 8px !important;
+  }
+
+  .code-copy-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 11px;
+  }
+
+  .message-table {
+    font-size: 11px;
+  }
+
+  .message-table th,
+  .message-table td {
+    padding: 4px 6px;
+  }
+
+  .message-timestamp {
+    font-size: 11px;
+  }
+
+  .status-icon {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .message {
+    max-width: 98%;
+    padding: 6px 10px;
+    border-radius: 12px;
+  }
+
+  .message-text {
+    font-size: 12px;
+    line-height: 1.3;
+  }
+
+  .message-text h1 {
+    font-size: 1.2em;
+  }
+  .message-text h2 {
+    font-size: 1.15em;
+  }
+  .message-text h3 {
+    font-size: 1.1em;
+  }
+  .message-text h4 {
+    font-size: 1.05em;
+  }
+
+  .action-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 11px;
+  }
+
+  .message-actions {
+    gap: 3px;
+    margin-top: 5px;
+  }
+
+  .code-block-header {
+    padding: 5px 8px;
+    font-size: 11px;
+  }
+
+  .syntax-highlighter {
+    font-size: 10px !important;
+    padding: 6px !important;
+  }
+
+  .message-table {
+    font-size: 10px;
+  }
+
+  .message-table th,
+  .message-table td {
+    padding: 3px 5px;
+  }
+
+  .message-timestamp {
+    font-size: 10px;
+  }
+
+  .status-icon {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+/* Touch-friendly interactions */
+@media (max-width: 768px) {
+  .action-btn {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    min-height: 44px; /* iOS accessibility guidelines */
+    min-width: 44px;
+  }
+
+  .code-copy-btn {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    min-height: 40px;
+    min-width: 40px;
+  }
+
+  .message-text {
+    -webkit-user-select: text;
+    user-select: text;
+  }
+
+  .code-block-container {
+    -webkit-overflow-scrolling: touch;
   }
 }
 
