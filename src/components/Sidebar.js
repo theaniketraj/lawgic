@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { useChatContext } from "../context/ChatContext";
 import { useTheme } from "../context/ThemeContext";
 import "./Sidebar.css";
@@ -9,16 +10,31 @@ const Sidebar = ({ isOpen, onClose }) => {
     status,
     currentEmotion,
     ttsEnabled,
-    chatHistory,
     currentChatId,
+    chatSearchQuery,
+    setChatSearchQuery,
+    selectedChatCategory,
+    setSelectedChatCategory,
+    usageStats,
+    userSettings,
+    chatCategories,
+    conversationTemplates,
     clearMemory,
     clearChatHistory,
     toggleTTS,
     createNewChat,
     switchToChat,
+    getFilteredChats,
+    createChatFromTemplate,
+    updateUserSettings,
+    archiveChat,
+    unarchiveChat,
   } = useChatContext();
 
   const { currentTheme, toggleTheme } = useTheme();
+
+  // Sidebar navigation state
+  const [activeSection, setActiveSection] = useState("chats");
 
   const getRecentMemory = () => {
     if (conversationMemory.length === 0) {
@@ -36,186 +52,492 @@ const Sidebar = ({ isOpen, onClose }) => {
     neutral: <i className="fas fa-meh" style={{ color: "#6b7280" }}></i>,
   };
 
+  const handleSettingChange = (setting, value) => {
+    updateUserSettings({ [setting]: value });
+    window.showToast?.(`${setting} updated`, "success");
+  };
+
+  const getFontSize = () => {
+    if (userSettings.fontSize === "small") return "12px";
+    if (userSettings.fontSize === "large") return "16px";
+    return "14px";
+  };
+
   return (
-    <div className={`sidebar ${isOpen ? "open" : ""}`}>
+    <div
+      className={`sidebar ${isOpen ? "open" : ""}`}
+      style={{ fontSize: getFontSize() }}
+    >
       <div className="sidebar-header">
         <h2>RIZZ.ie</h2>
-        <p
-          style={{
-            margin: "5px 0 0 0",
-            fontSize: "14px",
-            color: "rgba(255,255,255,0.6)",
-          }}
-        >
-          Daemon v1.0
-        </p>
+        <p className="sidebar-subtitle">Daemon v1.0</p>
       </div>
 
-      {/* Chat History */}
-      <div className="sidebar-section">
-        <h3>Chat Management</h3>
+      {/* Navigation Tabs */}
+      <div className="sidebar-nav">
         <button
-          className="btn new-chat-btn"
-          onClick={() => {
-            createNewChat();
-            window.showToast?.("New chat created!", "success");
-          }}
+          className={`nav-tab ${activeSection === "chats" ? "active" : ""}`}
+          onClick={() => setActiveSection("chats")}
         >
-          <span className="btn-icon">
-            <i className="fas fa-plus"></i>
-          </span>{" "}
-          New Chat
+          <i className="fas fa-comments"></i>
+          <span>Chats</span>
         </button>
+        <button
+          className={`nav-tab ${activeSection === "templates" ? "active" : ""}`}
+          onClick={() => setActiveSection("templates")}
+        >
+          <i className="fas fa-layer-group"></i>
+          <span>Templates</span>
+        </button>
+        <button
+          className={`nav-tab ${activeSection === "stats" ? "active" : ""}`}
+          onClick={() => setActiveSection("stats")}
+        >
+          <i className="fas fa-chart-bar"></i>
+          <span>Stats</span>
+        </button>
+        <button
+          className={`nav-tab ${activeSection === "settings" ? "active" : ""}`}
+          onClick={() => setActiveSection("settings")}
+        >
+          <i className="fas fa-cog"></i>
+          <span>Settings</span>
+        </button>
+      </div>
 
-        {/* Chat History List */}
-        {chatHistory && chatHistory.length > 0 && (
+      {/* Chats Section */}
+      {activeSection === "chats" && (
+        <div className="sidebar-content">
+          {/* Chat Search */}
+          <div className="search-section">
+            <div className="search-input-container">
+              <i className="fas fa-search search-icon"></i>
+              <input
+                type="text"
+                placeholder="Search chats..."
+                value={chatSearchQuery}
+                onChange={(e) => setChatSearchQuery(e.target.value)}
+                className="search-input-field"
+              />
+            </div>
+          </div>
+
+          {/* Category Filter */}
+          <div className="category-filter">
+            {chatCategories.map((category) => (
+              <button
+                key={category.id}
+                className={`category-btn ${
+                  selectedChatCategory === category.id ? "active" : ""
+                }`}
+                onClick={() => setSelectedChatCategory(category.id)}
+              >
+                <i className={`fas ${category.icon}`}></i>
+                <span>{category.name}</span>
+              </button>
+            ))}
+          </div>
+
+          {/* New Chat Button */}
+          <button
+            className="btn new-chat-btn"
+            onClick={() => {
+              createNewChat();
+              window.showToast?.("New chat created!", "success");
+            }}
+          >
+            <span className="btn-icon">
+              <i className="fas fa-plus"></i>
+            </span>{" "}
+            New Chat
+          </button>
+
+          {/* Chat History List */}
           <div className="chat-history-section">
-            <h4>Recent Chats</h4>
+            <h4>Conversations</h4>
             <div className="chat-history-list">
-              {chatHistory.slice(0, 10).map((chat) => (
-                <div
-                  key={chat.id}
-                  className={`chat-history-item ${
-                    currentChatId === chat.id ? "active" : ""
-                  }`}
-                  onClick={() => {
-                    switchToChat(chat.id);
-                    window.showToast?.(`Switched to: ${chat.title}`, "info");
-                  }}
-                >
-                  <div className="chat-title">{chat.title}</div>
-                  <div className="chat-preview">{chat.preview}</div>
-                  <div className="chat-time">
-                    {new Date(chat.lastActive).toLocaleDateString()}
+              {getFilteredChats()
+                .slice(0, 15)
+                .map((chat) => (
+                  <div
+                    key={chat.id}
+                    className={`chat-history-item ${
+                      currentChatId === chat.id ? "active" : ""
+                    }`}
+                  >
+                    <div
+                      className="chat-item-content"
+                      onClick={() => {
+                        switchToChat(chat.id);
+                        window.showToast?.(
+                          `Switched to: ${chat.title}`,
+                          "info"
+                        );
+                      }}
+                    >
+                      <div className="chat-header">
+                        <div className="chat-title">{chat.title}</div>
+                        {chat.category && chat.category !== "all" && (
+                          <span
+                            className={`chat-category-badge ${chat.category}`}
+                          >
+                            {chat.category}
+                          </span>
+                        )}
+                      </div>
+                      <div className="chat-preview">{chat.preview}</div>
+                      <div className="chat-time">
+                        {new Date(chat.lastActive).toLocaleDateString()}
+                      </div>
+                    </div>
+                    <div className="chat-actions">
+                      <button
+                        className="chat-action-btn"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (chat.category === "archived") {
+                            unarchiveChat(chat.id);
+                            window.showToast?.("Chat unarchived", "success");
+                          } else {
+                            archiveChat(chat.id);
+                            window.showToast?.("Chat archived", "success");
+                          }
+                        }}
+                        title={
+                          chat.category === "archived" ? "Unarchive" : "Archive"
+                        }
+                      >
+                        <i
+                          className={`fas ${
+                            chat.category === "archived"
+                              ? "fa-undo"
+                              : "fa-archive"
+                          }`}
+                        ></i>
+                      </button>
+                    </div>
                   </div>
+                ))}
+            </div>
+          </div>
+
+          <button
+            className="btn danger-btn"
+            onClick={() => {
+              clearChatHistory();
+              window.showToast?.("All chat history cleared", "success");
+            }}
+          >
+            <span className="btn-icon">
+              <i className="fas fa-trash"></i>
+            </span>{" "}
+            Clear All History
+          </button>
+        </div>
+      )}
+
+      {/* Templates Section */}
+      {activeSection === "templates" && (
+        <div className="sidebar-content">
+          <div className="templates-section">
+            <h3>Conversation Templates</h3>
+            <div className="templates-list">
+              {conversationTemplates.map((template) => (
+                <div key={template.id} className="template-item">
+                  <div className="template-header">
+                    <h4>{template.title}</h4>
+                    <span className={`template-category ${template.category}`}>
+                      {template.category}
+                    </span>
+                  </div>
+                  <p className="template-description">{template.description}</p>
+                  <button
+                    className="btn template-btn"
+                    onClick={() => {
+                      createChatFromTemplate(template);
+                      window.showToast?.(
+                        `Started ${template.title}`,
+                        "success"
+                      );
+                      setActiveSection("chats");
+                    }}
+                  >
+                    <i className="fas fa-play"></i>
+                    Start Chat
+                  </button>
                 </div>
               ))}
             </div>
           </div>
-        )}
+        </div>
+      )}
 
-        <button
-          className="btn danger-btn"
-          onClick={() => {
-            clearChatHistory();
-            window.showToast?.("All chat history cleared", "success");
-          }}
-        >
-          <span className="btn-icon">
-            <i className="fas fa-trash"></i>
-          </span>{" "}
-          Clear All History
-        </button>
-      </div>
+      {/* Stats Section */}
+      {activeSection === "stats" && (
+        <div className="sidebar-content">
+          <div className="stats-section">
+            <h3>Usage Statistics</h3>
+            <div className="stats-grid">
+              <div className="stat-item">
+                <div className="stat-icon">
+                  <i className="fas fa-comments"></i>
+                </div>
+                <div className="stat-content">
+                  <div className="stat-number">{usageStats.totalChats}</div>
+                  <div className="stat-label">Total Chats</div>
+                </div>
+              </div>
+              <div className="stat-item">
+                <div className="stat-icon">
+                  <i className="fas fa-comment-dots"></i>
+                </div>
+                <div className="stat-content">
+                  <div className="stat-number">{usageStats.totalMessages}</div>
+                  <div className="stat-label">Total Messages</div>
+                </div>
+              </div>
+              <div className="stat-item">
+                <div className="stat-icon">
+                  <i className="fas fa-robot"></i>
+                </div>
+                <div className="stat-content">
+                  <div className="stat-number">{currentEmotion}</div>
+                  <div className="stat-label">Current Mood</div>
+                </div>
+              </div>
+              <div className="stat-item">
+                <div className="stat-icon">
+                  <i className="fas fa-volume-up"></i>
+                </div>
+                <div className="stat-content">
+                  <div className="stat-number">{ttsEnabled ? "ON" : "OFF"}</div>
+                  <div className="stat-label">Voice Output</div>
+                </div>
+              </div>
+            </div>
 
-      {/* Chatbot Status */}
-      <div className="sidebar-section">
-        <h3>Chatbot Status</h3>
-        <div className="status-panel">
-          <div className="status-display">{status}</div>
-          <div className="emotion-status">
-            Current Emotion:{" "}
-            <span>
-              {emotionEmojis[currentEmotion]} {currentEmotion}
-            </span>
-          </div>
-          <div className="status-indicators">
-            <div className={`indicator ${ttsEnabled ? "active" : ""}`}>
-              <span className="status-icon">
-                <i className="fas fa-volume-up"></i>
-              </span>{" "}
-              Audio: {ttsEnabled ? "ON" : "OFF"}
+            {/* Bot Status */}
+            <div className="bot-status-section">
+              <h4>Avatar Status</h4>
+              <div className="status-panel">
+                <div className="status-display">{status}</div>
+                <div className="emotion-status">
+                  Current Emotion:{" "}
+                  <span>
+                    {emotionEmojis[currentEmotion]} {currentEmotion}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Memory Panel */}
+            <div className="memory-section">
+              <h4>Conversation Memory</h4>
+              <div className="memory-panel">
+                <div className="memory-content">{getRecentMemory()}</div>
+              </div>
+              <button
+                className="btn"
+                onClick={() => {
+                  clearMemory();
+                  window.showToast?.("Memory cleared successfully", "success");
+                }}
+              >
+                <span className="btn-icon">
+                  <i className="fas fa-undo"></i>
+                </span>{" "}
+                Clear Memory
+              </button>
             </div>
           </div>
         </div>
-      </div>
+      )}
 
-      {/* User Profile */}
-      <div className="sidebar-section">
-        <h3>User Profile</h3>
-        <div className="profile-panel">
-          <div className="profile-avatar">
-            <i className="fas fa-user"></i>
-          </div>
-          <div className="profile-info">
-            <div className="profile-name">Guest User</div>
-            <div className="profile-email">guest@example.com</div>
+      {/* Settings Section */}
+      {activeSection === "settings" && (
+        <div className="sidebar-content">
+          <div className="settings-section">
+            {/* Appearance Settings */}
+            <div className="setting-group">
+              <h3>Appearance</h3>
+
+              {/* Theme Toggle */}
+              <div className="setting-item">
+                <label>Theme</label>
+                <button
+                  className="btn theme-toggle-btn"
+                  onClick={() => {
+                    toggleTheme();
+                    window.showToast?.(
+                      `Switched to ${
+                        currentTheme === "dark" ? "light" : "dark"
+                      } mode`,
+                      "info"
+                    );
+                  }}
+                >
+                  <span className="btn-icon">
+                    <i
+                      className={`fas ${
+                        currentTheme === "dark" ? "fa-sun" : "fa-moon"
+                      }`}
+                    ></i>
+                  </span>{" "}
+                  {currentTheme === "dark" ? "Light Mode" : "Dark Mode"}
+                </button>
+              </div>
+
+              {/* Font Size */}
+              <div className="setting-item">
+                <label>Font Size</label>
+                <div className="setting-buttons">
+                  {["small", "medium", "large"].map((size) => (
+                    <button
+                      key={size}
+                      className={`setting-btn ${
+                        userSettings.fontSize === size ? "active" : ""
+                      }`}
+                      onClick={() => handleSettingChange("fontSize", size)}
+                    >
+                      {size}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Behavior Settings */}
+            <div className="setting-group">
+              <h3>Behavior</h3>
+
+              {/* Animations */}
+              <div className="setting-item">
+                <label>Animations</label>
+                <button
+                  className={`setting-toggle ${
+                    userSettings.animationsEnabled ? "active" : ""
+                  }`}
+                  onClick={() =>
+                    handleSettingChange(
+                      "animationsEnabled",
+                      !userSettings.animationsEnabled
+                    )
+                  }
+                >
+                  <span className="toggle-slider"></span>
+                  {userSettings.animationsEnabled ? "Enabled" : "Disabled"}
+                </button>
+              </div>
+
+              {/* Auto Scroll */}
+              <div className="setting-item">
+                <label>Auto Scroll</label>
+                <button
+                  className={`setting-toggle ${
+                    userSettings.autoScrollEnabled ? "active" : ""
+                  }`}
+                  onClick={() =>
+                    handleSettingChange(
+                      "autoScrollEnabled",
+                      !userSettings.autoScrollEnabled
+                    )
+                  }
+                >
+                  <span className="toggle-slider"></span>
+                  {userSettings.autoScrollEnabled ? "Enabled" : "Disabled"}
+                </button>
+              </div>
+
+              {/* Sound Effects */}
+              <div className="setting-item">
+                <label>Sound Effects</label>
+                <button
+                  className={`setting-toggle ${
+                    userSettings.soundEffectsEnabled ? "active" : ""
+                  }`}
+                  onClick={() =>
+                    handleSettingChange(
+                      "soundEffectsEnabled",
+                      !userSettings.soundEffectsEnabled
+                    )
+                  }
+                >
+                  <span className="toggle-slider"></span>
+                  {userSettings.soundEffectsEnabled ? "Enabled" : "Disabled"}
+                </button>
+              </div>
+
+              {/* TTS Toggle */}
+              <div className="setting-item">
+                <label>Text-to-Speech</label>
+                <button
+                  className={`setting-toggle ${ttsEnabled ? "active" : ""}`}
+                  onClick={() => {
+                    toggleTTS();
+                    window.showToast?.(
+                      "Audio " + (!ttsEnabled ? "enabled" : "disabled"),
+                      "info"
+                    );
+                  }}
+                >
+                  <span className="toggle-slider"></span>
+                  {ttsEnabled ? "Enabled" : "Disabled"}
+                </button>
+              </div>
+            </div>
+
+            {/* Keyboard Shortcuts */}
+            <div className="setting-group">
+              <h3>Keyboard Shortcuts</h3>
+              <div className="shortcuts-list">
+                <div className="shortcut-item">
+                  <span className="shortcut-key">Ctrl + M</span>
+                  <span className="shortcut-desc">Toggle Sidebar</span>
+                </div>
+                <div className="shortcut-item">
+                  <span className="shortcut-key">Escape</span>
+                  <span className="shortcut-desc">Close Sidebar</span>
+                </div>
+                <div className="shortcut-item">
+                  <span className="shortcut-key">Enter</span>
+                  <span className="shortcut-desc">Send Message</span>
+                </div>
+                <div className="shortcut-item">
+                  <span className="shortcut-key">Space</span>
+                  <span className="shortcut-desc">Push to Talk (Future)</span>
+                </div>
+              </div>
+
+              <div className="setting-item">
+                <label>Keyboard Shortcuts</label>
+                <button
+                  className={`setting-toggle ${
+                    userSettings.keyboardShortcutsEnabled ? "active" : ""
+                  }`}
+                  onClick={() =>
+                    handleSettingChange(
+                      "keyboardShortcutsEnabled",
+                      !userSettings.keyboardShortcutsEnabled
+                    )
+                  }
+                >
+                  <span className="toggle-slider"></span>
+                  {userSettings.keyboardShortcutsEnabled
+                    ? "Enabled"
+                    : "Disabled"}
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-        <button
-          className="btn"
-          onClick={() =>
-            window.showToast?.("Profile settings coming soon!", "info")
-          }
-        >
-          <span className="btn-icon">
-            <i className="fas fa-cog"></i>
-          </span>{" "}
-          Profile Settings
-        </button>
-      </div>
-
-      {/* Advanced */}
-      <div className="sidebar-section">
-        <h3>Appearance</h3>
-        <button
-          className={`btn theme-toggle-btn`}
-          onClick={() => {
-            toggleTheme();
-            window.showToast?.(
-              `Switched to ${currentTheme === 'dark' ? 'light' : 'dark'} mode`,
-              "info"
-            );
-          }}
-        >
-          <span className="btn-icon">
-            <i className={`fas ${currentTheme === 'dark' ? 'fa-sun' : 'fa-moon'}`}></i>
-          </span>{" "}
-          {currentTheme === 'dark' ? 'Light Mode' : 'Dark Mode'}
-        </button>
-      </div>
-
-      {/* Memory & Advanced */}
-      <div className="sidebar-section">
-        <h3>Advanced</h3>
-        <button
-          className="btn"
-          onClick={() => {
-            clearMemory();
-            window.showToast?.("Memory cleared successfully", "success");
-          }}
-        >
-          <span className="btn-icon">
-            <i className="fas fa-undo"></i>
-          </span>{" "}
-          Clear Memory
-        </button>
-        <button
-          className={`btn ${!ttsEnabled ? "disabled" : ""}`}
-          onClick={() => {
-            toggleTTS();
-            window.showToast?.(
-              "Audio " + (!ttsEnabled ? "enabled" : "disabled"),
-              "info"
-            );
-          }}
-        >
-          <span className="btn-icon">
-            <i
-              className={`fas ${
-                ttsEnabled ? "fa-volume-up" : "fa-volume-mute"
-              }`}
-            ></i>
-          </span>{" "}
-          {ttsEnabled ? "Audio ON" : "Audio OFF"}
-        </button>
-        <div className="memory-panel">
-          <h4>Recent Context</h4>
-          <div className="memory-content">{getRecentMemory()}</div>
-        </div>
-      </div>
+      )}
     </div>
   );
+};
+
+Sidebar.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func,
 };
 
 export default Sidebar;
