@@ -1,4 +1,11 @@
-import React, { createContext, useState, useContext, useEffect } from "react";
+import React, {
+  createContext,
+  useState,
+  useContext,
+  useEffect,
+  useMemo,
+} from "react";
+import PropTypes from "prop-types";
 
 const ThemeContext = createContext();
 
@@ -62,6 +69,10 @@ export const themes = {
       error: "#ef4444",
       warning: "#f59e0b",
       info: "#3b82f6",
+
+      // Skeleton loader colors
+      skeletonBase: "rgba(255, 255, 255, 0.1)",
+      skeletonHighlight: "rgba(255, 255, 255, 0.2)",
     },
   },
   light: {
@@ -115,6 +126,10 @@ export const themes = {
       error: "#dc2626",
       warning: "#d97706",
       info: "#2563eb",
+
+      // Skeleton loader colors
+      skeletonBase: "rgba(0, 0, 0, 0.05)",
+      skeletonHighlight: "rgba(0, 0, 0, 0.1)",
     },
   },
 };
@@ -149,15 +164,22 @@ export const ThemeProvider = ({ children }) => {
     setCurrentTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
-  const value = {
-    currentTheme,
-    theme: themes[currentTheme],
-    toggleTheme,
-    setTheme: setCurrentTheme,
-    themes,
-  };
+  const value = useMemo(
+    () => ({
+      currentTheme,
+      theme: themes[currentTheme],
+      toggleTheme,
+      setTheme: setCurrentTheme,
+      themes,
+    }),
+    [currentTheme]
+  );
 
   return (
     <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
   );
+};
+
+ThemeProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
