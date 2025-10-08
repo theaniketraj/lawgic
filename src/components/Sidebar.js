@@ -25,7 +25,6 @@ const Sidebar = ({ isOpen, onClose }) => {
     createNewChat,
     switchToChat,
     getFilteredChats,
-    createChatFromTemplate,
     updateUserSettings,
     archiveChat,
     unarchiveChat,
@@ -254,16 +253,16 @@ const Sidebar = ({ isOpen, onClose }) => {
                   <button
                     className="btn template-btn"
                     onClick={() => {
-                      createChatFromTemplate(template);
+                      setChatSearchQuery(template.initialMessage);
+                      setActiveSection("chats");
                       window.showToast?.(
-                        `Started ${template.title}`,
+                        `Template loaded: "${template.title}"`,
                         "success"
                       );
-                      setActiveSection("chats");
                     }}
                   >
-                    <i className="fas fa-play"></i>
-                    Start Chat
+                    <i className="fas fa-edit"></i>
+                    Use Template
                   </button>
                 </div>
               ))}
