@@ -727,7 +727,14 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .sidebar {
-    width: 300px;
+    width: 90vw;
+    max-width: 350px;
+    transform: translateX(-100%);
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
   }
 
   .sidebar-header h2 {
@@ -739,12 +746,14 @@
   }
 
   .stats-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
   }
 
   .nav-tab {
-    padding: 0.8rem 0.5rem;
+    padding: 0.8rem 0.3rem;
     min-height: 55px;
+    font-size: 0.8rem;
   }
 
   .nav-tab i {
@@ -756,13 +765,35 @@
   }
 
   .sidebar-content {
-    padding: 1rem;
+    padding: 1rem 0.8rem;
+  }
+
+  .search-input-field {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
+
+  .chat-item {
+    padding: 10px 12px;
+  }
+
+  .chat-item-title {
+    font-size: 0.9rem;
+  }
+
+  .chat-item-preview {
+    font-size: 0.8rem;
+  }
+
+  .settings-section {
+    padding: 0.8rem;
   }
 }
 
 @media (max-width: 480px) {
   .sidebar {
-    width: 280px;
+    width: 95vw;
+    max-width: 320px;
   }
 
   .sidebar-header {
@@ -774,13 +805,27 @@
   }
 
   .nav-tab {
-    padding: 0.7rem 0.3rem;
+    padding: 0.7rem 0.2rem;
     min-height: 50px;
+    font-size: 0.75rem;
+  }
+
+  .nav-tab i {
+    font-size: 1rem;
+  }
+
+  .nav-tab span {
+    font-size: 0.7rem;
+    display: block;
   }
 
   .stats-grid {
     grid-template-columns: 1fr;
-    gap: 0.5rem;
+    gap: 0.6rem;
+  }
+
+  .stat-card {
+    padding: 0.8rem;
   }
 
   .setting-item {
@@ -792,13 +837,46 @@
   .setting-item label {
     white-space: normal;
     text-align: center;
+    font-size: 0.9rem;
+  }
+
+  .search-input-field {
+    font-size: 13px;
+    padding: 8px 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .sidebar {
+    width: 100vw;
+    max-width: none;
+  }
+
+  .sidebar-header h2 {
+    font-size: 1.3rem;
+  }
+
+  .nav-tab {
+    padding: 0.6rem 0.1rem;
+    min-height: 45px;
+    font-size: 0.7rem;
+  }
+
+  .nav-tab i {
+    font-size: 0.9rem;
   }
 
   .nav-tab span {
-    font-size: 0.7rem;
-    display: block;
+    font-size: 0.65rem;
   }
 
+  .sidebar-content {
+    padding: 0.8rem 0.6rem;
+  }
+
+  .stats-grid {
+    gap: 0.5rem;
+  }
   .category-filter {
     gap: 0.5rem;
   }
@@ -987,10 +1065,6 @@
 }
 
 /* Page Transition Effects */
-.sidebar-content {
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
-}
-
 .sidebar.open .sidebar-content {
   animation: slideInFromLeft 0.4s ease-out;
 }
