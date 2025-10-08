@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { useTheme } from "../context/ThemeContext";
 import "./WelcomeScreen.css";
 
 const WelcomeScreen = ({ show }) => {
   const [showTagline, setShowTagline] = useState(false);
+  const { theme } = useTheme();
 
   useEffect(() => {
     if (show) {
@@ -18,7 +20,10 @@ const WelcomeScreen = ({ show }) => {
   }, [show]);
   
   return (
-    <div className="welcome-screen">
+    <div 
+      className="welcome-screen" 
+      style={{ background: theme.colors.welcomeBg }}
+    >
       <div className="welcome-content">
         <h1 className="brand-title">RIZZ.ie</h1>
         <p className={`tagline ${showTagline ? "visible" : ""}`}>
