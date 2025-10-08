@@ -4,13 +4,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(
-      ellipse at center,
-      rgba(169, 169, 169, 0.15) 0%,
-      rgba(169, 169, 169, 0.05) 40%,
-      transparent 70%
-    ),
-    linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #000000 100%);
+  /* Background will be set via inline style from theme */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -26,12 +20,12 @@
 .brand-title {
   font-size: 6rem;
   font-weight: 700;
-  color: #a9a9a9;
-  text-shadow: 0 0 20px rgba(169, 169, 169, 0.3),
-    0 0 40px rgba(169, 169, 169, 0.2), 0 0 60px rgba(169, 169, 169, 0.1);
+  color: var(--color-text-secondary);
+  text-shadow: 0 0 20px rgba(139, 92, 246, 0.3),
+    0 0 40px rgba(139, 92, 246, 0.2), 0 0 60px rgba(139, 92, 246, 0.1);
   letter-spacing: 8px;
   margin-bottom: 2rem;
-  background: linear-gradient(45deg, #a9a9a9, #d3d3d3, #a9a9a9);
+  background: var(--color-accent);
   background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -43,12 +37,12 @@
 .tagline {
   font-size: 1.5rem;
   font-weight: 300;
-  color: #888;
+  color: var(--color-text-muted);
   letter-spacing: 2px;
   opacity: 0;
   transform: translateY(20px);
   transition: all 0.8s ease-out;
-  text-shadow: 0 2px 10px rgba(136, 136, 136, 0.3);
+  text-shadow: 0 2px 10px rgba(139, 92, 246, 0.3);
 }
 
 .tagline.visible {
@@ -68,12 +62,12 @@
 
 @keyframes brandTitleGlow {
   0% {
-    text-shadow: 0 0 20px rgba(169, 169, 169, 0.3),
-      0 0 40px rgba(169, 169, 169, 0.2), 0 0 60px rgba(169, 169, 169, 0.1);
+    text-shadow: 0 0 20px rgba(139, 92, 246, 0.3),
+      0 0 40px rgba(139, 92, 246, 0.2), 0 0 60px rgba(139, 92, 246, 0.1);
   }
   100% {
-    text-shadow: 0 0 30px rgba(169, 169, 169, 0.5),
-      0 0 60px rgba(169, 169, 169, 0.3), 0 0 90px rgba(169, 169, 169, 0.2);
+    text-shadow: 0 0 30px rgba(139, 92, 246, 0.5),
+      0 0 60px rgba(139, 92, 246, 0.3), 0 0 90px rgba(139, 92, 246, 0.2);
   }
 }
 
