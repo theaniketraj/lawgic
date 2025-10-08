@@ -1,0 +1,345 @@
+/* Skeleton Loader Styles */
+.skeleton-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+.skeleton-item {
+  animation: skeletonFadeIn 0.5s ease forwards;
+  opacity: 0;
+}
+
+/* Base skeleton animation */
+@keyframes skeletonShimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+@keyframes skeletonFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.skeleton-element {
+  background: linear-gradient(
+    90deg,
+    var(--color-skeleton-base) 25%,
+    var(--color-skeleton-highlight) 50%,
+    var(--color-skeleton-base) 75%
+  );
+  background-size: 200px 100%;
+  animation: skeletonShimmer 1.5s infinite linear;
+  border-radius: 4px;
+}
+
+/* Chat Item Skeleton */
+.skeleton-chat-item {
+  display: flex;
+  gap: 0.75rem;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  background: var(--color-background);
+}
+
+.skeleton-chat-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: linear-gradient(
+    90deg,
+    var(--color-skeleton-base) 25%,
+    var(--color-skeleton-highlight) 50%,
+    var(--color-skeleton-base) 75%
+  );
+  background-size: 200px 100%;
+  animation: skeletonShimmer 1.5s infinite linear;
+}
+
+.skeleton-chat-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.skeleton-chat-title {
+  height: 16px;
+  width: 70%;
+  background: linear-gradient(
+    90deg,
+    var(--color-skeleton-base) 25%,
+    var(--color-skeleton-highlight) 50%,
+    var(--color-skeleton-base) 75%
+  );
+  background-size: 200px 100%;
+  animation: skeletonShimmer 1.5s infinite linear;
+  border-radius: 4px;
+}
+
+.skeleton-chat-preview {
+  height: 14px;
+  width: 90%;
+  background: linear-gradient(
+    90deg,
+    var(--color-skeleton-base) 25%,
+    var(--color-skeleton-highlight) 50%,
+    var(--color-skeleton-base) 75%
+  );
+  background-size: 200px 100%;
+  animation: skeletonShimmer 1.5s infinite linear;
+  border-radius: 4px;
+}
+
+.skeleton-chat-time {
+  height: 12px;
+  width: 40%;
+  background: linear-gradient(
+    90deg,
+    var(--color-skeleton-base) 25%,
+    var(--color-skeleton-highlight) 50%,
+    var(--color-skeleton-base) 75%
+  );
+  background-size: 200px 100%;
+  animation: skeletonShimmer 1.5s infinite linear;
+  border-radius: 4px;
+}
+
+/* Message Skeleton */
+.skeleton-message {
+  display: flex;
+  max-width: 70%;
+  margin-bottom: 1rem;
+}
+
+.skeleton-message-content {
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.skeleton-text-line {
+  height: 16px;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--color-skeleton-base) 25%,
+    var(--color-skeleton-highlight) 50%,
+    var(--color-skeleton-base) 75%
+  );
+  background-size: 200px 100%;
+  animation: skeletonShimmer 1.5s infinite linear;
+}
+
+.skeleton-text-line.long {
+  width: 95%;
+}
+
+.skeleton-text-line.medium {
+  width: 80%;
+}
+
+.skeleton-text-line.short {
+  width: 60%;
+}
+
+/* Stats Skeleton */
+.skeleton-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.skeleton-stat-item {
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.skeleton-stat-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(
+    90deg,
+    var(--color-skeleton-base) 25%,
+    var(--color-skeleton-highlight) 50%,
+    var(--color-skeleton-base) 75%
+  );
+  background-size: 200px 100%;
+  animation: skeletonShimmer 1.5s infinite linear;
+}
+
+.skeleton-stat-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.skeleton-stat-number {
+  height: 20px;
+  width: 60%;
+  background: linear-gradient(
+    90deg,
+    var(--color-skeleton-base) 25%,
+    var(--color-skeleton-highlight) 50%,
+    var(--color-skeleton-base) 75%
+  );
+  background-size: 200px 100%;
+  animation: skeletonShimmer 1.5s infinite linear;
+  border-radius: 4px;
+}
+
+.skeleton-stat-label {
+  height: 14px;
+  width: 80%;
+  background: linear-gradient(
+    90deg,
+    var(--color-skeleton-base) 25%,
+    var(--color-skeleton-highlight) 50%,
+    var(--color-skeleton-base) 75%
+  );
+  background-size: 200px 100%;
+  animation: skeletonShimmer 1.5s infinite linear;
+  border-radius: 4px;
+}
+
+/* Template Skeleton */
+.skeleton-template-item {
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.skeleton-template-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.skeleton-template-title {
+  height: 18px;
+  width: 60%;
+  background: linear-gradient(
+    90deg,
+    var(--color-skeleton-base) 25%,
+    var(--color-skeleton-highlight) 50%,
+    var(--color-skeleton-base) 75%
+  );
+  background-size: 200px 100%;
+  animation: skeletonShimmer 1.5s infinite linear;
+  border-radius: 4px;
+}
+
+.skeleton-template-category {
+  height: 20px;
+  width: 80px;
+  background: linear-gradient(
+    90deg,
+    var(--color-skeleton-base) 25%,
+    var(--color-skeleton-highlight) 50%,
+    var(--color-skeleton-base) 75%
+  );
+  background-size: 200px 100%;
+  animation: skeletonShimmer 1.5s infinite linear;
+  border-radius: 12px;
+}
+
+.skeleton-template-description {
+  height: 14px;
+  width: 85%;
+  background: linear-gradient(
+    90deg,
+    var(--color-skeleton-base) 25%,
+    var(--color-skeleton-highlight) 50%,
+    var(--color-skeleton-base) 75%
+  );
+  background-size: 200px 100%;
+  animation: skeletonShimmer 1.5s infinite linear;
+  border-radius: 4px;
+}
+
+.skeleton-template-button {
+  height: 36px;
+  width: 120px;
+  background: linear-gradient(
+    90deg,
+    var(--color-skeleton-base) 25%,
+    var(--color-skeleton-highlight) 50%,
+    var(--color-skeleton-base) 75%
+  );
+  background-size: 200px 100%;
+  animation: skeletonShimmer 1.5s infinite linear;
+  border-radius: 6px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+  .skeleton-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .skeleton-chat-item {
+    padding: 0.75rem;
+  }
+
+  .skeleton-message {
+    max-width: 85%;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-element,
+  .skeleton-chat-avatar,
+  .skeleton-chat-title,
+  .skeleton-chat-preview,
+  .skeleton-chat-time,
+  .skeleton-text-line,
+  .skeleton-stat-icon,
+  .skeleton-stat-number,
+  .skeleton-stat-label,
+  .skeleton-template-title,
+  .skeleton-template-category,
+  .skeleton-template-description,
+  .skeleton-template-button {
+    animation: none;
+    background: var(--color-skeleton-base);
+  }
+
+  .skeleton-item {
+    animation: none;
+    opacity: 1;
+  }
+}
