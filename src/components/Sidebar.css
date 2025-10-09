@@ -30,6 +30,7 @@
   color: white;
   flex-shrink: 0;
   text-align: center;
+  position: relative;
 }
 
 .sidebar-header h2 {
@@ -47,6 +48,29 @@
   color: rgba(255, 255, 255, 0.9);
   font-weight: 400;
   opacity: 0.8;
+}
+
+.close-sidebar {
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.close-sidebar:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 /* Navigation Tabs */
