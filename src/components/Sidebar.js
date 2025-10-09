@@ -71,6 +71,9 @@ const Sidebar = ({ isOpen, onClose }) => {
       style={{ fontSize: getFontSize() }}
     >
       <div className="sidebar-header">
+        <button className="close-sidebar" onClick={onClose}>
+          <i className="fas fa-times"></i>
+        </button>
         <h2>RIZZ.ie</h2>
         <p className="sidebar-subtitle">Daemon v1.0</p>
       </div>
