@@ -58,41 +58,41 @@ export const ChatProvider = ({ children }) => {
     { id: "archived", name: "Archived", icon: "fa-archive" },
   ];
 
-  // Conversation templates
+  // Legal Conversation templates
   const conversationTemplates = [
     {
-      id: "brainstorm",
-      title: "Brainstorming Session",
-      description: "Generate creative ideas",
-      initialMessage: "Let's brainstorm some creative ideas about...",
-      category: "creative",
-    },
-    {
-      id: "problem-solving",
-      title: "Problem Solving",
-      description: "Work through a problem step by step",
-      initialMessage: "I need help solving this problem:",
+      id: "case-search",
+      title: "Case Law Search",
+      description: "Find relevant Supreme Court judgments",
+      initialMessage: "find judgments related to Section 138 NI Act",
       category: "work",
     },
     {
-      id: "learning",
-      title: "Learning Assistant",
-      description: "Learn something new",
-      initialMessage: "I want to learn about...",
+      id: "legal-drafting",
+      title: "Draft Legal Document",
+      description: "Create affidavits, notices, or agreements",
+      initialMessage: "I need to draft a Rent Agreement for a property in Delhi",
+      category: "work",
+    },
+    {
+      id: "bns-query",
+      title: "New Criminal Laws (BNS)",
+      description: "Understand the transition from IPC to BNS",
+      initialMessage: "What is the new section for Cheating under BNS?",
       category: "learning",
     },
     {
-      id: "planning",
-      title: "Project Planning",
-      description: "Plan a project or task",
-      initialMessage: "Help me plan this project:",
-      category: "work",
+      id: "procedural",
+      title: "Procedural Guidance",
+      description: "Steps for filing FIR, RTI, or Complaints",
+      initialMessage: "What is the procedure to file an FIR online?",
+      category: "learning",
     },
     {
-      id: "casual",
-      title: "Casual Chat",
-      description: "Just have a friendly conversation",
-      initialMessage: "Hey! Let's chat about...",
+      id: "general-consult",
+      title: "General Consultation",
+      description: "Ask any legal question",
+      initialMessage: "I have a legal query regarding...",
       category: "personal",
     },
   ];
@@ -191,7 +191,7 @@ export const ChatProvider = ({ children }) => {
       const newChatId = `chat_${Date.now()}`;
       const welcomeMessage = {
         id: "welcome-message",
-        text: "Hello! I'm your AI avatar. Click the menu button to access controls and personalize me! 🤖",
+        text: "Hello! I am LAWGic, your AI Legal Consultant. I can assist you with Indian laws (BNS, BNSS, BSA), case precedents, and legal drafting. Please note: I am an AI, not a lawyer. \n\nHow can I assist you today?",
         sender: "bot",
         timestamp: new Date().toISOString(),
       };
@@ -285,7 +285,7 @@ export const ChatProvider = ({ children }) => {
     const newChatId = `chat_${Date.now()}`;
     const welcomeMessage = {
       id: "welcome-message",
-      text: "Hello! I'm your AI avatar. Click the menu button to access controls and personalize me! 🤖",
+      text: "Hello! I am LAWGic, your AI Legal Consultant. I can assist you with Indian laws (BNS, BNSS, BSA), case precedents, and legal drafting. Please note: I am an AI, not a lawyer. \n\nHow can I assist you today?",
       sender: "bot",
       timestamp: new Date().toISOString(),
     };
@@ -336,7 +336,7 @@ export const ChatProvider = ({ children }) => {
         setConversationMemory(session.memory);
         setShowWelcomeScreen(
           session.messages.length === 1 &&
-            session.messages[0].id === "welcome-message"
+          session.messages[0].id === "welcome-message"
         );
         setIsLoadingMessages(false);
       }, 150);
@@ -364,10 +364,10 @@ export const ChatProvider = ({ children }) => {
       const updated = prev.map((item) =>
         item.id === chatId
           ? {
-              ...item,
-              lastActive: session.lastActive,
-              preview: getPreviewText(session.messages),
-            }
+            ...item,
+            lastActive: session.lastActive,
+            preview: getPreviewText(session.messages),
+          }
           : item
       );
       localStorage.setItem("chatHistoryList", JSON.stringify(updated));
@@ -506,56 +506,42 @@ export const ChatProvider = ({ children }) => {
   };
 
   const generateResponse = (message) => {
-    const responses = {
-      greeting: [
-        "Hello there! How can I help you today?",
-        "Hi! Great to see you! What would you like to talk about?",
-        "Hey! I'm excited to chat with you!",
-      ],
-      question: [
-        "That's a fascinating question! Let me think about that...",
-        "Great question! Based on what I know, I'd say...",
-        "I love curious minds! Here's what I think...",
-      ],
-      compliment: [
-        "Thank you so much! That really means a lot to me!",
-        "You're too kind! I appreciate that!",
-        "Aww, that made my day! Thank you!",
-      ],
-      default: [
-        "That's really interesting! Tell me more about that.",
-        "I see what you mean. That's worth thinking about.",
-        "Thanks for sharing that with me! What else is on your mind?",
-      ],
-    };
-
     const lowerMessage = message.toLowerCase();
 
-    if (
-      lowerMessage.includes("hello") ||
-      lowerMessage.includes("hi") ||
-      lowerMessage.includes("hey")
-    ) {
-      return responses.greeting[
-        Math.floor(Math.random() * responses.greeting.length)
-      ];
-    } else if (lowerMessage.includes("?")) {
-      return responses.question[
-        Math.floor(Math.random() * responses.question.length)
-      ];
-    } else if (
-      lowerMessage.includes("good") ||
-      lowerMessage.includes("great") ||
-      lowerMessage.includes("awesome")
-    ) {
-      return responses.compliment[
-        Math.floor(Math.random() * responses.compliment.length)
-      ];
-    } else {
-      return responses.default[
-        Math.floor(Math.random() * responses.default.length)
-      ];
+    // Mock Legal Knowledge Base Logic
+    if (lowerMessage.includes("murder") || lowerMessage.includes("302")) {
+      return "Under the **Bharatiya Nyaya Sanhita (BNS)**, Murder is covered under **Section 103** (previously Section 302 of IPC). \n\n**Punishment:** Death or imprisonment for life, and shall also be liable to fine.\n\n*Source: Section 103, Bharatiya Nyaya Sanhita, 2023*";
     }
+
+    if (lowerMessage.includes("cheating") || lowerMessage.includes("420")) {
+      return "Cheating is now covered under **Section 318** of the **Bharatiya Nyaya Sanhita (BNS)** (previously Section 420 of IPC). \n\n**Punishment:** Imprisonment up to 3 years, or with fine, or both.\n\n*Source: Section 318, Bharatiya Nyaya Sanhita, 2023*";
+    }
+
+    if (lowerMessage.includes("theft") || lowerMessage.includes("378")) {
+      return "Theft is defined under **Section 303** of the **Bharatiya Nyaya Sanhita (BNS)** (previously Section 378 of IPC). \n\n**Definition:** Whoever, intending to take dishonestly any movable property out of the possession of any person without that person's consent, moves that property in order to such taking, is said to commit theft.\n\n*Source: Section 303, Bharatiya Nyaya Sanhita, 2023*";
+    }
+
+    if (lowerMessage.includes("divorce")) {
+      return "Divorce in India is governed by personal laws based on religion:\n\n1. **Hindu Marriage Act, 1955:** Section 13B (Mutual Consent), Section 13 (Contested).\n2. **Special Marriage Act, 1954:** For inter-faith marriages.\n3. **Muslim Law:** Talaq, Khula, etc.\n\nPlease specify your religion or the Act under which the marriage was registered for more specific advice.";
+    }
+
+    if (lowerMessage.includes("rent") || lowerMessage.includes("agreement")) {
+      return "For a **Rent Agreement**, the following clauses are essential:\n\n1. **Parties:** Names and addresses of Landlord and Tenant.\n2. **Property Details:** Address and description.\n3. **Tenure:** Start and end date (usually 11 months to avoid registration).\n4. **Rent & Deposit:** Monthly rent amount and security deposit.\n5. **Notice Period:** Usually 1 month.\n\nWould you like me to draft a template for you?";
+    }
+
+    if (lowerMessage.includes("fir") || lowerMessage.includes("police")) {
+      return "To file an **FIR (First Information Report)** under **BNSS (Bharatiya Nagarik Suraksha Sanhita)**:\n\n1. Visit the nearest Police Station containing the jurisdiction.\n2. You can also file an **e-FIR** for certain cognizable offences (like theft) via the state police portal (Section 173 BNSS).\n3. If police refuse, you can send the substance of information to the Superintendent of Police (SP).\n\n*Source: Section 173, Bharatiya Nagarik Suraksha Sanhita, 2023*";
+    }
+
+    // Default responses
+    const defaultResponses = [
+      "That is a complex legal matter. According to Indian Law, this would typically fall under Civil/Criminal jurisdiction depending on the facts. Could you provide more specific details?",
+      "I can help you search for relevant case laws on this topic. Please specify if you are looking for Supreme Court or High Court judgments.",
+      "Please note that while I can provide information on Acts and Sections, you should consult a practicing Advocate for legal representation.",
+      "Could you clarify which specific Act you are referring to? (e.g., Contract Act, IT Act, Companies Act).",
+    ];
+
+    return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
   };
 
   const processMessage = async (message) => {
