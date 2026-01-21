@@ -3,6 +3,8 @@ import Sidebar from "./components/Sidebar";
 import ChatSection from "./components/ChatSection";
 import ToastContainer from "./components/ToastContainer";
 import WelcomeScreen from "./components/WelcomeScreen";
+import DisclaimerModal from "./components/DisclaimerModal";
+
 import { ChatProvider, useChatContext } from "./context/ChatContext";
 import { ThemeProvider, useTheme } from "./context/ThemeContext";
 import "./App.css";
@@ -147,8 +149,12 @@ function AppContent() {
             <ChatSection />
           </div>
 
+
           {/* Toast Container */}
           <ToastContainer />
+
+          {/* Legal Disclaimer Modal */}
+          <DisclaimerModal />
         </>
       )}
     </div>
