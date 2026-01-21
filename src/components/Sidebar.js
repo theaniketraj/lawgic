@@ -71,10 +71,10 @@ const Sidebar = ({ isOpen, onClose }) => {
       style={{ fontSize: getFontSize() }}
     >
       <div className="sidebar-header">
-        <button className="close-sidebar" onClick={onClose}>
-          <i className="fas fa-times"></i>
-        </button>
-        <h2>RIZZ.ie</h2>
+        <h2>
+          <i className="fas fa-balance-scale" style={{ marginRight: '10px', fontSize: '0.8em' }}></i>
+          LAWGic
+        </h2>
         <p className="sidebar-subtitle">Daemon v1.0</p>
       </div>
 
@@ -132,9 +132,8 @@ const Sidebar = ({ isOpen, onClose }) => {
             {chatCategories.map((category) => (
               <button
                 key={category.id}
-                className={`category-btn ${
-                  selectedChatCategory === category.id ? "active" : ""
-                }`}
+                className={`category-btn ${selectedChatCategory === category.id ? "active" : ""
+                  }`}
                 onClick={() => setSelectedChatCategory(category.id)}
               >
                 <i className={`fas ${category.icon}`}></i>
@@ -169,9 +168,8 @@ const Sidebar = ({ isOpen, onClose }) => {
                   .map((chat, index) => (
                     <div
                       key={chat.id}
-                      className={`chat-history-item ${
-                        currentChatId === chat.id ? "active" : ""
-                      }`}
+                      className={`chat-history-item ${currentChatId === chat.id ? "active" : ""
+                        }`}
                       style={{
                         animationDelay: userSettings.animationsEnabled
                           ? `${index * 0.05}s`
@@ -223,11 +221,10 @@ const Sidebar = ({ isOpen, onClose }) => {
                           }
                         >
                           <i
-                            className={`fas ${
-                              chat.category === "archived"
-                                ? "fa-undo"
-                                : "fa-archive"
-                            }`}
+                            className={`fas ${chat.category === "archived"
+                              ? "fa-undo"
+                              : "fa-archive"
+                              }`}
                           ></i>
                         </button>
                       </div>
@@ -421,8 +418,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                   onClick={() => {
                     toggleTheme();
                     window.showToast?.(
-                      `Switched to ${
-                        currentTheme === "dark" ? "light" : "dark"
+                      `Switched to ${currentTheme === "dark" ? "light" : "dark"
                       } mode`,
                       "info"
                     );
@@ -430,9 +426,8 @@ const Sidebar = ({ isOpen, onClose }) => {
                 >
                   <span className="btn-icon">
                     <i
-                      className={`fas ${
-                        currentTheme === "dark" ? "fa-sun" : "fa-moon"
-                      }`}
+                      className={`fas ${currentTheme === "dark" ? "fa-sun" : "fa-moon"
+                        }`}
                     ></i>
                   </span>{" "}
                   {currentTheme === "dark" ? "Light Mode" : "Dark Mode"}
@@ -446,9 +441,8 @@ const Sidebar = ({ isOpen, onClose }) => {
                   {["small", "medium", "large"].map((size) => (
                     <button
                       key={size}
-                      className={`setting-btn ${
-                        userSettings.fontSize === size ? "active" : ""
-                      }`}
+                      className={`setting-btn ${userSettings.fontSize === size ? "active" : ""
+                        }`}
                       onClick={() => handleSettingChange("fontSize", size)}
                     >
                       {size}
@@ -466,9 +460,8 @@ const Sidebar = ({ isOpen, onClose }) => {
               <div className="setting-item">
                 <label>Animations</label>
                 <button
-                  className={`setting-toggle ${
-                    userSettings.animationsEnabled ? "active" : ""
-                  }`}
+                  className={`setting-toggle ${userSettings.animationsEnabled ? "active" : ""
+                    }`}
                   onClick={() =>
                     handleSettingChange(
                       "animationsEnabled",
@@ -485,9 +478,8 @@ const Sidebar = ({ isOpen, onClose }) => {
               <div className="setting-item">
                 <label>Auto Scroll</label>
                 <button
-                  className={`setting-toggle ${
-                    userSettings.autoScrollEnabled ? "active" : ""
-                  }`}
+                  className={`setting-toggle ${userSettings.autoScrollEnabled ? "active" : ""
+                    }`}
                   onClick={() =>
                     handleSettingChange(
                       "autoScrollEnabled",
@@ -504,9 +496,8 @@ const Sidebar = ({ isOpen, onClose }) => {
               <div className="setting-item">
                 <label>Sound Effects</label>
                 <button
-                  className={`setting-toggle ${
-                    userSettings.soundEffectsEnabled ? "active" : ""
-                  }`}
+                  className={`setting-toggle ${userSettings.soundEffectsEnabled ? "active" : ""
+                    }`}
                   onClick={() =>
                     handleSettingChange(
                       "soundEffectsEnabled",
@@ -563,9 +554,8 @@ const Sidebar = ({ isOpen, onClose }) => {
               <div className="setting-item">
                 <label>Keyboard Shortcuts</label>
                 <button
-                  className={`setting-toggle ${
-                    userSettings.keyboardShortcutsEnabled ? "active" : ""
-                  }`}
+                  className={`setting-toggle ${userSettings.keyboardShortcutsEnabled ? "active" : ""
+                    }`}
                   onClick={() =>
                     handleSettingChange(
                       "keyboardShortcutsEnabled",
