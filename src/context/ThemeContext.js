@@ -21,116 +21,116 @@ export const themes = {
   dark: {
     name: "dark",
     colors: {
-      // Background gradients
+      // Background gradients - Deep Navy Legal Theme
       primaryBg:
-        "linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #000000 100%)",
+        "linear-gradient(135deg, #0a192f 0%, #112240 50%, #0a192f 100%)",
       welcomeBg:
-        "radial-gradient(ellipse at center, rgba(169, 169, 169, 0.15) 0%, rgba(169, 169, 169, 0.05) 40%, transparent 70%), linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #000000 100%)",
-      background: "#1a1a1a",
-      gradient: "linear-gradient(45deg, #8b5cf6, #06b6d4)",
+        "radial-gradient(ellipse at center, rgba(251, 140, 0, 0.05) 0%, rgba(10, 25, 47, 0.5) 40%, transparent 70%), linear-gradient(135deg, #0a192f 0%, #112240 50%, #0a192f 100%)",
+      background: "#0a192f",
+      gradient: "linear-gradient(45deg, #fb8c00, #ffd700)",
 
       // Text colors
-      text: "#ffffff",
-      textPrimary: "#ffffff",
-      textSecondary: "rgba(255, 255, 255, 0.8)",
-      textMuted: "rgba(255, 255, 255, 0.6)",
-      textFaded: "rgba(255, 255, 255, 0.4)",
+      text: "#e6f1ff",
+      textPrimary: "#e6f1ff",
+      textSecondary: "rgba(230, 241, 255, 0.7)",
+      textMuted: "rgba(230, 241, 255, 0.5)",
+      textFaded: "rgba(230, 241, 255, 0.3)",
 
-      // Accent colors - Purple/Cyan gradient theme
-      primary: "#8b5cf6",
-      primaryLight: "rgba(139, 92, 246, 0.1)",
-      accent: "linear-gradient(45deg, #8b5cf6, #06b6d4)",
-      accentSolid: "#8b5cf6",
-      accentSecondary: "#06b6d4",
-      accentHover: "linear-gradient(45deg, #7c3aed, #0891b2)",
+      // Accent colors - Gold/Amber for Premium Feel
+      primary: "#fb8c00", // Amber 600
+      primaryLight: "rgba(251, 140, 0, 0.1)",
+      accent: "linear-gradient(45deg, #fb8c00, #ffa726)",
+      accentSolid: "#fb8c00",
+      accentSecondary: "#ffa726",
+      accentHover: "linear-gradient(45deg, #f57c00, #ff9800)",
 
       // Message colors
-      userMessage: "linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%)",
-      userMessageBorder: "rgba(139, 92, 246, 0.3)",
-      botMessage: "rgba(255, 255, 255, 0.1)",
-      botMessageBorder: "rgba(255, 255, 255, 0.2)",
+      userMessage: "linear-gradient(135deg, #1a237e 0%, #283593 100%)", // Navy Blue
+      userMessageBorder: "rgba(251, 140, 0, 0.3)",
+      botMessage: "rgba(255, 255, 255, 0.05)",
+      botMessageBorder: "rgba(255, 255, 255, 0.1)",
 
       // UI elements
-      sidebar: "rgba(0, 0, 0, 0.4)",
-      sidebarBg: "rgba(0, 0, 0, 0.4)",
-      sidebarNavBg: "rgba(0, 0, 0, 0.2)",
-      chatBg: "rgba(0, 0, 0, 0.1)",
-      searchBarBg: "rgba(0, 0, 0, 0.4)",
-      buttonBg: "rgba(255, 255, 255, 0.2)",
-      buttonHover: "rgba(255, 255, 255, 0.3)",
-      hover: "rgba(255, 255, 255, 0.1)",
-      border: "rgba(255, 255, 255, 0.2)",
-      borderHover: "rgba(255, 255, 255, 0.3)",
+      sidebar: "rgba(10, 25, 47, 0.8)",
+      sidebarBg: "rgba(10, 25, 47, 0.8)",
+      sidebarNavBg: "rgba(255, 255, 255, 0.05)",
+      chatBg: "rgba(0, 0, 0, 0.2)",
+      searchBarBg: "rgba(10, 25, 47, 0.6)",
+      buttonBg: "rgba(255, 255, 255, 0.1)",
+      buttonHover: "rgba(255, 255, 255, 0.2)",
+      hover: "rgba(255, 255, 255, 0.05)",
+      border: "rgba(230, 241, 255, 0.1)",
+      borderHover: "rgba(251, 140, 0, 0.3)",
 
       // Status colors
-      success: "#10b981",
-      danger: "#ef4444",
-      dangerHover: "#dc2626",
-      error: "#ef4444",
-      warning: "#f59e0b",
-      info: "#3b82f6",
+      success: "#00e676",
+      danger: "#ff1744",
+      dangerHover: "#d50000",
+      error: "#ff1744",
+      warning: "#ffab00",
+      info: "#2979ff",
 
       // Skeleton loader colors
-      skeletonBase: "rgba(255, 255, 255, 0.1)",
-      skeletonHighlight: "rgba(255, 255, 255, 0.2)",
+      skeletonBase: "rgba(255, 255, 255, 0.05)",
+      skeletonHighlight: "rgba(255, 255, 255, 0.1)",
 
       // Toast colors
-      toastBg: "rgba(0, 0, 0, 0.85)",
-      toastBorder: "rgba(255, 255, 255, 0.2)",
-      toastText: "#ffffff",
+      toastBg: "rgba(10, 25, 47, 0.95)",
+      toastBorder: "rgba(251, 140, 0, 0.3)",
+      toastText: "#e6f1ff",
     },
   },
   light: {
     name: "light",
     colors: {
-      // Background gradients
+      // Background gradients - Clean Legal Document Look
       primaryBg:
-        "linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%)",
+        "linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%)",
       welcomeBg:
-        "radial-gradient(ellipse at center, rgba(139, 92, 246, 0.1) 0%, rgba(139, 92, 246, 0.05) 40%, transparent 70%), linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #cbd5e1 100%)",
+        "radial-gradient(ellipse at center, rgba(26, 35, 126, 0.05) 0%, rgba(26, 35, 126, 0.02) 40%, transparent 70%), linear-gradient(135deg, #f5f7fa 0%, #e4e7eb 100%)",
       background: "#ffffff",
-      gradient: "linear-gradient(45deg, #8b5cf6, #06b6d4)",
+      gradient: "linear-gradient(45deg, #1a237e, #283593)",
 
       // Text colors
-      text: "#1e293b",
-      textPrimary: "#1e293b",
-      textSecondary: "#475569",
-      textMuted: "#64748b",
-      textFaded: "#94a3b8",
+      text: "#1a237e", // Navy Blue Text
+      textPrimary: "#1a237e",
+      textSecondary: "#303f9f",
+      textMuted: "#5c6bc0",
+      textFaded: "#9fa8da",
 
-      // Accent colors - Purple/Cyan gradient theme
-      primary: "#8b5cf6",
-      primaryLight: "rgba(139, 92, 246, 0.1)",
-      accent: "linear-gradient(45deg, #8b5cf6, #06b6d4)",
-      accentSolid: "#8b5cf6",
-      accentSecondary: "#06b6d4",
-      accentHover: "linear-gradient(45deg, #7c3aed, #0891b2)",
+      // Accent colors - Navy Blue Dominant with Gold Highlights
+      primary: "#1a237e",
+      primaryLight: "rgba(26, 35, 126, 0.1)",
+      accent: "linear-gradient(45deg, #1a237e, #283593)",
+      accentSolid: "#1a237e",
+      accentSecondary: "#fb8c00", // Gold accent
+      accentHover: "linear-gradient(45deg, #283593, #303f9f)",
 
       // Message colors
-      userMessage: "linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%)",
-      userMessageBorder: "rgba(139, 92, 246, 0.3)",
-      botMessage: "rgba(255, 255, 255, 0.8)",
+      userMessage: "linear-gradient(135deg, #1a237e 0%, #303f9f 100%)",
+      userMessageBorder: "rgba(26, 35, 126, 0.1)",
+      botMessage: "#ffffff",
       botMessageBorder: "rgba(0, 0, 0, 0.1)",
 
       // UI elements
-      sidebar: "rgba(255, 255, 255, 0.9)",
-      sidebarBg: "rgba(255, 255, 255, 0.9)",
-      sidebarNavBg: "rgba(0, 0, 0, 0.05)",
+      sidebar: "rgba(255, 255, 255, 0.95)",
+      sidebarBg: "rgba(255, 255, 255, 0.95)",
+      sidebarNavBg: "rgba(26, 35, 126, 0.05)",
       chatBg: "rgba(255, 255, 255, 0.5)",
-      searchBarBg: "rgba(255, 255, 255, 0.8)",
-      buttonBg: "rgba(0, 0, 0, 0.1)",
-      buttonHover: "rgba(0, 0, 0, 0.15)",
-      hover: "rgba(0, 0, 0, 0.05)",
-      border: "rgba(0, 0, 0, 0.1)",
-      borderHover: "rgba(0, 0, 0, 0.2)",
+      searchBarBg: "rgba(255, 255, 255, 0.9)",
+      buttonBg: "rgba(26, 35, 126, 0.08)",
+      buttonHover: "rgba(26, 35, 126, 0.15)",
+      hover: "rgba(26, 35, 126, 0.05)",
+      border: "rgba(26, 35, 126, 0.1)",
+      borderHover: "rgba(26, 35, 126, 0.3)",
 
       // Status colors
-      success: "#059669",
-      danger: "#dc2626",
-      dangerHover: "#b91c1c",
-      error: "#dc2626",
-      warning: "#d97706",
-      info: "#2563eb",
+      success: "#2e7d32",
+      danger: "#c62828",
+      dangerHover: "#b71c1c",
+      error: "#c62828",
+      warning: "#f9a825",
+      info: "#1565c0",
 
       // Skeleton loader colors
       skeletonBase: "rgba(0, 0, 0, 0.05)",
@@ -138,8 +138,8 @@ export const themes = {
 
       // Toast colors
       toastBg: "rgba(255, 255, 255, 0.95)",
-      toastBorder: "rgba(0, 0, 0, 0.1)",
-      toastText: "#1e293b",
+      toastBorder: "rgba(26, 35, 126, 0.2)",
+      toastText: "#1a237e",
     },
   },
 };
@@ -149,7 +149,7 @@ export const ThemeProvider = ({ children }) => {
 
   // Load theme from localStorage on mount
   useEffect(() => {
-    const savedTheme = localStorage.getItem("rizzTheme");
+    const savedTheme = localStorage.getItem("nyayaTheme");
     if (savedTheme && themes[savedTheme]) {
       setCurrentTheme(savedTheme);
     }
@@ -157,7 +157,7 @@ export const ThemeProvider = ({ children }) => {
 
   // Save theme to localStorage when it changes
   useEffect(() => {
-    localStorage.setItem("rizzTheme", currentTheme);
+    localStorage.setItem("nyayaTheme", currentTheme);
     // Apply theme to document root for CSS custom properties
     const root = document.documentElement;
     const theme = themes[currentTheme];
