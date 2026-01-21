@@ -158,7 +158,9 @@ const Sidebar = ({ isOpen, onClose }) => {
 
           {/* Chat History List */}
           <div className="chat-history-section">
-            <h4>Conversations</h4>
+            <h3 className="sidebar-section-title">
+              <i className="fas fa-history"></i> Recent Consultations
+            </h3>
             <div className="chat-history-list">
               {isLoadingChats ? (
                 <SkeletonLoader type="chat" count={5} />
@@ -253,7 +255,9 @@ const Sidebar = ({ isOpen, onClose }) => {
       {activeSection === "templates" && (
         <div className="sidebar-content">
           <div className="templates-section">
-            <h3>Conversation Templates</h3>
+            <h3 className="sidebar-section-title">
+              <i className="fas fa-file-contract"></i> Legal Templates
+            </h3>
             <div className="templates-list">
               {conversationTemplates.map((template) => (
                 <div key={template.id} className="template-item">
@@ -289,7 +293,9 @@ const Sidebar = ({ isOpen, onClose }) => {
       {activeSection === "stats" && (
         <div className="sidebar-content">
           <div className="stats-section">
-            <h3>Usage Statistics</h3>
+            <h3 className="sidebar-section-title">
+              <i className="fas fa-chart-pie"></i> Firm Analytics
+            </h3>
             {isLoadingStats ? (
               <SkeletonLoader type="stats" />
             ) : (
@@ -367,7 +373,9 @@ const Sidebar = ({ isOpen, onClose }) => {
 
             {/* Bot Status */}
             <div className="bot-status-section">
-              <h4>Avatar Status</h4>
+              <h3 className="sidebar-section-title">
+                <i className="fas fa-signal"></i> System Status
+              </h3>
               <div className="status-panel">
                 <div className="status-display">{status}</div>
                 <div className="emotion-status">
@@ -381,7 +389,9 @@ const Sidebar = ({ isOpen, onClose }) => {
 
             {/* Memory Panel */}
             <div className="memory-section">
-              <h4>Conversation Memory</h4>
+              <h3 className="sidebar-section-title">
+                <i className="fas fa-brain"></i> Case Context Memory
+              </h3>
               <div className="memory-panel">
                 <div className="memory-content">{getRecentMemory()}</div>
               </div>
@@ -395,7 +405,7 @@ const Sidebar = ({ isOpen, onClose }) => {
                 <span className="btn-icon">
                   <i className="fas fa-undo"></i>
                 </span>{" "}
-                Clear Memory
+                Clear Context
               </button>
             </div>
           </div>
@@ -408,7 +418,9 @@ const Sidebar = ({ isOpen, onClose }) => {
           <div className="settings-section">
             {/* Appearance Settings */}
             <div className="setting-group">
-              <h3>Appearance</h3>
+              <h3 className="sidebar-section-title">
+                <i className="fas fa-sliders-h"></i> Preferences
+              </h3>
 
               {/* Theme Toggle */}
               <div className="setting-item">
@@ -454,7 +466,9 @@ const Sidebar = ({ isOpen, onClose }) => {
 
             {/* Behavior Settings */}
             <div className="setting-group">
-              <h3>Behavior</h3>
+              <h3 className="sidebar-section-title">
+                <i className="fas fa-robot"></i> Assistant Behavior
+              </h3>
 
               {/* Animations */}
               <div className="setting-item">
@@ -531,7 +545,9 @@ const Sidebar = ({ isOpen, onClose }) => {
 
             {/* Keyboard Shortcuts */}
             <div className="setting-group">
-              <h3>Keyboard Shortcuts</h3>
+              <h3 className="sidebar-section-title">
+                <i className="fas fa-keyboard"></i> Shortcuts
+              </h3>
               <div className="shortcuts-list">
                 <div className="shortcut-item">
                   <span className="shortcut-key">Ctrl + M</span>
