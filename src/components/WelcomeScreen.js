@@ -18,16 +18,19 @@ const WelcomeScreen = ({ show }) => {
       setShowTagline(false);
     }
   }, [show]);
-  
+
   return (
-    <div 
-      className="welcome-screen" 
+    <div
+      className="welcome-screen"
       style={{ background: theme.colors.welcomeBg }}
     >
       <div className="welcome-content">
-        <h1 className="brand-title">RIZZ.ie</h1>
+        <h1 className="brand-title">
+          <i className="fas fa-balance-scale" style={{ marginRight: '15px' }}></i>
+          LAWGic
+        </h1>
         <p className={`tagline ${showTagline ? "visible" : ""}`}>
-          Intelligence Evolved with rizz
+          Legal Advisory Workflow using General Intelligence Chatbot
         </p>
       </div>
     </div>
