@@ -505,6 +505,7 @@ export const ChatProvider = ({ children }) => {
     return "neutral";
   };
 
+  // eslint-disable-next-line no-unused-vars
   const generateResponse = (message) => {
     const lowerMessage = message.toLowerCase();
 
@@ -552,25 +553,55 @@ export const ChatProvider = ({ children }) => {
     const userMemory = { role: "user", content: message };
     setConversationMemory((prev) => [...prev, userMemory]);
 
-    // Simulate AI processing delay
-    setTimeout(() => {
-      const response = generateResponse(message);
-      const emotion = analyzeEmotion(response);
+    // Call backend API
+    try {
+      // Assuming conversationMemory is a list of {role, content}
+      // Group them into {"query": str, "answer": str} pairs for the backend
+      const history = [];
+      let currentQuery = null;
+
+      for (let i = 0; i < conversationMemory.length; i++) {
+        const msg = conversationMemory[i];
+        if (msg.role === "user") {
+          currentQuery = msg.content;
+        } else if (msg.role === "assistant" && currentQuery) {
+          history.push({ query: currentQuery, answer: msg.content });
+          currentQuery = null;
+        }
+      }
+
+      const res = await fetch("http://localhost:5000/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: message, history }),
+      });
+
+      if (!res.ok) throw new Error(`Error ${res.status}`);
+
+      const data = await res.json();
+      const response = data.response;
+      const emotion = data.emotion || analyzeEmotion(response);
 
       addMessage(response, "bot");
       setCurrentEmotion(emotion);
-      setIsTyping(false);
-      setStatus("Ready");
-
-      // Add to memory
+      
       const botMemory = { role: "assistant", content: response };
       setConversationMemory((prev) => [...prev, botMemory]);
 
-      // Text-to-speech
       if (ttsEnabled) {
         speakText(response);
       }
-    }, 1500);
+    } catch (error) {
+      console.error("Backend error:", error);
+      // Fallback
+      const response = "I'm having trouble reaching the BNS backend. Please check your connection or try again later.";
+      addMessage(response, "bot");
+      setCurrentEmotion("confused");
+      setConversationMemory((prev) => [...prev, { role: "assistant", content: response }]);
+    } finally {
+      setIsTyping(false);
+      setStatus("Ready");
+    }
   };
 
   const speakText = (text) => {
