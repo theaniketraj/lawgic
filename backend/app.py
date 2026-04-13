@@ -55,8 +55,8 @@ def chat():
         })
         
     except Exception as e:
-        logger.error(f"Error handling chat: {e}")
-        return jsonify({"error": str(e)}), 500
+        logger.exception("Error handling chat")
+        return jsonify({"error": "An internal error has occurred."}), 500
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
