@@ -15,7 +15,7 @@ import TermsPage from "./components/TermsPage";
 import CookieConsent from "./components/CookieConsent";
 
 import { ChatProvider, useChatContext } from "./context/ChatContext";
-import { ThemeProvider, useTheme } from "./context/ThemeContext";
+import { ThemeProvider } from "./context/ThemeContext";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import "./App.css";
 
@@ -36,7 +36,6 @@ function AppContent() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const { showWelcomeScreen } = useChatContext();
-  const { theme } = useTheme();
 
   const toggleSidebar = () => {
     setSidebarOpen(!sidebarOpen);
