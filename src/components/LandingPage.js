@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTheme } from '../context/ThemeContext';
 import './LandingPage.css';
 
 const LandingPage = ({ onGoHome, onStartChat, onGoFAQ, onGoTeam, onGoAbout, onGoPrivacy, onGoTerms }) => {
   const { currentTheme, toggleTheme } = useTheme();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const handleNavClick = (action) => {
+    setIsMobileMenuOpen(false);
+    if (action) action();
+  };
 
   return (
     <div className={`landing-page ${currentTheme}`}>
@@ -13,11 +19,14 @@ const LandingPage = ({ onGoHome, onStartChat, onGoFAQ, onGoTeam, onGoAbout, onGo
             <i className="fas fa-balance-scale"></i> LAWgic
           </div>
         </button>
-        <nav className="landing-nav">
-          <a href="#features">Features</a>
-          <button onClick={onGoAbout} className="nav-link">About</button>
-          <button onClick={onGoTeam} className="nav-link">Team</button>
-          <button onClick={onGoFAQ} className="nav-link">FAQ</button>
+        <button className="mobile-menu-toggle" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+          <i className={`fas ${isMobileMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
+        </button>
+        <nav className={`landing-nav ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
+          <a href="#features" onClick={() => handleNavClick()}>Features</a>
+          <button onClick={() => handleNavClick(onGoAbout)} className="nav-link">About</button>
+          <button onClick={() => handleNavClick(onGoTeam)} className="nav-link">Team</button>
+          <button onClick={() => handleNavClick(onGoFAQ)} className="nav-link">FAQ</button>
           <button className="theme-toggle-btn" onClick={toggleTheme} aria-label="Toggle Theme">
             <i className={`fas ${currentTheme === 'dark' ? 'fa-sun' : 'fa-moon'}`}></i>
           </button>

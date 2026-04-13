@@ -61,6 +61,8 @@ const teamMembers = [
 ];
 
 const TeamPage = ({ onGoHome, onGoPrivacy, onGoTerms }) => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   const { currentTheme, toggleTheme } = useTheme();
   const [expandedIndex, setExpandedIndex] = useState(0);
 
@@ -76,7 +78,10 @@ const TeamPage = ({ onGoHome, onGoPrivacy, onGoTerms }) => {
             <i className="fas fa-balance-scale"></i> LAWgic
           </div>
         </button>
-        <nav className="team-nav">
+        <button className="mobile-menu-toggle" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+          <i className={`fas ${isMobileMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
+        </button>
+        <nav className={`team-nav ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
           <button onClick={onGoHome} className="nav-link">Home</button>
           <button className="theme-toggle-btn" onClick={toggleTheme} aria-label="Toggle Theme">
             <i className={`fas ${currentTheme === 'dark' ? 'fa-sun' : 'fa-moon'}`}></i>

@@ -3,6 +3,8 @@ import { useTheme } from '../context/ThemeContext';
 import './FAQPage.css';
 
 const FAQPage = ({ onGoHome, onStartChat, onGoPrivacy, onGoTerms }) => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   const { currentTheme, toggleTheme } = useTheme();
   const [activeIndex, setActiveIndex] = useState(0); // first item open by default
 
@@ -46,7 +48,10 @@ const FAQPage = ({ onGoHome, onStartChat, onGoPrivacy, onGoTerms }) => {
             <i className="fas fa-balance-scale"></i> LAWgic
           </div>
         </button>
-        <nav className="faq-nav">
+        <button className="mobile-menu-toggle" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+          <i className={`fas ${isMobileMenuOpen ? 'fa-times' : 'fa-bars'}`}></i>
+        </button>
+        <nav className={`faq-nav ${isMobileMenuOpen ? 'mobile-open' : ''}`}>
           <button onClick={onGoHome} className="nav-link">Home</button>
           <button className="theme-toggle-btn" onClick={toggleTheme} aria-label="Toggle Theme">
             <i className={`fas ${currentTheme === 'dark' ? 'fa-sun' : 'fa-moon'}`}></i>

@@ -132,8 +132,8 @@ function AppContent() {
     title: "LAWgic | AI-Powered Legal Advisory & Drafting for Indian Judiciary",
     description: "LAWgic empowers professionals and individuals with instant case law research, IPC-to-BNS procedural transitions, and accurate legal document drafting.",
     keywords: "LAWgic, AI Lawyer India, BNS, Indian Judiciary AI, Legal Tech, Case Law Search, AI drafting, Legal AI Chatbot",
-    canonical: "https://lawgicchat.netlify.app/", // Placeholder
-    ogImage: "https://lawgicchat.netlify.app/og-image.jpg" // Placeholder
+    canonical: "https://lawgicchat.netlify.app/",
+    ogImage: "https://lawgicchat.netlify.app/og-image.jpg",
   };
 
   return (

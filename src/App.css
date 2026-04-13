@@ -289,3 +289,78 @@ body {
   background: var(--accent-gold, #D4AF37);
   color: #000;
 }
+
+/* Global Mobile Navbar fix for LandingPage and all secondary pages */
+.mobile-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+@media (max-width: 768px) {
+  .landing-header,
+  .about-header,
+  .faq-header,
+  .team-header,
+  .privacy-header,
+  .terms-header {
+    position: relative;
+    justify-content: space-between;
+    padding: 15px 20px;
+  }
+
+  .mobile-menu-toggle {
+    display: block;
+  }
+
+  .landing-nav,
+  .about-nav,
+  .faq-nav,
+  .team-nav,
+  .privacy-nav,
+  .terms-nav {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--bg-primary);
+    padding: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-200%);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    z-index: 999;
+    border-bottom: 1px solid var(--border-color);
+    gap: 15px;
+    align-items: center;
+    pointer-events: none;
+  }
+
+  .landing-nav.mobile-open,
+  .about-nav.mobile-open,
+  .faq-nav.mobile-open,
+  .team-nav.mobile-open,
+  .privacy-nav.mobile-open,
+  .terms-nav.mobile-open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Reset margin/gap inside column nav */
+  .landing-nav > *,
+  .about-nav > *,
+  .faq-nav > *,
+  .team-nav > *,
+  .privacy-nav > *,
+  .terms-nav > * {
+    margin: 10px 0;
+    font-size: 18px;
+  }
+}
