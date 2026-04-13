@@ -4,7 +4,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: rgba(10, 37, 64, 0.85); /* Navy transparent */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,14 +13,14 @@
 }
 
 .disclaimer-modal {
-  background-color: #ffffff;
+  background-color: var(--bg-primary);
   width: 90%;
   max-width: 600px;
   border-radius: 12px;
   padding: 0;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
   overflow: hidden;
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--border-color);
   animation: slideIn 0.3s ease-out forwards;
 }
 
@@ -36,8 +36,8 @@
 }
 
 .disclaimer-header {
-  background-color: #1a237e; /* Navy Blue for legal feel */
-  color: white;
+  background-color: var(--primary-navy);
+  color: #FFFFFF;
   padding: 20px;
   text-align: center;
   display: flex;
@@ -48,20 +48,21 @@
 
 .disclaimer-header i {
   font-size: 24px;
-  color: #fb8c00; /* Gold/Amber accent */
+  color: var(--accent-gold);
 }
 
-.disclaimer-header h2 {
+.law-heading {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: var(--font-heading);
   font-weight: 600;
+  font-size: 1.5rem;
 }
 
 .disclaimer-content {
   padding: 30px;
-  color: #333;
+  color: var(--text-primary);
   line-height: 1.6;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: var(--font-body);
   max-height: 60vh;
   overflow-y: auto;
 }
@@ -73,11 +74,12 @@
 
 .disclaimer-list li {
   margin-bottom: 15px;
+  color: var(--text-secondary);
 }
 
 .disclaimer-footer-text {
   font-size: 0.9em;
-  color: #666;
+  color: var(--text-secondary);
   margin-top: 20px;
   text-align: center;
   font-style: italic;
@@ -86,9 +88,10 @@
 .disclaimer-btn {
   display: block;
   width: 100%;
-  padding: 18px;
-  background-color: #1a237e;
-  color: white;
+  padding: 16px;
+  min-height: var(--min-touch-target);
+  background-color: var(--primary-navy);
+  color: #FFFFFF;
   border: none;
   font-size: 16px;
   font-weight: bold;
@@ -99,21 +102,6 @@
 }
 
 .disclaimer-btn:hover {
-  background-color: #121858;
-}
-
-/* Dark mode support if applicable */
-@media (prefers-color-scheme: dark) {
-  .disclaimer-modal {
-    background-color: #1e1e1e;
-    border-color: #333;
-  }
-  
-  .disclaimer-content {
-    color: #e0e0e0;
-  }
-  
-  .disclaimer-footer-text {
-    color: #aaa;
-  }
+  background-color: var(--primary-charcoal);
+  color: var(--accent-gold);
 }

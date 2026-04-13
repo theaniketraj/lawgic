@@ -1,0 +1,66 @@
+.floating-nav-container {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  z-index: 1000;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.floating-nav-container.sidebar-open {
+  transform: translateX(360px);
+}
+
+.floating-menu-btn {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  font-size: 24px;
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.floating-menu-btn:hover {
+  background: var(--surface-bg);
+  color: var(--accent-gold);
+  border-color: var(--accent-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.floating-menu-btn i {
+  transition: transform 0.3s ease;
+}
+
+.floating-menu-btn:hover i {
+  transform: scale(1.1);
+}
+
+/* Add responsive adjustments for the floating button */
+@media (max-width: 768px) {
+  .floating-nav-container {
+    top: 10px;
+    left: 10px;
+  }
+  
+  .floating-nav-container.sidebar-open {
+    transform: translateX(85vw); /* Match mobile sidebar width approx */
+  }
+
+  .floating-menu-btn {
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+    border-radius: 10px;
+  }
+}

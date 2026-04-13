@@ -50,11 +50,11 @@
 
 /* Color variations */
 .spinner-primary {
-  color: var(--color-primary);
+  color: var(--accent-gold);
 }
 
 .spinner-secondary {
-  color: var(--color-text-secondary);
+  color: var(--text-secondary);
 }
 
 .spinner-white {
@@ -62,13 +62,13 @@
 }
 
 .spinner-accent {
-  color: var(--color-accent-solid);
+  color: var(--accent-gold);
 }
 
 /* Spinner text */
 .spinner-text {
   font-size: 0.85rem;
-  color: var(--color-text-secondary);
+  color: var(--text-secondary);
   font-weight: 500;
   animation: pulse 2s ease-in-out infinite;
 }

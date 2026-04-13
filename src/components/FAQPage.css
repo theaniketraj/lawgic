@@ -1,0 +1,226 @@
+.faq-page {
+  flex: 1;
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Header matched to LandingPage */
+.faq-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 8%;
+  background: var(--surface-bg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.faq-brand-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+}
+
+.faq-nav {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.faq-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 2rem;
+}
+
+.faq-container {
+  max-width: 800px;
+  width: 100%;
+}
+
+.faq-title-section {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.faq-title {
+  font-size: 3rem;
+  margin: 1rem 0;
+  font-weight: 700;
+}
+
+.faq-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  line-height: as normal;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.faq-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.faq-item {
+  background-color: var(--surface-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.faq-item:hover {
+  border-color: var(--accent-gold);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.faq-item.active {
+  border-color: var(--accent-gold);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.1);
+}
+
+.faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.faq-question h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.faq-icon {
+  color: var(--accent-gold);
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.faq-item.active .faq-icon {
+  transform: rotate(180deg);
+}
+
+.faq-answer {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.faq-item.active .faq-answer {
+  max-height: 500px;
+  opacity: 1;
+}
+
+.faq-answer-inner {
+  padding: 0 1.5rem 1.5rem 1.5rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.faq-answer-inner p {
+  margin: 0;
+}
+
+.faq-cta-section {
+  margin-top: 4rem;
+  text-align: center;
+  padding: 3rem;
+  background-color: var(--surface-bg);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+}
+
+.faq-cta-section h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.faq-cta-section p {
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+
+/* Light Theme Overrides */
+.faq-page.light {
+  background-color: #f8f9fa;
+}
+
+.faq-page.light .faq-header {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.faq-page.light .faq-item {
+  background-color: #ffffff;
+  border-color: #e2e8f0;
+}
+
+.faq-page.light .faq-item:hover,
+.faq-page.light .faq-item.active {
+  border-color: #9e7529; /* Darker gold for light mode */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.faq-page.light .faq-icon {
+  color: #9e7529;
+}
+
+.faq-page.light .faq-answer {
+  background-color: #f8f9fa;
+}
+
+.faq-page.light .faq-cta-section {
+  background-color: #ffffff;
+}
+
+.faq-page.light .highlight {
+  color: #9e7529; /* Darker gold for better contrast on light bg */
+}
+
+.faq-page.light .badge {
+  background-color: rgba(158, 117, 41, 0.1);
+  color: #9e7529;
+  border-color: rgba(158, 117, 41, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .faq-header {
+    padding: 1rem 2rem;
+  }
+  .faq-title {
+    font-size: 2rem;
+  }
+  .faq-main {
+    padding: 2rem 1rem;
+  }
+  .faq-cta-section {
+    padding: 2rem 1rem;
+  }
+}

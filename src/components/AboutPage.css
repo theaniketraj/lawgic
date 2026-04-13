@@ -1,0 +1,198 @@
+.about-page {
+  flex: 1;
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Header matched to LandingPage & FAQPage */
+.about-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 8%;
+  background: var(--surface-bg);
+  border-bottom: 1px solid var(--border-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.about-brand-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+}
+
+.about-nav {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+/* Main Layout */
+.about-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 2rem;
+}
+
+.about-container {
+  max-width: 900px;
+  width: 100%;
+}
+
+.about-title-section {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.about-title {
+  font-size: 3.5rem;
+  margin: 1rem 0;
+  font-weight: 700;
+}
+
+.about-subtitle {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Content Sections */
+.about-content {
+  background-color: var(--surface-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 3rem;
+  margin-bottom: 3rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.about-section {
+  margin-bottom: 2.5rem;
+}
+
+.about-section:last-child {
+  margin-bottom: 0;
+}
+
+.about-section h2 {
+  font-size: 1.7rem;
+  color: var(--accent-gold);
+  margin-bottom: 1.2rem;
+  font-weight: 600;
+}
+
+.about-section p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+
+.about-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.about-section ul li {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+  line-height: 1.7;
+  padding-left: 2rem;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.about-section ul li::before {
+  content: '→';
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  position: absolute;
+  left: 0;
+  color: var(--accent-gold);
+}
+
+.about-section ul li strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.about-cta-section {
+  text-align: center;
+  padding: 3rem;
+  background: var(--surface-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+
+.about-cta-section h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+
+/* Light Theme Overrides */
+.about-page.light {
+  background-color: #f8f9fa;
+}
+
+.about-page.light .about-header {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.about-page.light .about-content,
+.about-page.light .about-cta-section {
+  background-color: #ffffff;
+  border-color: #e2e8f0;
+}
+
+.about-page.light .about-content {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.about-page.light .about-section h2,
+.about-page.light .about-section ul li::before,
+.about-page.light .highlight {
+  color: #9e7529; /* Darker gold for better contrast on light bg */
+}
+
+.about-page.light .about-section ul li strong {
+  color: #2d3748;
+}
+
+.about-page.light .badge {
+  background-color: rgba(158, 117, 41, 0.1);
+  color: #9e7529;
+  border-color: rgba(158, 117, 41, 0.2);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .about-header {
+    padding: 1rem 2rem;
+  }
+  .about-title {
+    font-size: 2.2rem;
+  }
+  .about-main {
+    padding: 2rem 1rem;
+  }
+  .about-content {
+    padding: 2rem 1.5rem;
+  }
+}

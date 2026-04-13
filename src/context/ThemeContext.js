@@ -160,11 +160,12 @@ export const ThemeProvider = ({ children }) => {
     localStorage.setItem("nyayaTheme", currentTheme);
     // Apply theme to document root for CSS custom properties
     const root = document.documentElement;
+    root.setAttribute("data-theme", currentTheme);
     const theme = themes[currentTheme];
 
     Object.entries(theme.colors).forEach(([key, value]) => {
       root.style.setProperty(
-        `--color-${key.replace(/([A-Z])/g, "-$1").toLowerCase()}`,
+        `--color-${key.replaceAll(/([A-Z])/g, "-$1").toLowerCase()}`,
         value
       );
     });

@@ -5,7 +5,7 @@ import { useTheme } from "../context/ThemeContext";
 import SkeletonLoader from "./SkeletonLoader";
 import "./Sidebar.css";
 
-const Sidebar = ({ isOpen, onClose }) => {
+const Sidebar = ({ isOpen, onClose, onGoHome }) => {
   const {
     conversationMemory,
     status,
@@ -70,7 +70,16 @@ const Sidebar = ({ isOpen, onClose }) => {
       className={`sidebar ${isOpen ? "open" : ""}`}
       style={{ fontSize: getFontSize() }}
     >
-      <div className="sidebar-header">
+      <div className="sidebar-header" 
+           onClick={() => {
+             if (onGoHome) {
+               onGoHome();
+             }
+             onClose();
+           }}
+           style={{ cursor: "pointer" }}
+           title="Return to Homepage"
+      >
         <h2>
           <i className="fas fa-balance-scale" style={{ marginRight: '10px', fontSize: '0.8em' }}></i>
           LAWGic
@@ -426,7 +435,7 @@ const Sidebar = ({ isOpen, onClose }) => {
               <div className="setting-item">
                 <label>Theme</label>
                 <button
-                  className="btn theme-toggle-btn"
+                  className="setting-theme-btn"
                   onClick={() => {
                     toggleTheme();
                     window.showToast?.(

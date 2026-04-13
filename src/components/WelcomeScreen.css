@@ -20,12 +20,12 @@
 .brand-title {
   font-size: 6rem;
   font-weight: 700;
-  color: var(--color-text-secondary);
+  color: var(--text-secondary);
   text-shadow: 0 0 20px rgba(139, 92, 246, 0.3),
     0 0 40px rgba(139, 92, 246, 0.2), 0 0 60px rgba(139, 92, 246, 0.1);
   letter-spacing: 8px;
   margin-bottom: 2rem;
-  background: var(--color-accent);
+  background: var(--accent-gold);
   background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -37,7 +37,7 @@
 .tagline {
   font-size: 1.5rem;
   font-weight: 300;
-  color: var(--color-text-muted);
+  color: var(--text-muted);
   letter-spacing: 2px;
   opacity: 0;
   transform: translateY(20px);

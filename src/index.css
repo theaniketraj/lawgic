@@ -1,14 +1,72 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   touch-action: manipulation;
   overscroll-behavior: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  margin-top: 0;
+}
+
+:root {
+  --font-heading: 'Merriweather', 'Playfair Display', Garamond, serif;
+  --font-body: 'Inter', 'Roboto', 'Open Sans', sans-serif;
+  
+  /* Primary & Accent Base */
+  --primary-navy: #0A2540;
+  --primary-charcoal: #2D3748;
+  --accent-gold: #D4AF37;
+  --error-red: #E53E3E;
+  
+  /* Touch target sizes (WCAG AA) */
+  --min-touch-target: 44px;
+}
+
+[data-theme="light"] {
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F9FAFB;
+  --text-primary: #0A2540;     /* Navy text */
+  --text-secondary: #2D3748;   /* Charcoal */
+  --text-muted: #64748B;
+  --border-color: #E2E8F0;
+  --border-subtle: #F1F5F9;
+  --surface-bg: #FFFFFF;
+  --surface-hover: #F1F5F9;
+  --shadow-color: rgba(0, 0, 0, 0.05);
+  
+  --chat-bubble-user: #0A2540; /* Navy bg for user */
+  --chat-bubble-user-text: #FFFFFF;
+  --chat-bubble-bot: #F9FAFB;
+  --chat-bubble-bot-text: #0A2540;
+  --chat-bubble-bot-border: #D4AF37; /* Subtle gold border */
+}
+
+[data-theme="dark"] {
+  --bg-primary: #0F172A;
+  --bg-secondary: #1A202C;
+  --text-primary: #E2E8F0;     /* Light text to reduce eye strain */
+  --text-secondary: #CBD5E1; 
+  --text-muted: #94A3B8;
+  --border-color: #2D3748;
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  --surface-bg: rgba(255, 255, 255, 0.03);
+  --surface-hover: rgba(255, 255, 255, 0.08);
+  --shadow-color: rgba(0, 0, 0, 0.2);
+
+  --chat-bubble-user: #D4AF37; /* Gold bg for user */
+  --chat-bubble-user-text: #0F172A; 
+  --chat-bubble-bot: #1A202C;
+  --chat-bubble-bot-text: #E2E8F0;
+  --chat-bubble-bot-border: #0A2540; 
 }
 
 code {
@@ -16,7 +74,6 @@ code {
     monospace;
 }
 
-/* Mobile-first global styles */
 * {
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
@@ -28,7 +85,6 @@ html {
   -ms-text-size-adjust: 100%;
 }
 
-/* Prevent zoom on input focus for iOS */
 @media screen and (max-width: 768px) {
   input,
   textarea,
@@ -37,14 +93,12 @@ html {
   }
 }
 
-/* Prevent horizontal scroll */
 html,
 body {
   overflow-x: hidden;
   width: 100%;
 }
 
-/* Safe area support for iPhone X+ */
 @supports (padding: max(0px)) {
   body {
     padding-left: env(safe-area-inset-left);

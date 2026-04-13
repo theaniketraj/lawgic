@@ -33,9 +33,18 @@ const Toast = ({ message, type = "info", duration = 3000, onClose }) => {
       className={`toast ${type} ${isVisible ? "visible" : "hidden"}`}
       data-theme={theme.name}
     >
-      <div className="toast-content">
-        <span className="toast-icon">{getIcon()}</span>
-        <span className="toast-message">{message}</span>
+      <div className="toast-content" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <span className="toast-icon">{getIcon()}</span>
+          <span className="toast-message">{message}</span>
+        </div>
+        <button 
+          className="toast-dismiss-btn" 
+          onClick={() => { setIsVisible(false); setTimeout(onClose, 300); }}
+          style={{ background: 'none', border: 'none', color: 'inherit', cursor: 'pointer', opacity: 0.6, marginLeft: '10px', fontSize: '1.2em' }}
+        >
+          &times;
+        </button>
       </div>
     </div>
   );

@@ -4,22 +4,35 @@ import ChatSection from "./components/ChatSection";
 import ToastContainer from "./components/ToastContainer";
 import WelcomeScreen from "./components/WelcomeScreen";
 import DisclaimerModal from "./components/DisclaimerModal";
+import Navbar from "./components/Navbar";
+
+import LandingPage from "./components/LandingPage";
+import FAQPage from "./components/FAQPage";
+import TeamPage from "./components/TeamPage";
+import AboutPage from "./components/AboutPage";
+import PrivacyPage from "./components/PrivacyPage";
+import TermsPage from "./components/TermsPage";
+import CookieConsent from "./components/CookieConsent";
 
 import { ChatProvider, useChatContext } from "./context/ChatContext";
 import { ThemeProvider, useTheme } from "./context/ThemeContext";
+import { HelmetProvider, Helmet } from "react-helmet-async";
 import "./App.css";
 
 function App() {
   return (
-    <ThemeProvider>
-      <ChatProvider>
-        <AppContent />
-      </ChatProvider>
-    </ThemeProvider>
+    <HelmetProvider>
+      <ThemeProvider>
+        <ChatProvider>
+          <AppContent />
+        </ChatProvider>
+      </ThemeProvider>
+    </HelmetProvider>
   );
 }
 
 function AppContent() {
+  const [currentView, setCurrentView] = useState("landing"); // 'landing', 'chat', 'faq'
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const { showWelcomeScreen } = useChatContext();
@@ -115,46 +128,124 @@ function AppContent() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sidebarOpen]);
 
+  // Comprehensive SEO Configuration
+  const seoConfig = {
+    title: "LAWgic | AI-Powered Legal Advisory & Drafting for Indian Judiciary",
+    description: "LAWgic empowers professionals and individuals with instant case law research, IPC-to-BNS procedural transitions, and accurate legal document drafting.",
+    keywords: "LAWgic, AI Lawyer India, BNS, Indian Judiciary AI, Legal Tech, Case Law Search, AI drafting, Legal AI Chatbot",
+    canonical: "https://lawgicchat.netlify.app/", // Placeholder
+    ogImage: "https://lawgicchat.netlify.app/og-image.jpg" // Placeholder
+  };
+
   return (
-    <div className="app" style={{ background: theme.colors.primaryBg }}>
-      {/* Welcome Screen */}
-      {showWelcomeScreen && <WelcomeScreen show={showWelcomeScreen} />}
+    <div className="app" style={{ backgroundColor: 'var(--bg-primary)' }}>
+      <Helmet>
+        <title>{seoConfig.title}</title>
+        <meta name="description" content={seoConfig.description} />
+        <meta name="keywords" content={seoConfig.keywords} />
+        <link rel="canonical" href={seoConfig.canonical} />
+        {/* Open Graph Tags for Social Media */}
+        <meta property="og:title" content={seoConfig.title} />
+        <meta property="og:description" content={seoConfig.description} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={seoConfig.canonical} />
+        <meta property="og:image" content={seoConfig.ogImage} />
+        {/* Twitter Card Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={seoConfig.title} />
+        <meta name="twitter:description" content={seoConfig.description} />
+        <meta name="twitter:image" content={seoConfig.ogImage} />
+      </Helmet>
 
-      {/* Main App Content - Only render when welcome screen is not showing */}
-      {!showWelcomeScreen && (
+      <CookieConsent />
+
+      {currentView === "landing" && (
+        <LandingPage 
+          onGoHome={() => setCurrentView("landing")}
+          onStartChat={() => setCurrentView("chat")} 
+          onGoFAQ={() => setCurrentView("faq")} 
+          onGoTeam={() => setCurrentView("team")} 
+          onGoAbout={() => setCurrentView("about")} 
+          onGoPrivacy={() => setCurrentView("privacy")}
+          onGoTerms={() => setCurrentView("terms")}
+        />
+      )}
+
+      {currentView === "faq" && (
+        <FAQPage 
+          onGoHome={() => setCurrentView("landing")} 
+          onStartChat={() => setCurrentView("chat")} 
+          onGoPrivacy={() => setCurrentView("privacy")}
+          onGoTerms={() => setCurrentView("terms")}
+        />
+      )}
+
+      {currentView === "team" && (
+        <TeamPage 
+          onGoHome={() => setCurrentView("landing")} 
+          onGoPrivacy={() => setCurrentView("privacy")}
+          onGoTerms={() => setCurrentView("terms")}
+        />
+      )}
+
+      {currentView === "about" && (
+        <AboutPage 
+          onGoHome={() => setCurrentView("landing")} 
+          onStartChat={() => setCurrentView("chat")} 
+          onGoPrivacy={() => setCurrentView("privacy")}
+          onGoTerms={() => setCurrentView("terms")}
+        />
+      )}
+
+      {currentView === "privacy" && (
+        <PrivacyPage 
+          onGoHome={() => setCurrentView("landing")}
+          onGoPrivacy={() => setCurrentView("privacy")}
+          onGoTerms={() => setCurrentView("terms")}
+        />
+      )}
+
+      {currentView === "terms" && (
+        <TermsPage 
+          onGoHome={() => setCurrentView("landing")}
+          onGoPrivacy={() => setCurrentView("privacy")}
+          onGoTerms={() => setCurrentView("terms")}
+        />
+      )}
+
+      {/* Main App Content - Only render when landing page and faq are not showing */}
+      {currentView === "chat" && (
         <>
-          {/* Overlay */}
-          <div
-            className={`overlay ${sidebarOpen ? "active" : ""}`}
-            onClick={closeSidebar}
-          />
+          {/* Welcome Screen */}
+          {showWelcomeScreen && <WelcomeScreen show={showWelcomeScreen} />}
 
-          {/* Sidebar Toggle Button */}
-          <button
-            className={`sidebar-toggle ${sidebarOpen ? "sidebar-open" : ""}`}
-            onClick={toggleSidebar}
-          >
-            {sidebarOpen ? (
-              <i className="fas fa-times"></i>
-            ) : (
-              <i className="fas fa-bars"></i>
-            )}
-          </button>
+          {!showWelcomeScreen && (
+            <>
+              {/* Overlay */}
+              <div
+                className={`overlay ${sidebarOpen ? "active" : ""}`}
+                onClick={closeSidebar}
+              />
 
-          {/* Sidebar */}
-          <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
+              {/* Sidebar */}
+              <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} onGoHome={() => setCurrentView("landing")} />
 
-          {/* Main Content */}
-          <div className={`main-content ${sidebarOpen ? "sidebar-open" : ""}`}>
-            <ChatSection />
-          </div>
+              {/* Main Content */}
+              <div className={`main-content ${sidebarOpen ? "sidebar-open" : ""}`}>
+                <Navbar 
+                  onMenuClick={toggleSidebar} 
+                  isOpen={sidebarOpen} 
+                />
+                <ChatSection />
+              </div>
 
+              {/* Toast Container */}
+              <ToastContainer />
 
-          {/* Toast Container */}
-          <ToastContainer />
-
-          {/* Legal Disclaimer Modal */}
-          <DisclaimerModal />
+              {/* Legal Disclaimer Modal */}
+              <DisclaimerModal />
+            </>
+          )}
         </>
       )}
     </div>

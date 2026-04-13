@@ -25,11 +25,11 @@
 }
 
 .message.liked {
-  border: 2px solid var(--color-success);
+  border: 2px solid #22c55e;
 }
 
 .message.disliked {
-  border: 2px solid var(--color-danger);
+  border: 2px solid #ef4444;
 }
 
 /* Message Types */
@@ -71,7 +71,7 @@
 .message-text h5,
 .message-text h6 {
   margin: 16px 0 8px 0;
-  color: var(--color-text);
+  color: var(--text-primary);
   font-weight: 600;
 }
 
@@ -95,12 +95,12 @@
 
 .message-text strong {
   font-weight: 600;
-  color: var(--color-text);
+  color: var(--text-primary);
 }
 
 .message-text em {
   font-style: italic;
-  color: var(--color-text-secondary);
+  color: var(--text-secondary);
 }
 
 /* Lists */
@@ -123,12 +123,12 @@
 }
 
 .message-list li::marker {
-  color: var(--color-primary);
+  color: var(--accent-gold);
 }
 
 /* Links */
 .message-link {
-  color: var(--color-primary);
+  color: var(--accent-gold);
   text-decoration: none;
   border-bottom: 1px solid transparent;
   transition: all 0.2s ease;
@@ -138,8 +138,8 @@
 }
 
 .message-link:hover {
-  border-bottom-color: var(--color-primary);
-  color: var(--color-primary-light);
+  border-bottom-color: var(--accent-gold);
+  color: #e2e8f0;
 }
 
 .link-icon {
@@ -149,13 +149,13 @@
 
 /* Blockquotes */
 .message-blockquote {
-  border-left: 4px solid var(--color-primary);
+  border-left: 4px solid var(--accent-gold);
   padding: 12px 16px;
   margin: 12px 0;
-  background: var(--color-background);
+  background: var(--bg-secondary);
   border-radius: 8px;
   font-style: italic;
-  color: var(--color-text-secondary);
+  color: var(--text-secondary);
 }
 
 /* Tables */
@@ -168,43 +168,43 @@
 
 .message-table th,
 .message-table td {
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--border-color);
   padding: 8px 12px;
   text-align: left;
 }
 
 .message-table th {
-  background: var(--color-background);
+  background: var(--bg-secondary);
   font-weight: 600;
-  color: var(--color-text);
+  color: var(--text-primary);
 }
 
 .message-table tr:nth-child(even) {
-  background: var(--color-hover);
+  background: var(--surface-hover);
 }
 
 /* Code Styling */
 .inline-code {
-  background: var(--color-background);
-  border: 1px solid var(--color-border);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
   border-radius: 4px;
   padding: 2px 6px;
   font-family: "Monaco", "Menlo", "Ubuntu Mono", monospace;
   font-size: 0.9em;
-  color: var(--color-primary);
+  color: var(--accent-gold);
 }
 
 .code-block-container {
   margin: 12px 0;
   border-radius: 8px;
   overflow: hidden;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--border-color);
 }
 
 .code-block-header {
-  background: var(--color-background);
+  background: var(--bg-secondary);
   padding: 8px 12px;
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--border-color);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -212,7 +212,7 @@
 }
 
 .code-language {
-  color: var(--color-text-secondary);
+  color: var(--text-secondary);
   font-weight: 500;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -221,7 +221,7 @@
 .code-copy-btn {
   background: none;
   border: none;
-  color: var(--color-text-secondary);
+  color: var(--text-secondary);
   cursor: pointer;
   padding: 4px 8px;
   border-radius: 4px;
@@ -230,8 +230,8 @@
 }
 
 .code-copy-btn:hover {
-  background: var(--color-hover);
-  color: var(--color-text);
+  background: var(--surface-hover);
+  color: var(--text-primary);
 }
 
 .syntax-highlighter {
@@ -242,72 +242,45 @@
 
 /* Message Actions */
 .message-actions {
-  position: absolute;
-  top: -8px;
-  right: -8px;
   display: flex;
-  gap: 4px;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-10px);
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  background: var(--color-background);
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
-  padding: 4px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  justify-content: flex-start;
+  gap: 8px;
+  margin-top: 8px;
+  opacity: 1;
+  visibility: visible;
 }
 
 .user-message .message-actions {
-  right: auto;
-  left: -8px;
+  justify-content: flex-start;
+}
+
+.user-message .action-btn {
+  color: white;
 }
 
 .message-actions.visible {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
 }
 
 .action-btn {
   background: none;
   border: none;
-  color: var(--color-text-secondary);
+  color: var(--text-primary);
   cursor: pointer;
-  padding: 6px;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-  font-size: 12px;
-  width: 28px;
-  height: 28px;
+  padding: 4px;
+  transition: opacity 0.2s ease;
+  font-size: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
+  opacity: 0.5;
 }
 
 .action-btn:hover {
-  background: var(--color-hover);
-  color: var(--color-text);
-  transform: scale(1.1);
-}
-
-.copy-btn.active,
-.copy-btn:hover {
-  color: var(--color-success);
-}
-
-.regenerate-btn:hover {
-  color: var(--color-info);
-}
-
-.like-btn:hover,
-.like-btn.active {
-  color: var(--color-success);
-}
-
-.dislike-btn:hover,
-.dislike-btn.active {
-  color: var(--color-danger);
+  background: none;
+  opacity: 1;
+  transform: none;
 }
 
 /* Message Footer */
@@ -321,8 +294,12 @@
 }
 
 .message-timestamp {
-  color: var(--color-text-secondary);
+  color: var(--text-secondary);
   font-weight: 500;
+}
+
+.user-message .message-timestamp {
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .message-status {
@@ -336,16 +313,16 @@
 }
 
 .status-icon.sending {
-  color: var(--color-warning);
+  color: #f59e0b;
   animation: pulse 1.5s infinite;
 }
 
 .status-icon.sent {
-  color: var(--color-info);
+  color: #3b82f6;
 }
 
 .status-icon.delivered {
-  color: var(--color-success);
+  color: #22c55e;
 }
 
 /* Enhanced Animations */
@@ -403,16 +380,8 @@
   }
 
   .message-actions {
-    position: static;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
     margin-top: 8px;
-    justify-content: center;
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    padding: 0;
+    justify-content: flex-start;
   }
 
   .action-btn {
@@ -663,17 +632,21 @@
 
 /* Focus states for accessibility */
 .action-btn:focus {
-  outline: 2px solid var(--color-primary);
+  outline: 2px solid var(--accent-gold);
   outline-offset: 2px;
 }
 
 .message-link:focus {
-  outline: 2px solid var(--color-primary);
+  outline: 2px solid var(--accent-gold);
   outline-offset: 2px;
   border-radius: 2px;
 }
 
 .code-copy-btn:focus {
-  outline: 2px solid var(--color-primary);
+  outline: 2px solid var(--accent-gold);
   outline-offset: 2px;
+}
+
+.action-btn.active {
+  opacity: 1;
 }
