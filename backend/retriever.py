@@ -25,6 +25,9 @@ from __future__ import annotations
 import logging
 from functools import lru_cache
 
+import chromadb
+from sentence_transformers import SentenceTransformer
+
 from config import (
     DB_DIR, EMBED_MODEL, COLLECTION,
     TOP_K, FINAL_TOP_K, DISTANCE_THRESHOLD, QUERY_EXPANSION_N,
@@ -38,16 +41,13 @@ logger = logging.getLogger(__name__)
 # ── Lazy singletons ────────────────────────────────────────────────────────────
 
 @lru_cache(maxsize=1)
-def _get_embedder():
-    from sentence_transformers import SentenceTransformer
+def _get_embedder() -> SentenceTransformer:
     logger.info("Loading embedding model '%s' …", EMBED_MODEL)
     return SentenceTransformer(EMBED_MODEL)
 
 
 @lru_cache(maxsize=1)
-def _get_collection():
-    import chromadb
-
+def _get_collection() -> chromadb.Collection:
     client = chromadb.PersistentClient(path=str(DB_DIR))
     return client.get_collection(COLLECTION)
 

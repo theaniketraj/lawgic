@@ -8,32 +8,24 @@ from retriever import retrieve, warm_up
 from rag_pipeline import build_prompt, ask_llm
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "*"}})
-
-import threading
+CORS(app)
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Warm up in background to prevent port binding timeout on free hosts
-def background_warm_up():
-    logger.info("Warming up retriever (in background)...")
-    try:
-        warm_up()
-        logger.info("Retriever ready.")
-    except Exception as e:
-        logger.error(f"Warm up failed: {e}")
-
-threading.Thread(target=background_warm_up, daemon=True).start()
+# Warm up retriever at startup
+try:
+    logger.info("Warming up retriever...")
+    warm_up()
+    logger.info("Retriever ready.")
+except Exception as e:
+    logger.error(f"Warm up failed: {e}")
 
 # Simple in-memory history per session could be added, but for now we'll keep history stateless or pass it from frontend
 # If frontend passes history in request, we use it.
 
-@app.route("/api/v1/chat", methods=["POST", "OPTIONS"])
+@app.route("/api/v1/chat", methods=["POST"])
 def chat():
-    if request.method == "OPTIONS":
-        return jsonify({}), 200
-        
     data = request.json
     query = data.get("message", "")
     history = data.get("history", []) # Expected format: [{"query": str, "answer": str}]
