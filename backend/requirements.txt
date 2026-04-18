@@ -3,3 +3,4 @@ flask-cors
 requests
 chromadb
 sentence-transformers
+gunicorn

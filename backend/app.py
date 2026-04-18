@@ -8,7 +8,7 @@ from retriever import retrieve, warm_up
 from rag_pipeline import build_prompt, ask_llm
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 import threading
 
@@ -29,8 +29,11 @@ threading.Thread(target=background_warm_up, daemon=True).start()
 # Simple in-memory history per session could be added, but for now we'll keep history stateless or pass it from frontend
 # If frontend passes history in request, we use it.
 
-@app.route("/api/v1/chat", methods=["POST"])
+@app.route("/api/v1/chat", methods=["POST", "OPTIONS"])
 def chat():
+    if request.method == "OPTIONS":
+        return jsonify({}), 200
+        
     data = request.json
     query = data.get("message", "")
     history = data.get("history", []) # Expected format: [{"query": str, "answer": str}]
