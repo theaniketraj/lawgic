@@ -29,7 +29,7 @@ threading.Thread(target=background_warm_up, daemon=True).start()
 # Simple in-memory history per session could be added, but for now we'll keep history stateless or pass it from frontend
 # If frontend passes history in request, we use it.
 
-@app.route("/chat", methods=["POST"])
+@app.route("/api/v1/chat", methods=["POST"])
 def chat():
     data = request.json
     query = data.get("message", "")
