@@ -144,15 +144,24 @@ export default function GeneratorSidebar() {
         </button>
       )}
 
+      {/* Mobile Backdrop Overlay */}
+      {!isCollapsed && (
+        <div 
+          className="md:hidden fixed inset-0 bg-gray-900/20 dark:bg-black/40 backdrop-blur-sm z-40 transition-opacity"
+          onClick={() => setIsCollapsed(true)}
+          aria-hidden="true"
+        />
+      )}
+
       <aside
         ref={sidebarRef}
-        className={`bg-white dark:bg-dark-primary border-r border-gray-100 dark:border-gray-800 shrink-0 relative z-40 transition-all duration-300 overflow-hidden ${
+        className={`bg-white dark:bg-dark-primary border-r border-gray-100 dark:border-gray-800 shrink-0 absolute md:relative inset-y-0 left-0 z-50 h-full transition-all duration-300 overflow-hidden ${
           isCollapsed
             ? "w-0 min-w-0 max-w-0 border-r-0 opacity-0"
-            : "w-100 max-w-100 opacity-100"
+            : "w-[85%] sm:w-[320px] md:w-100 max-w-full opacity-100 shadow-2xl md:shadow-none"
         }`}
       >
-        <div className="flex flex-col h-full w-100">
+        <div className="flex flex-col h-full w-full">
           {/* Navigation Tabs */}
           <div className="flex border-b border-gray-100 dark:border-gray-800">
             {[

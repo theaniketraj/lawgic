@@ -39,8 +39,21 @@ export default function DocsPage() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-6 relative">
-            {/* Connection Line (Desktop only) */}
-            <div className="hidden md:block absolute top-1/2 left-[10%] right-[10%] h-0.5 bg-linear-to-r from-primary-500/20 via-purple-500/50 to-primary-500/20 -z-10 -translate-y-1/2"></div>
+            {/* Glowing Connection Nodes (Desktop only) */}
+            <div className="hidden md:block absolute top-[64px] left-[16%] right-[16%] h-[2px] bg-linear-to-r from-primary-500/0 via-primary-500/30 to-primary-500/0 -z-10">
+              {/* Glowing Pulse Effect */}
+              <div className="absolute inset-0 bg-linear-to-r from-transparent via-primary-500 to-transparent blur-[4px] opacity-50 animate-pulse"></div>
+              
+              {/* Node 1 */}
+              <div className="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-primary-500 rounded-full shadow-[0_0_15px_rgba(99,102,241,1)] animate-pulse">
+                <div className="absolute inset-0 rounded-full bg-primary-500 animate-ping opacity-75"></div>
+              </div>
+              
+              {/* Node 2 */}
+              <div className="absolute top-1/2 left-2/3 -translate-x-1/2 -translate-y-1/2 w-2 h-2 bg-cyan-500 rounded-full shadow-[0_0_15px_rgba(6,182,212,1)] animate-pulse" style={{ animationDelay: '0.5s' }}>
+                <div className="absolute inset-0 rounded-full bg-cyan-500 animate-ping opacity-75" style={{ animationDelay: '0.5s' }}></div>
+              </div>
+            </div>
 
             {/* Step 1 */}
             <div className="relative group">
