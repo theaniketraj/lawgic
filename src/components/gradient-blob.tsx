@@ -7,14 +7,9 @@ export function GradientBlob({
 }: Readonly<{ className?: string }>) {
   return (
     <div className={`overflow-visible pointer-events-none ${className}`}>
-      <Image
-        src="/images/gen-glow.png"
-        className="absolute bottom-0 left-1/2 z-10 -translate-x-1/2 opacity-80 max-w-none! w-[200vw] md:w-[150vw] h-[50vh] object-fill"
-        role="presentation"
-        alt=""
-        width={1600}
-        height={800}
-        priority
+      <GradientBlob2 
+        className="absolute bottom-0 left-1/2 z-10 -translate-x-1/2 opacity-80 max-w-none! w-[200vw] md:w-[150vw] h-[50vh]" 
+        preserveAspectRatio="none"
       />
     </div>
   );

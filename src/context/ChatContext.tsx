@@ -625,7 +625,8 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
         }
       }
 
-      const res = await fetch("http://localhost:5000/chat", {
+      const backendUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+      const res = await fetch(`${backendUrl}/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: message, history }),
@@ -647,7 +648,7 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
         speakText(response);
       }
     } catch (error) {
-      console.error("Backend error:", error);
+      console.warn("Backend unavailable, using fallback:", error);
 
       // Fallback to local keyword-based response if backend fails
       const fallbackResponse = generateResponse(message);

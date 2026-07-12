@@ -73,7 +73,7 @@ export default function BenefitsGrid() {
               </div>
             </div>
             <div className="lg:col-span-12">
-              <div className="lg:px-12 p-8 bg-[#2D0B70] lg:pb-0 lg:p-12 relative rounded-[20px] h-full lg:flex lg:flex-row justify-between bg-cover flex-col gap-5">
+              <div className="lg:px-12 p-8 bg-[#2D0B70] lg:pb-0 lg:p-12 relative rounded-[20px] overflow-hidden h-full lg:flex lg:flex-row justify-between flex-col gap-5">
                 <div className="max-w-sm relative z-10">
                   <h3 className="font-bold text-white text-2xl md:text-3xl mb-4">
                     Expedite Legal Discovery
@@ -101,7 +101,7 @@ export default function BenefitsGrid() {
                 <Image
                   src="/images/benefits/blur-shape.png"
                   alt=""
-                  className="h-full w-full -z-0 absolute top-0 right-0"
+                  className="h-full w-full object-cover object-center -z-0 absolute top-0 left-0"
                   width={399}
                   height={399}
                 />

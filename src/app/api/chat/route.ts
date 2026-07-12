@@ -25,7 +25,8 @@ export async function POST(req: Request) {
     }
     history.pop();
 
-    const res = await fetch("http://localhost:5000/chat", {
+    const backendUrl = process.env.API_URL || "http://localhost:5000";
+    const res = await fetch(`${backendUrl}/chat`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message: userMessage.content, history }),

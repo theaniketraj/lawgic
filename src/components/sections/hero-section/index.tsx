@@ -41,20 +41,24 @@ export default function HeroSection() {
           </div>
           <div className="max-w-250 mx-auto relative">
             <div className="p-3 sm:p-4.5 relative z-30 rounded-4xl border border-white/30 dark:border-white/10 bg-white/20">
-              <Image
-                src="/images/hero/hero-img.jpg"
-                alt=""
-                className="w-full rounded-2xl block dark:hidden"
-                width={966}
-                height={552}
-              />
-              <Image
-                src="/images/hero/hero-img-dark.png"
-                alt=""
-                className="w-full rounded-2xl hidden dark:block"
-                width={966}
-                height={552}
-              />
+              <div className="overflow-hidden rounded-2xl w-full">
+                <Image
+                  src="/images/hero/hero-img.png"
+                  alt=""
+                  className="w-full rounded-2xl block dark:hidden scale-[1.02] transform origin-center"
+                  width={1100}
+                  height={700}
+                  priority
+                />
+                <Image
+                  src="/images/hero/hero-img-dark.png"
+                  alt=""
+                  className="w-full rounded-2xl hidden dark:block scale-[1.02] transform origin-center"
+                  width={966}
+                  height={552}
+                  priority
+                />
+              </div>
             </div>
             <div className="absolute hidden lg:block z-10 -top-20 -translate-y-20 left-1/2 -translate-x-1/2">
               <svg

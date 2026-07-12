@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import type React from 'react';
-import { Fragment, useState } from 'react';
+import type React from "react";
+import { Fragment, useState } from "react";
 
 import {
   CodeGeneratorIcon,
   EmailGeneratorIcon,
   TextGeneratorIcon,
-} from '@/icons/icons';
-import Image from 'next/image';
-import Link from 'next/link';
-import { cn } from '@/lib/utils';
+} from "@/icons/icons";
+import Image from "next/image";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 // Define the tab type
 interface Tab {
@@ -24,49 +24,49 @@ interface Tab {
 }
 
 export default function AIToolsTabs() {
-  const [activeTab, setActiveTab] = useState('text');
+  const [activeTab, setActiveTab] = useState("text");
 
   // Tab data
   const tabs: Tab[] = [
     {
-      id: 'text',
-      label: 'Legal Research',
+      id: "text",
+      label: "Legal Research",
       icon: <TextGeneratorIcon className="w-8 h-8" />,
-      lightImage: '/images/tab-image/tab-image-1.jpg',
-      darkImage: '/images/tab-image/tab-image-1-dark.jpg',
-      title: 'Find Case Laws Instantly',
+      lightImage: "/images/tab-image/legal-research-light.png",
+      darkImage: "/images/tab-image/legal-research-dark.png",
+      title: "Find Case Laws Instantly",
       description:
-        'Ask plain-language questions and get accurate citations from Supreme Court and High Court judgements.',
+        "Ask plain-language questions and get accurate citations from Supreme Court and High Court judgements.",
     },
     {
-      id: 'draft',
-      label: 'Document Drafting',
+      id: "draft",
+      label: "Document Drafting",
       icon: <EmailGeneratorIcon className="w-8 h-8" />,
-      lightImage: '/images/tab-image/tab-image-5.jpg',
-      darkImage: '/images/tab-image/tab-image-5-dark.jpg',
-      title: 'Automate Legal Drafting',
+      lightImage: "/images/tab-image/document-drafting-light.png",
+      darkImage: "/images/tab-image/document-drafting-dark.png",
+      title: "Automate Legal Drafting",
       description:
-        'Generate legal notices, NDAs, and petitions with formatting tailored to Indian courts.',
+        "Generate legal notices, NDAs, and petitions with formatting tailored to Indian courts.",
     },
     {
-      id: 'summary',
-      label: 'Case Summaries',
+      id: "summary",
+      label: "Case Summaries",
       icon: <TextGeneratorIcon className="w-8 h-8" />,
-      lightImage: '/images/tab-image/tab-image-2.jpg',
-      darkImage: '/images/tab-image/tab-image-2-dark.jpg',
-      title: 'Condense Lengthy Judgements',
+      lightImage: "/images/tab-image/case-summaries-light.png",
+      darkImage: "/images/tab-image/case-summaries-dark.png",
+      title: "Condense Lengthy Judgements",
       description:
-        'Get concise summaries highlighting the ratio decidendi and obiter dicta.',
+        "Get concise summaries highlighting the ratio decidendi and obiter dicta.",
     },
     {
-      id: 'bns',
-      label: 'IPC to BNS',
+      id: "bns",
+      label: "IPC to BNS",
       icon: <CodeGeneratorIcon className="w-8 h-8" />,
-      lightImage: '/images/tab-image/tab-image-3.jpg',
-      darkImage: '/images/tab-image/tab-image-3-dark.jpg',
-      title: 'Seamlessly Transition Procedural Codes',
+      lightImage: "/images/tab-image/ipc-to-bns-light.png",
+      darkImage: "/images/tab-image/ipc-to-bns-dark.png",
+      title: "Seamlessly Transition Procedural Codes",
       description:
-        'Easily look up Bharatiya Nyaya Sanhita equivalents for old Indian Penal Code sections.',
+        "Easily look up Bharatiya Nyaya Sanhita equivalents for old Indian Penal Code sections.",
     },
   ];
 
@@ -98,8 +98,8 @@ export default function AIToolsTabs() {
                     onClick={() => setActiveTab(tab.id)}
                     className={`flex items-center h-12 gap-2 px-4 py-3 text-sm font-medium transition-colors duration-200 rounded-full ${
                       activeTab === tab.id
-                        ? 'bg-white dark:text-white/90 dark:bg-white/10 text-gray-800'
-                        : 'text-gray-500 dark:text-gray-400 bg-transparent'
+                        ? "bg-white dark:text-white/90 dark:bg-white/10 text-gray-800"
+                        : "text-gray-500 dark:text-gray-400 bg-transparent"
                     }`}
                   >
                     {tab.icon}
@@ -115,31 +115,27 @@ export default function AIToolsTabs() {
               <div className="p-3 tab-img-overlay">
                 {tabs.map((tab) => (
                   <Fragment key={tab.id}>
-                    <Image
-                      src={tab.lightImage || '/placeholder.svg'}
-                      alt={tab.label}
-                      width={936}
-                      height={535}
-                      className={cn(
-                        'w-full rounded-2xl block dark:hidden',
-                        currentTab.id !== tab.id && 'hidden!'
-                      )}
-                      quality={90}
-                      priority
-                    />
+                    <div className={cn("overflow-hidden rounded-2xl w-full h-full", currentTab.id !== tab.id && "hidden!")}>
+                      <Image
+                        src={tab.lightImage || "/placeholder.svg"}
+                        alt={tab.label}
+                        width={930}
+                        height={530}
+                        className="w-full h-full object-cover scale-[1.02] block dark:hidden transform origin-center"
+                        quality={100}
+                        priority
+                      />
 
-                    <Image
-                      src={tab.darkImage || '/placeholder.svg'}
-                      alt={tab.label}
-                      width={936}
-                      height={535}
-                      className={cn(
-                        'w-full rounded-2xl hidden dark:block',
-                        currentTab.id !== tab.id && 'hidden!'
-                      )}
-                      quality={90}
-                      priority
-                    />
+                      <Image
+                        src={tab.darkImage || "/placeholder.svg"}
+                        alt={tab.label}
+                        width={930}
+                        height={530}
+                        className="w-full h-full object-cover scale-[1.02] hidden dark:block transform origin-center"
+                        quality={100}
+                        priority
+                      />
+                    </div>
                   </Fragment>
                 ))}
               </div>
@@ -153,7 +149,10 @@ export default function AIToolsTabs() {
               <p className="max-w-xl mx-auto mb-6 text-sm text-gray-500 dark:text-gray-400">
                 {currentTab.description}
               </p>
-              <Link href="/chat" className="px-6 py-3 text-sm font-medium text-white transition-colors rounded-full bg-primary-500 hover:bg-primary-600 inline-block">
+              <Link
+                href="/chat"
+                className="px-6 py-3 text-sm font-medium text-white transition-colors rounded-full bg-primary-500 hover:bg-primary-600 inline-block"
+              >
                 Get Started
               </Link>
             </div>
