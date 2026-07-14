@@ -31,7 +31,7 @@ export function RenderMessage({ messages, isThinking }: Readonly<PropsType>) {
       ref={userSettings?.autoScrollEnabled ? scrollRef : containerRef}
     >
       <div
-        className={`text-gray-800 dark:text-white/90 space-y-6 w-full max-w-4xl mx-auto prose dark:prose-invert ${userSettings?.animationsEnabled ? "animate-fade-in" : ""}`}
+        className={`text-gray-800 dark:text-white/90 space-y-4 w-full max-w-4xl mx-auto prose ${userSettings?.fontSize === 'large' ? 'prose-lg text-xl' : userSettings?.fontSize === 'small' ? 'prose-sm text-sm' : 'prose-base text-base'} dark:prose-invert ${userSettings?.animationsEnabled ? "animate-fade-in" : ""}`}
         ref={contentRef}
       >
         {messages.map((message, messageIdx) => {

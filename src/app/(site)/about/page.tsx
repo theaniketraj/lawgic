@@ -93,8 +93,11 @@ export default function AboutPage() {
                 
                 <div className="lg:w-2/3 grid sm:grid-cols-2 gap-6 w-full">
                   <div className="bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-2xl shadow-lg">
-                    <h4 className="text-white font-bold text-lg mb-2 flex items-center gap-2">
-                      <i className="fas fa-check-circle text-green-300"></i> Accuracy
+                    <h4 className="text-white font-bold text-lg mb-3 flex items-center gap-3">
+                      <div className="w-10 h-10 shrink-0 rounded-full bg-green-500/20 border border-green-500/30 flex items-center justify-center">
+                        <i className="fas fa-check-circle text-green-400 text-lg"></i>
+                      </div>
+                      Accuracy
                     </h4>
                     <p className="text-white/80 text-sm leading-relaxed">
                       Our models strictly reference established Supreme Court data to prevent AI hallucinations.
@@ -102,8 +105,11 @@ export default function AboutPage() {
                   </div>
                   
                   <div className="bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-2xl shadow-lg">
-                    <h4 className="text-white font-bold text-lg mb-2 flex items-center gap-2">
-                      <i className="fas fa-user-shield text-blue-300"></i> Privacy First
+                    <h4 className="text-white font-bold text-lg mb-3 flex items-center gap-3">
+                      <div className="w-10 h-10 shrink-0 rounded-full bg-blue-500/20 border border-blue-500/30 flex items-center justify-center">
+                        <i className="fas fa-user-shield text-blue-400 text-lg"></i>
+                      </div>
+                      Privacy First
                     </h4>
                     <p className="text-white/80 text-sm leading-relaxed">
                       We believe in attorney-client privilege. Your inputs are encrypted and never persist beyond your session.
@@ -111,8 +117,11 @@ export default function AboutPage() {
                   </div>
                   
                   <div className="bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-2xl sm:col-span-2 shadow-lg">
-                    <h4 className="text-white font-bold text-lg mb-2 flex items-center gap-2">
-                      <i className="fas fa-handshake text-purple-300"></i> Empowerment, Not Replacement
+                    <h4 className="text-white font-bold text-lg mb-3 flex items-center gap-3">
+                      <div className="w-10 h-10 shrink-0 rounded-full bg-purple-500/20 border border-purple-500/30 flex items-center justify-center">
+                        <i className="fas fa-handshake text-purple-400 text-lg"></i>
+                      </div>
+                      Empowerment, Not Replacement
                     </h4>
                     <p className="text-white/80 text-sm leading-relaxed">
                       LAWgic is built to assist, not replace, human legal expertise. The human lawyer maintains total command, enhanced by digital speed.

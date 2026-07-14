@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
   },
   images: {
     unoptimized: true,
+    qualities: [100, 75],
     remotePatterns: [
       {
         hostname: "avatars.githubusercontent.com",

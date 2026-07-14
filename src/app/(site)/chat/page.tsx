@@ -23,6 +23,26 @@ function ChatInterface() {
   const hasTriggeredRef = React.useRef(false);
 
   useEffect(() => {
+    // Lock body and html scroll to prevent mobile browser bounce and layout shift
+    const originalHtmlOverflow = document.documentElement.style.overflow;
+    const originalHtmlHeight = document.documentElement.style.height;
+    const originalBodyOverflow = document.body.style.overflow;
+    const originalBodyHeight = document.body.style.height;
+
+    document.documentElement.style.overflow = 'hidden';
+    document.documentElement.style.height = '100%';
+    document.body.style.overflow = 'hidden';
+    document.body.style.height = '100%';
+
+    return () => {
+      document.documentElement.style.overflow = originalHtmlOverflow;
+      document.documentElement.style.height = originalHtmlHeight;
+      document.body.style.overflow = originalBodyOverflow;
+      document.body.style.height = originalBodyHeight;
+    };
+  }, []);
+
+  useEffect(() => {
     // Wait until ChatContext has finished loading history/welcome message
     if (messages.length === 0) return;
 
@@ -46,7 +66,7 @@ function ChatInterface() {
 
   return (
     <GeneratorWrapper>
-      <div className={`flex flex-col flex-1 w-full h-full min-h-0 ${userSettings?.fontSize === 'large' ? 'text-lg' : userSettings?.fontSize === 'small' ? 'text-sm' : 'text-base'}`}>
+      <div className={`flex flex-col flex-1 w-full h-full min-h-0 ${userSettings?.fontSize === 'large' ? 'text-xl' : userSettings?.fontSize === 'small' ? 'text-sm' : 'text-base'}`}>
         <RenderMessage messages={messages} isThinking={isTyping} />
 
         <div className="w-full relative mt-auto">

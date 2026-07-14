@@ -8,7 +8,7 @@ export default function GeneratorWrapper({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="absolute inset-0 flex flex-col overflow-hidden">
+    <div className="fixed inset-0 flex flex-col overflow-hidden">
       <div className="isolate relative flex flex-1 w-full bg-gray-50 dark:bg-dark-secondary">
         <GeneratorSidebar />
 

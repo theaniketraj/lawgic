@@ -139,41 +139,8 @@ export default function Footer() {
               </div>
             </div>
             <div className="lg:col-span-9 xl:col-span-8 lg:flex lg:justify-end">
-              <div className="grid sm:grid-cols-3 gap-7 lg:gap-16 xl:gap-24 w-full lg:w-auto">
-                <div>
-                  <span className="block mb-6 text-sm text-gray-400">
-                    Services
-                  </span>
-                  <nav className="flex flex-col space-y-3">
-                    <Link
-                      href="/docs"
-                      className="text-sm font-normal text-gray-400 transition hover:text-white"
-                    >
-                      Learn
-                    </Link>
-                    <Link
-                      href="/about"
-                      className="text-sm font-normal text-gray-400 transition hover:text-white"
-                    >
-                      About us
-                    </Link>
-                    <Link
-                      href="https://plastecure.netlify.app"
-                      target="_blank"
-                      className="text-sm font-normal text-gray-400 transition hover:text-white"
-                    >
-                      Plastecure
-                    </Link>
-                    <Link
-                      href="https://raptorai.netlify.app"
-                      target="_blank"
-                      className="text-sm font-normal text-gray-400 transition hover:text-white"
-                    >
-                      Raptor
-                    </Link>
-                  </nav>
-                </div>
-                <div>
+              <div className="flex flex-col sm:flex-row gap-8 sm:gap-10 lg:gap-16 xl:gap-20 w-full lg:w-auto">
+                <div className="min-w-45">
                   <span className="block mb-6 text-sm text-gray-400">
                     Features
                   </span>
@@ -204,7 +171,40 @@ export default function Footer() {
                     </Link>
                   </nav>
                 </div>
-                <div>
+                <div className="min-w-30">
+                  <span className="block mb-6 text-sm text-gray-400">
+                    Services
+                  </span>
+                  <nav className="flex flex-col space-y-3">
+                    <Link
+                      href="/about"
+                      className="text-sm font-normal text-gray-400 transition hover:text-white"
+                    >
+                      About us
+                    </Link>
+                    <Link
+                      href="/docs"
+                      className="text-sm font-normal text-gray-400 transition hover:text-white"
+                    >
+                      Learn More
+                    </Link>
+                    <Link
+                      href="https://plastecure.netlify.app"
+                      target="_blank"
+                      className="text-sm font-normal text-gray-400 transition hover:text-white"
+                    >
+                      Plastecure
+                    </Link>
+                    <Link
+                      href="https://raptorai.netlify.app"
+                      target="_blank"
+                      className="text-sm font-normal text-gray-400 transition hover:text-white"
+                    >
+                      Raptor
+                    </Link>
+                  </nav>
+                </div>
+                <div className="min-w-35">
                   <span className="relative block mb-6 text-sm text-gray-400">
                     Resources
                   </span>
@@ -243,7 +243,7 @@ export default function Footer() {
             </p>
             <div className="flex flex-col items-center">
               <div className="h-px w-full bg-gray-800/80 mb-3"></div>
-              <p className="text-xs text-gray-600 whitespace-nowrap">
+              <p className="text-xs text-gray-600 max-w-4xl mx-auto">
                 Disclaimer: LAWgic is an AI tool and does not constitute
                 professional legal advice. Consult a qualified legal
                 practitioner before making any legal decisions.

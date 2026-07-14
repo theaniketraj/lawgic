@@ -47,6 +47,7 @@ export default function BenefitsGrid() {
                     width={488}
                     height={288}
                     sizes="100vw"
+                    style={{ height: "auto" }}
                   />
                 </div>
               </div>
@@ -59,6 +60,7 @@ export default function BenefitsGrid() {
                     alt=""
                     width={306}
                     height={279}
+                    style={{ width: "auto", height: "auto" }}
                   />
                 </div>
                 <div>
@@ -92,16 +94,17 @@ export default function BenefitsGrid() {
                 <div>
                   <Image
                     src="/images/benefits/bn-3.svg"
-                    className="hidden lg:block relative z-10"
+                    className="relative z-10 w-full max-w-89.75 mx-auto mt-8 lg:mt-0"
                     alt=""
                     width={359}
                     height={318}
+                    style={{ height: "auto" }}
                   />
                 </div>
                 <Image
                   src="/images/benefits/blur-shape.png"
                   alt=""
-                  className="h-full w-full object-cover object-center -z-0 absolute top-0 left-0"
+                  className="h-full w-full object-cover object-center z-0 absolute top-0 left-0"
                   width={399}
                   height={399}
                 />

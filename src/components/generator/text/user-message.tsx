@@ -45,7 +45,7 @@ export default function UserMessage({
     <div>
       <div
         className={cn(
-          'shadow-theme-xs bg-primary-100 dark:bg-white/10 rounded-3xl rounded-tr-lg py-4 px-5 max-w-md ml-auto w-fit',
+          'shadow-theme-xs bg-primary-100 dark:bg-white/10 rounded-2xl rounded-tr-sm py-2.5 px-4 max-w-md ml-auto w-fit',
           showEditInput && 'max-w-none w-full'
         )}
       >

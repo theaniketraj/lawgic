@@ -11,7 +11,7 @@ interface CtaCardProps {
 export function CtaCard({
   title,
   description,
-  buttonText = "Start Chatting Now",
+  buttonText = "Start Consulting Now",
   href = "/chat",
   backgroundClass = "bg-primary-500",
 }: Readonly<CtaCardProps>) {

@@ -12,7 +12,7 @@ export default function AiResponse({ message }: Readonly<PropsType>) {
 
   return (
     <div className="max-w-3xl whitespace-pre-wrap group">
-      <div className="bg-white dark:bg-white/5 shadow-theme-xs rounded-3xl rounded-bl-lg py-4 px-5 max-w-3xl leading-7">
+      <div className="bg-white dark:bg-white/5 shadow-theme-xs rounded-2xl rounded-bl-sm py-3 px-4 max-w-3xl leading-relaxed">
         {message.text}
       </div>
 

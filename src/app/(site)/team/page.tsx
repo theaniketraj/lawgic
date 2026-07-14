@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CtaCard } from '@/components/ui/cta-card';
+import { CtaCard } from "@/components/ui/cta-card";
 
 export const metadata: Metadata = {
   title: "Team | LAWgic",
@@ -8,58 +8,58 @@ export const metadata: Metadata = {
 
 const teamMembers = [
   {
+    name: "Piyush Pratap Singh",
+    role: "Project Manager",
+    github: "https://github.com/piyushsingh67/",
+    linkedin: "https://www.linkedin.com/in/piyush-singh-493a36411/",
+    contributions: [
+      "Spearheaded agile project planning and execution timelines",
+      "Coordinated tasks between frontend, backend, and data teams",
+      "Ensured timely delivery and high-quality product milestones",
+    ],
+  },
+  {
     name: "Aniket Raj",
-    role: "Creative Lead",
+    role: "Frontend, Data Driven UI",
     github: "https://github.com/theaniketraj/",
     linkedin: "https://www.linkedin.com/in/theaniketraj/",
     contributions: [
-      "Built the React components",
-      "Implemented responsive CSS layouts",
-      "Ensured accessibility compliance",
+      "UI/UX Design & Frontend Development",
+      "Engineered core application features, including chatbot integration and interactive sidebar functionality",
+      "Configured CI/CD workflows and managed deployment for the production website",
     ],
   },
   {
     name: "Falguni Mathur",
-    role: "Head of Development",
+    role: "Backend, Data Training",
     github: "https://github.com/Falguni35/",
     linkedin: "https://www.linkedin.com/in/falguni-mathur/",
     contributions: [
-      "Set up the Node.js server",
-      "Created RESTful APIs",
-      "Managed database schemas",
-    ],
-  },
-  {
-    name: "Piyush Pratap Singh",
-    role: "Project Lead",
-    github: "https://github.com/piyushsingh67/",
-    linkedin: "https://www.linkedin.com/in/piyushpratapsingh9124/",
-    contributions: [
-      "Worked on core architecture",
-      "Designed the AI integration pipeline",
-      "Managed the project schedule",
+      "Architected scalable and secure server-side infrastructure",
+      "Designed and optimized RESTful APIs for fast data retrieval",
+      "Managed database schemas and handled deployments",
     ],
   },
   {
     name: "Shahbaz Ansari",
-    role: "Data Trainer",
+    role: "Backend, Data Training",
     github: "https://github.com/Shahbaz9832/",
     linkedin: "https://www.linkedin.com/in/shahbaz-ansari-dev/",
     contributions: [
-      "Trained the initial models",
-      "Fine-tuned NLP responses",
-      "Evaluated model accuracy",
+      "Curated and processed legal datasets for AI models",
+      "Fine-tuned models to achieve high accuracy on legal text",
+      "Implemented data validation pipelines to prevent hallucinations",
     ],
   },
   {
     name: "Souptik Roy",
-    role: "UI/UX Designer",
+    role: "Testing",
     github: "https://github.com/Souptik-Roy/",
     linkedin: "https://www.linkedin.com/in/souptik-roy-95601926b/",
     contributions: [
-      "Created wireframes in Figma",
-      "Defined the color palette and typography",
-      "Conducted user testing",
+      "Wrote comprehensive unit and end-to-end testing suites",
+      "Identified and resolved critical edge cases in the backend",
+      "Maintained continuous integration pipelines for quality assurance",
     ],
   },
 ];
@@ -153,7 +153,7 @@ export default function TeamPage() {
         </div>
 
         <div className="mt-20 relative z-10">
-          <CtaCard 
+          <CtaCard
             title="Work with the Best Tools"
             description="Our team built LAWgic so you can build stronger cases. Start using our AI assistant today."
             backgroundClass="bg-linear-to-br from-slate-800 to-blue-900 shadow-slate-500/20"
