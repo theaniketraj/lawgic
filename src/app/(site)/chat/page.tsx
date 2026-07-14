@@ -79,13 +79,16 @@ function ChatInterface() {
             )}
           </div>
 
-          <div className="px-5 md:px-12 w-full max-w-4xl mx-auto relative z-20 pb-6">
-            <form onSubmit={handleSubmit}>
+          <div className="px-5 md:px-12 w-full max-w-4xl mx-auto relative z-20 pb-4">
+            <form onSubmit={handleSubmit} className="mb-2">
               <GeneratorInput
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
               />
             </form>
+            <p className="text-[11px] text-center text-gray-400 dark:text-gray-500 max-w-2xl mx-auto leading-relaxed px-2">
+              Disclaimer: LAWgic is an AI tool and not professional legal advice. Consult a qualified legal practitioner before making decisions.
+            </p>
           </div>
         </div>
       </div>

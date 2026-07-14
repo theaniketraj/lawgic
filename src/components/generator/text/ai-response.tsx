@@ -16,7 +16,7 @@ export default function AiResponse({ message }: Readonly<PropsType>) {
         {message.text}
       </div>
 
-      <div className="mt-2 flex items-center gap-3 text-gray-400 dark:text-gray-500 opacity-0 group-hover:opacity-100 transition-opacity px-2">
+      <div className="mt-2 flex items-center gap-3 text-gray-400 dark:text-gray-500 md:opacity-0 md:group-hover:opacity-100 opacity-100 transition-opacity px-2">
         {/* Listen Button */}
         <button
           onClick={() => speakText(message.text)}
