@@ -77,7 +77,9 @@ export function MinusIcon() {
   );
 }
 
-export function TextGeneratorIcon({ className = '' }: Readonly<{ className?: string }>) {
+export function TextGeneratorIcon({
+  className = "",
+}: Readonly<{ className?: string }>) {
   return (
     <svg
       className={className}
@@ -184,7 +186,9 @@ export function TextGeneratorIcon({ className = '' }: Readonly<{ className?: str
   );
 }
 
-export function ImageGeneratorIcon({ className = '' }: Readonly<{ className?: string }>) {
+export function ImageGeneratorIcon({
+  className = "",
+}: Readonly<{ className?: string }>) {
   return (
     <svg
       className={className}
@@ -306,7 +310,9 @@ export function ImageGeneratorIcon({ className = '' }: Readonly<{ className?: st
   );
 }
 
-export function CodeGeneratorIcon({ className = '' }: Readonly<{ className?: string }>) {
+export function CodeGeneratorIcon({
+  className = "",
+}: Readonly<{ className?: string }>) {
   return (
     <svg
       className={className}
@@ -413,7 +419,9 @@ export function CodeGeneratorIcon({ className = '' }: Readonly<{ className?: str
   );
 }
 
-export function VideoGeneratorIcon({ className = '' }: Readonly<{ className?: string }>) {
+export function VideoGeneratorIcon({
+  className = "",
+}: Readonly<{ className?: string }>) {
   return (
     <svg
       className={className}
@@ -520,7 +528,9 @@ export function VideoGeneratorIcon({ className = '' }: Readonly<{ className?: st
   );
 }
 
-export function EmailGeneratorIcon({ className = '' }: Readonly<{ className?: string }>) {
+export function EmailGeneratorIcon({
+  className = "",
+}: Readonly<{ className?: string }>) {
   return (
     <svg
       className={className}
@@ -818,7 +828,9 @@ export function ChevronDownIcon(props: Readonly<IconProps>) {
     </svg>
   );
 }
-export function MoreVerticalIcon({ className = '' }: Readonly<{ className?: string }>) {
+export function MoreVerticalIcon({
+  className = "",
+}: Readonly<{ className?: string }>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

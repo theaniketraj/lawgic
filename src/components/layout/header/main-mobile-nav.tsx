@@ -50,7 +50,7 @@ export default function MainMobileNav({ isOpen }: Readonly<MobileMenuProps>) {
                 if (item.type === "link") {
                   const { icon, color } = getNavCardStyles(item.label);
                   const isActive = pathname === item.href;
-                  
+
                   return (
                     <Link
                       key={item.href}
@@ -58,7 +58,9 @@ export default function MainMobileNav({ isOpen }: Readonly<MobileMenuProps>) {
                       className={cn(
                         "flex flex-col p-5 rounded-2xl transition-all duration-300 hover:shadow-xl relative overflow-hidden group border border-white/10",
                         color,
-                        isActive ? "ring-2 ring-white/50 shadow-lg scale-[1.02]" : "hover:-translate-y-1 hover:scale-[1.02]"
+                        isActive
+                          ? "ring-2 ring-white/50 shadow-lg scale-[1.02]"
+                          : "hover:-translate-y-1 hover:scale-[1.02]",
                       )}
                     >
                       <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -83,13 +85,14 @@ export default function MainMobileNav({ isOpen }: Readonly<MobileMenuProps>) {
                           "flex justify-between items-center w-full px-4 py-3 rounded-xl border font-medium transition-colors",
                           "bg-gray-50 dark:bg-dark-secondary border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300",
                           {
-                            "border-primary-500/50 text-primary-500 bg-primary-500/5": (
-                              item as unknown as {
-                                items: { href: string; label: string }[];
-                              }
-                            ).items.some((subItem) =>
-                              pathname.includes(subItem.href),
-                            ),
+                            "border-primary-500/50 text-primary-500 bg-primary-500/5":
+                              (
+                                item as unknown as {
+                                  items: { href: string; label: string }[];
+                                }
+                              ).items.some((subItem) =>
+                                pathname.includes(subItem.href),
+                              ),
                           },
                         )}
                       >

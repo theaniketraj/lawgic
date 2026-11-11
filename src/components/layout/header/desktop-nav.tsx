@@ -31,7 +31,7 @@ export default function DesktopNav() {
                 {
                   "bg-white/60 dark:bg-white/10 text-gray-900 dark:text-white shadow-sm border-white/50 dark:border-white/5":
                     pathname === item.href,
-                }
+                },
               )}
             >
               {item.label}
@@ -61,8 +61,13 @@ export default function DesktopNav() {
                   "border border-transparent text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-white group text-sm inline-flex gap-1 items-center px-4 py-1.5 font-medium rounded-full transition-colors duration-300",
                   {
                     "bg-white/60 dark:bg-white/10 text-gray-900 dark:text-white shadow-sm border-white/50 dark:border-white/5":
-                      item.type === 'dropdown' && (item as unknown as { items: { href: string; label: string }[] }).items.some(({ href }) => pathname?.includes(href)),
-                  }
+                      item.type === "dropdown" &&
+                      (
+                        item as unknown as {
+                          items: { href: string; label: string }[];
+                        }
+                      ).items.some(({ href }) => pathname?.includes(href)),
+                  },
                 )}
               >
                 <span>{item.label}</span>
@@ -85,7 +90,11 @@ export default function DesktopNav() {
                   className="absolute right-0 w-66.5 bg-white dark:bg-dark-secondary dark:border-gray-800 rounded-2xl shadow-theme-lg border border-gray-100 p-3 z-50"
                 >
                   <div className="space-y-1">
-                    {(item as unknown as { items: { href: string; label: string }[] }).items.map((subItem) => (
+                    {(
+                      item as unknown as {
+                        items: { href: string; label: string }[];
+                      }
+                    ).items.map((subItem) => (
                       <Link
                         key={subItem.href}
                         href={subItem.href}

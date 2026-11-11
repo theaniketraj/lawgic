@@ -23,9 +23,9 @@ export default function FaqAccordion() {
     },
     {
       id: 2,
-      question: 'Which courts and case laws are covered?',
+      question: "Which courts and case laws are covered?",
       answer:
-        'LAWgic accesses a comprehensive database of judgements from the Supreme Court of India, all state High Courts, and major tribunals. The database is updated regularly to include recent rulings.',
+        "LAWgic accesses a comprehensive database of judgements from the Supreme Court of India, all state High Courts, and major tribunals. The database is updated regularly to include recent rulings.",
     },
     {
       id: 3,
@@ -35,15 +35,15 @@ export default function FaqAccordion() {
     },
     {
       id: 4,
-      question: 'Is my data secure?',
+      question: "Is my data secure?",
       answer:
-        'Absolutely. We employ bank-grade encryption to ensure that your queries, uploaded documents, and generated drafts remain entirely confidential and are never used to train external public models.',
+        "Absolutely. We employ bank-grade encryption to ensure that your queries, uploaded documents, and generated drafts remain entirely confidential and are never used to train external public models.",
     },
     {
       id: 5,
       question: "Can I upload my own case files for summarization?",
       answer:
-        'Yes, you can upload lengthy PDFs or text documents. LAWgic will analyze the document, extract key facts, identify the ratio decidendi, and provide a concise, readable summary.',
+        "Yes, you can upload lengthy PDFs or text documents. LAWgic will analyze the document, extract key facts, identify the ratio decidendi, and provide a concise, readable summary.",
     },
   ];
 

@@ -11,7 +11,9 @@ export default function BenefitsGrid() {
             The key benefits of using LAWgic.
           </h2>
           <p className="max-w-2xl mx-auto text-base dark: font-normal leading-6 text-white/50">
-            Streamline your legal workflow. Experience the power of AI to research faster, draft smarter, and stay compliant with ever-changing regulations.
+            Streamline your legal workflow. Experience the power of AI to
+            research faster, draft smarter, and stay compliant with
+            ever-changing regulations.
           </p>
         </div>
         <div className="max-w-252 mx-auto">
@@ -23,21 +25,23 @@ export default function BenefitsGrid() {
                     Draft Professional-Grade Legal Documents
                   </h3>
                   <p className="text-base text-white/70">
-                    Don&apos;t spend hours sifting through heavy law books. Retrieve relevant case precedents, rules, and notices with advanced AI.
+                    Don&apos;t spend hours sifting through heavy law books.
+                    Retrieve relevant case precedents, rules, and notices with
+                    advanced AI.
                   </p>
                 </div>
                 <div>
                   <div className="absolute left-8 top-[61%] floating-1 flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-full text-white font-medium text-sm shadow-lg">
                     <span className="w-2 h-2 rounded-full bg-blue-300"></span>
-                    Legal Research
+                    Legal Research{""}
                   </div>
                   <div className="absolute right-28 top-[55%] floating-2 flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-full text-white font-medium text-sm shadow-lg">
                     <span className="w-2 h-2 rounded-full bg-red-300"></span>
-                    Document Drafting
+                    Document Drafting{""}
                   </div>
                   <div className="right-8 absolute bottom-[15%] floating-3 flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-md border border-white/30 rounded-full text-white font-medium text-sm shadow-lg">
                     <span className="w-2 h-2 rounded-full bg-yellow-300"></span>
-                    Case Summaries
+                    Case Summaries{""}
                   </div>
 
                   <Image
@@ -68,8 +72,8 @@ export default function BenefitsGrid() {
                     Enhance Your Firm&apos;s Productivity with AI.
                   </h3>
                   <p className="text-base max-w-sm text-white/70">
-                    Automate routine legal work, from case discovery to initial document drafting.
-                    
+                    Automate routine legal work, from case discovery to initial
+                    document drafting.
                   </p>
                 </div>
               </div>

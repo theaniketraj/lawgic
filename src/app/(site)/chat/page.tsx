@@ -1,21 +1,21 @@
-'use client';
+"use client";
 
-import React, { Suspense, useEffect } from 'react';
-import { useSearchParams, useRouter } from 'next/navigation';
-import GeneratorWrapper from '@/components/generator/generator-wrapper';
-import GeneratorInput from '@/components/generator/generator-input';
-import { RenderMessage } from '@/components/generator/render-message';
-import { GradientBlob } from '@/components/gradient-blob';
-import { useChatContext } from '@/context/ChatContext';
+import React, { Suspense, useEffect } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+import GeneratorWrapper from "@/components/generator/generator-wrapper";
+import GeneratorInput from "@/components/generator/generator-input";
+import { RenderMessage } from "@/components/generator/render-message";
+import { GradientBlob } from "@/components/gradient-blob";
+import { useChatContext } from "@/context/ChatContext";
 
 function ChatInterface() {
-  const { 
-    inputValue, 
-    setInputValue, 
-    processMessage, 
-    isTyping, 
+  const {
+    inputValue,
+    setInputValue,
+    processMessage,
+    isTyping,
     userSettings,
-    messages
+    messages,
   } = useChatContext();
 
   const searchParams = useSearchParams();
@@ -29,10 +29,10 @@ function ChatInterface() {
     const originalBodyOverflow = document.body.style.overflow;
     const originalBodyHeight = document.body.style.height;
 
-    document.documentElement.style.overflow = 'hidden';
-    document.documentElement.style.height = '100%';
-    document.body.style.overflow = 'hidden';
-    document.body.style.height = '100%';
+    document.documentElement.style.overflow = "hidden";
+    document.documentElement.style.height = "100%";
+    document.body.style.overflow = "hidden";
+    document.body.style.height = "100%";
 
     return () => {
       document.documentElement.style.overflow = originalHtmlOverflow;
@@ -46,19 +46,19 @@ function ChatInterface() {
     // Wait until ChatContext has finished loading history/welcome message
     if (messages.length === 0) return;
 
-    const prompt = searchParams.get('prompt');
+    const prompt = searchParams.get("prompt");
     if (prompt && !hasTriggeredRef.current && !isTyping) {
       hasTriggeredRef.current = true;
       processMessage(prompt);
       // Remove prompt from URL to prevent re-triggering on refresh
-      router.replace('/chat');
+      router.replace("/chat");
     }
   }, [searchParams, messages.length, isTyping, processMessage, router]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputValue.trim() || isTyping) return;
-    
+
     // Send message using custom backend process
     processMessage(inputValue);
     setInputValue("");
@@ -66,7 +66,9 @@ function ChatInterface() {
 
   return (
     <GeneratorWrapper>
-      <div className={`flex flex-col flex-1 w-full h-full min-h-0 ${userSettings?.fontSize === 'large' ? 'text-xl' : userSettings?.fontSize === 'small' ? 'text-sm' : 'text-base'}`}>
+      <div
+        className={`flex flex-col flex-1 w-full h-full min-h-0 ${userSettings?.fontSize === "large" ? "text-xl" : userSettings?.fontSize === "small" ? "text-sm" : "text-base"}`}
+      >
         <RenderMessage messages={messages} isThinking={isTyping} />
 
         <div className="w-full relative mt-auto">
@@ -87,7 +89,9 @@ function ChatInterface() {
               />
             </form>
             <p className="text-[11px] text-center text-gray-400 dark:text-gray-500 max-w-2xl mx-auto leading-relaxed px-2">
-              Disclaimer: LAWgic is an AI tool and not professional legal advice. Consult a qualified legal practitioner before making decisions.
+              Disclaimer: LAWgic is an AI tool and not professional legal
+              advice. Consult a qualified legal practitioner before making
+              decisions.
             </p>
           </div>
         </div>
@@ -98,7 +102,13 @@ function ChatInterface() {
 
 export default function Page() {
   return (
-    <Suspense fallback={<div className="flex h-screen items-center justify-center">Loading...</div>}>
+    <Suspense
+      fallback={
+        <div className="flex h-screen items-center justify-center">
+          Loading...
+        </div>
+      }
+    >
       <ChatInterface />
     </Suspense>
   );

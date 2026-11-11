@@ -94,7 +94,7 @@ export function DisclaimerModal() {
               onClick={handleAccept}
               className="w-full inline-flex justify-center items-center rounded-xl border border-transparent bg-primary-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 sm:w-auto sm:text-sm transition-colors"
             >
-              I Agree & Enter
+              I Agree & Enter{" "}
               <i className="fas fa-arrow-right ml-2 text-xs"></i>
             </button>
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-4 sm:mt-0 text-center sm:text-left">

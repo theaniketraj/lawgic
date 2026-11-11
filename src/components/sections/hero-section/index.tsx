@@ -34,7 +34,7 @@ export default function HeroSection() {
                   <span className="size-9 rounded-full gradient-bg-two inline-flex items-center justify-center text-sm font-medium text-white shadow-md">
                     <i className="fas fa-book"></i>
                   </span>
-                  Learn More
+                  Learn More{""}
                 </Link>
               </div>
             </div>
@@ -126,19 +126,19 @@ export default function HeroSection() {
         <div className="max-[1100px]:hidden">
           <div className="absolute top-14 left-16 floating-1 flex items-center gap-2 px-4 py-2 bg-white/50 dark:bg-white/10 backdrop-blur-md border border-gray-200 dark:border-white/20 rounded-full text-gray-800 dark:text-white font-medium text-sm shadow-lg">
             <span className="w-2 h-2 rounded-full bg-primary-500"></span>
-            Legal Research
+            Legal Research{""}
           </div>
           <div className="absolute left-36.25 top-74.5 floating-2 max-[1240px]:left-20 flex items-center gap-2 px-4 py-2 bg-white/50 dark:bg-white/10 backdrop-blur-md border border-gray-200 dark:border-white/20 rounded-full text-gray-800 dark:text-white font-medium text-sm shadow-lg">
             <span className="w-2 h-2 rounded-full bg-blue-500"></span>
-            Document Drafting
+            Document Drafting{""}
           </div>
           <div className="absolute right-16 top-27 floating-3 flex items-center gap-2 px-4 py-2 bg-white/50 dark:bg-white/10 backdrop-blur-md border border-gray-200 dark:border-white/20 rounded-full text-gray-800 dark:text-white font-medium text-sm shadow-lg">
             <span className="w-2 h-2 rounded-full bg-green-500"></span>
-            Case Summaries
+            Case Summaries{""}
           </div>
           <div className="absolute top-79 right-50 floating-4 max-[1240px]:right-20 max-[1350px]:right-37.5 max-[1500px]:right-50 flex items-center gap-2 px-4 py-2 bg-white/50 dark:bg-white/10 backdrop-blur-md border border-gray-200 dark:border-white/20 rounded-full text-gray-800 dark:text-white font-medium text-sm shadow-lg">
             <span className="w-2 h-2 rounded-full bg-purple-500"></span>
-            IPC to BNS
+            IPC to BNS{""}
           </div>
         </div>
       </div>

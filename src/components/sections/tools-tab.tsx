@@ -115,7 +115,12 @@ export default function AIToolsTabs() {
               <div className="p-3 tab-img-overlay">
                 {tabs.map((tab) => (
                   <Fragment key={tab.id}>
-                    <div className={cn("overflow-hidden rounded-2xl w-full h-full", currentTab.id !== tab.id && "hidden!")}>
+                    <div
+                      className={cn(
+                        "overflow-hidden rounded-2xl w-full h-full",
+                        currentTab.id !== tab.id && "hidden!",
+                      )}
+                    >
                       <Image
                         src={tab.lightImage || "/placeholder.svg"}
                         alt={tab.label}

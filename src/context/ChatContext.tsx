@@ -1,6 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any */
 "use client";
-import React, { createContext, useState, useContext, useEffect, useMemo } from "react";
+import React, {
+  createContext,
+  useState,
+  useContext,
+  useEffect,
+  useMemo,
+} from "react";
 import { toast } from "sonner";
 
 const ChatContext = createContext<any>(null);
@@ -625,7 +631,8 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
         }
       }
 
-      const backendUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+      const backendUrl =
+        process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
       const res = await fetch(`${backendUrl}/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -681,10 +688,13 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
     window.speechSynthesis.speak(utterance);
   };
 
-  const rateMessage = (messageId: string | number, rating: 'like' | 'dislike') => {
+  const rateMessage = (
+    messageId: string | number,
+    rating: "like" | "dislike",
+  ) => {
     setMessages((prev: any[]) => {
       const updatedMessages = prev.map((msg) =>
-        msg.id === messageId ? { ...msg, reaction: rating } : msg
+        msg.id === messageId ? { ...msg, reaction: rating } : msg,
       );
 
       if (currentChatId) {
@@ -818,7 +828,7 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const archiveChat = (chatId: string) => {
-    const chatToArchive = chatHistory.find((chat) => chat.id === chatId);
+    const chatToArchive = chatHistory.some((chat) => chat.id === chatId);
     if (chatToArchive) {
       setChatHistory((prev: any) => {
         const updated = prev.map((chat: any) =>
@@ -887,7 +897,7 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  const emptyTrash = async () => {
+  const emptyTrash = () => {
     const trashedChats = chatHistory.filter(
       (chat) => chat.category === "trashed",
     );
@@ -916,7 +926,7 @@ export const ChatProvider = ({ children }: { children: React.ReactNode }) => {
     updateUsageStats();
   };
 
-  const deleteChat = async (chatId: string) => {
+  const deleteChat = (chatId: string) => {
     setChatSessions((prev: any) => {
       const updated = { ...prev };
       delete updated[chatId];

@@ -8,17 +8,6 @@ export const metadata: Metadata = {
 
 const teamMembers = [
   {
-    name: "Piyush Pratap Singh",
-    role: "Project Manager",
-    github: "https://github.com/piyushsingh67/",
-    linkedin: "https://www.linkedin.com/in/piyush-singh-493a36411/",
-    contributions: [
-      "Spearheaded agile project planning and execution timelines",
-      "Coordinated tasks between frontend, backend, and data teams",
-      "Ensured timely delivery and high-quality product milestones",
-    ],
-  },
-  {
     name: "Aniket Raj",
     role: "Frontend, Data Driven UI",
     github: "https://github.com/theaniketraj/",
@@ -38,6 +27,17 @@ const teamMembers = [
       "Architected scalable and secure server-side infrastructure",
       "Designed and optimized RESTful APIs for fast data retrieval",
       "Managed database schemas and handled deployments",
+    ],
+  },
+  {
+    name: "Piyush Pratap Singh",
+    role: "Project Manager",
+    github: "https://github.com/piyushsingh67/",
+    linkedin: "https://www.linkedin.com/in/piyush-singh-493a36411/",
+    contributions: [
+      "Spearheaded agile project planning and execution timelines",
+      "Coordinated tasks between frontend, backend, and data teams",
+      "Ensured timely delivery and high-quality product milestones",
     ],
   },
   {

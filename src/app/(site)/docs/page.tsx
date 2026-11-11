@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { CtaCard } from "@/components/ui/cta-card";
 
 export const metadata: Metadata = {
@@ -39,8 +38,6 @@ export default function DocsPage() {
           </div>
 
           <div className="grid md:grid-cols-3 gap-6 relative">
-
-
             {/* Step 1 */}
             <div className="relative group">
               <div className="bg-white dark:bg-gray-900 rounded-3xl p-8 h-full border border-gray-100 dark:border-gray-800 shadow-xl transition-transform duration-300 hover:-translate-y-2">
@@ -203,14 +200,15 @@ export default function DocsPage() {
                           <span className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center shrink-0">
                             <i className="fas fa-terminal text-[10px]"></i>
                           </span>
-                          &quot;Summarize the Kesavananda Bharati case.&quot;
+                          &quot;Summarize the Kesavananda Bharati
+                          case.&quot;{" "}
                         </li>
                         <li className="flex items-center gap-3 text-white/90 text-sm">
                           <span className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center shrink-0">
                             <i className="fas fa-terminal text-[10px]"></i>
                           </span>
                           &quot;What are the latest SC guidelines on
-                          anticipatory bail?&quot;
+                          anticipatory bail?&quot;{" "}
                         </li>
                       </ul>
                     </div>

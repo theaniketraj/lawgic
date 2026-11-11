@@ -9,7 +9,7 @@ export default function NotFoundPage() {
   return (
     <div className="dark:bg-[#101828] flex flex-col min-h-screen">
       <Header />
-      
+
       <main className="isolate flex-1 flex flex-col">
         <section className="pt-24 pb-20 relative overflow-hidden">
           {/* Glowing Orbs Background */}
@@ -94,45 +94,64 @@ export default function NotFoundPage() {
                 Oops! You've strayed from the path.
               </h1>
               <p className="text-lg text-gray-600 dark:text-gray-400">
-                We can't seem to find the page you're looking for. Let's get you back on track with these helpful destinations.
+                We can't seem to find the page you're looking for. Let's get you
+                back on track with these helpful destinations.
               </p>
             </div>
 
             {/* Infographic Cards */}
             <div className="grid md:grid-cols-3 gap-6 mb-20">
-              <Link href="/chat" className="group flex flex-col p-8 rounded-2xl bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 hover:shadow-xl dark:hover:bg-white/10 transition-all duration-300">
+              <Link
+                href="/chat"
+                className="group flex flex-col p-8 rounded-2xl bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 hover:shadow-xl dark:hover:bg-white/10 transition-all duration-300"
+              >
                 <div className="w-12 h-12 rounded-xl bg-primary-500/10 border border-primary-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   <i className="fas fa-robot text-primary-500 text-xl"></i>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">AI Legal Chat</h3>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                  AI Legal Chat
+                </h3>
                 <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-8 flex-1">
-                  Draft documents, research case laws, and get instant answers from our advanced legal AI model.
+                  Draft documents, research case laws, and get instant answers
+                  from our advanced legal AI model.
                 </p>
                 <div className="text-primary-500 text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
                   Start Chatting <i className="fas fa-arrow-right"></i>
                 </div>
               </Link>
 
-              <Link href="/docs" className="group flex flex-col p-8 rounded-2xl bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 hover:shadow-xl dark:hover:bg-white/10 transition-all duration-300">
+              <Link
+                href="/docs"
+                className="group flex flex-col p-8 rounded-2xl bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 hover:shadow-xl dark:hover:bg-white/10 transition-all duration-300"
+              >
                 <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   <i className="fas fa-book text-blue-500 text-xl"></i>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">Documentation</h3>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                  Documentation
+                </h3>
                 <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-8 flex-1">
-                  Learn how to maximize your productivity using LAWgic's comprehensive suite of tools.
+                  Learn how to maximize your productivity using LAWgic's
+                  comprehensive suite of tools.
                 </p>
                 <div className="text-blue-500 text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
                   Read the Docs <i className="fas fa-arrow-right"></i>
                 </div>
               </Link>
 
-              <Link href="/about" className="group flex flex-col p-8 rounded-2xl bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 hover:shadow-xl dark:hover:bg-white/10 transition-all duration-300">
+              <Link
+                href="/about"
+                className="group flex flex-col p-8 rounded-2xl bg-white dark:bg-white/5 border border-gray-100 dark:border-white/10 hover:shadow-xl dark:hover:bg-white/10 transition-all duration-300"
+              >
                 <div className="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   <i className="fas fa-building text-purple-500 text-xl"></i>
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">About Us</h3>
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                  About Us
+                </h3>
                 <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed mb-8 flex-1">
-                  Discover our mission to revolutionize the Indian Judiciary through ethical AI technology.
+                  Discover our mission to revolutionize the Indian Judiciary
+                  through ethical AI technology.
                 </p>
                 <div className="text-purple-500 text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
                   Our Vision <i className="fas fa-arrow-right"></i>
@@ -141,7 +160,7 @@ export default function NotFoundPage() {
             </div>
 
             {/* CTA */}
-            <CtaCard 
+            <CtaCard
               title="Ready to dive back in?"
               description="Get instant insights and professional legal drafting right at your fingertips."
               backgroundClass="bg-linear-to-br from-indigo-600 to-purple-700 shadow-indigo-500/20"

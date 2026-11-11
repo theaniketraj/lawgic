@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars, @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-expressions */
 "use client";
 
-import Link from "next/link";
 import { useState, useEffect, useRef } from "react";
 import { useChatContext } from "@/context/ChatContext";
 import { useTheme } from "next-themes";
@@ -12,7 +11,6 @@ import { AvatarSection } from "@/components/generator/avatar-section";
 export default function GeneratorSidebar() {
   const {
     conversationMemory,
-    status,
     currentEmotion,
     ttsEnabled,
     currentChatId,
@@ -25,7 +23,6 @@ export default function GeneratorSidebar() {
     chatCategories,
     conversationTemplates,
     isLoadingChats,
-    isLoadingStats,
     clearMemory,
     clearChatHistory,
     toggleTTS,
@@ -83,9 +80,13 @@ export default function GeneratorSidebar() {
     const handleClickOutside = (e: MouseEvent) => {
       // Don't close if they click the "open sidebar" pulse button (which is outside the aside)
       const target = e.target as HTMLElement;
-      if (target.closest('.highlight-pulse-btn')) return;
+      if (target.closest(".highlight-pulse-btn")) return;
 
-      if (!isCollapsed && sidebarRef.current && !sidebarRef.current.contains(e.target as Node)) {
+      if (
+        !isCollapsed &&
+        sidebarRef.current &&
+        !sidebarRef.current.contains(e.target as Node)
+      ) {
         setIsCollapsed(true);
       }
     };
@@ -146,7 +147,7 @@ export default function GeneratorSidebar() {
 
       {/* Mobile Backdrop Overlay */}
       {!isCollapsed && (
-        <div 
+        <div
           className="md:hidden fixed inset-0 bg-gray-900/20 dark:bg-black/40 backdrop-blur-sm z-40 transition-opacity"
           onClick={() => setIsCollapsed(true)}
           aria-hidden="true"
@@ -155,13 +156,13 @@ export default function GeneratorSidebar() {
 
       <aside
         ref={sidebarRef}
-        className={`bg-white dark:bg-dark-primary border-r border-gray-100 dark:border-gray-800 shrink-0 absolute md:relative inset-y-0 left-0 z-50 h-full transition-all duration-300 overflow-hidden ${
+        className={`bg-white dark:bg-dark-primary border-r border-gray-100 dark:border-gray-800 shrink-0 absolute md:relative inset-y-0 left-0 z-50 h-[calc(100dvh-56px)] md:h-[calc(100dvh-73px)] min-h-0 transition-all duration-300 overflow-hidden ${
           isCollapsed
             ? "w-0 min-w-0 max-w-0 border-r-0 opacity-0"
             : "w-[85%] sm:w-[320px] md:w-100 max-w-full opacity-100 shadow-2xl md:shadow-none"
         }`}
       >
-        <div className="flex flex-col h-full w-full">
+        <div className="grid h-full min-h-0 w-full grid-rows-[auto_minmax(0,1fr)_auto]">
           {/* Navigation Tabs */}
           <div className="flex border-b border-gray-100 dark:border-gray-800">
             {[
@@ -174,7 +175,7 @@ export default function GeneratorSidebar() {
               <button
                 key={tab.id}
                 onClick={() => setActiveSection(tab.id)}
-                className={`flex-1 py-5 flex items-center justify-center border-b-2 transition-colors ${
+                className={`flex-1 py-3 md:py-5 flex items-center justify-center border-b-2 transition-colors ${
                   activeSection === tab.id
                     ? "border-primary-500 text-primary-500"
                     : "border-transparent text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
@@ -186,15 +187,15 @@ export default function GeneratorSidebar() {
             ))}
             <button
               onClick={() => setIsCollapsed(true)}
-              className="flex-1 py-5 flex items-center justify-center border-b-2 border-transparent text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
+              className="flex-1 py-3 md:py-5 flex items-center justify-center border-b-2 border-transparent text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
               title="Close Sidebar (Esc)"
             >
-              <i className="fas fa-chevron-left text-xl"></i>
+              <i className="fas fa-chevron-left text-lg md:text-xl"></i>
             </button>
           </div>
 
           {/* Content Area */}
-          <div className="flex-[1_1_0] overflow-y-auto custom-scrollbar p-4">
+          <div className="min-h-0 min-w-0 overflow-y-auto overscroll-contain touch-pan-y custom-scrollbar p-3 md:p-4">
             {/* Chats Section */}
             {activeSection === "chats" && (
               <div className="space-y-6">
@@ -280,7 +281,11 @@ export default function GeneratorSidebar() {
                                 : archiveChat(chat.id);
                             }}
                             className="p-2 text-gray-400 hover:text-primary-500 transition"
-                            title={chat.category === "archived" ? "Unarchive" : "Archive"}
+                            title={
+                              chat.category === "archived"
+                                ? "Unarchive"
+                                : "Archive"
+                            }
                           >
                             <i
                               className={`fas ${chat.category === "archived" ? "fa-undo" : "fa-archive"}`}
@@ -313,7 +318,10 @@ export default function GeneratorSidebar() {
                   </h2>
                   <button
                     onClick={emptyTrash}
-                    disabled={chatHistory.filter((c: any) => c.category === "trashed").length === 0}
+                    disabled={
+                      chatHistory.filter((c: any) => c.category === "trashed")
+                        .length === 0
+                    }
                     className="text-xs text-red-500 hover:text-red-600 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1 font-medium transition-colors"
                   >
                     <i className="fas fa-times-circle"></i> Empty
@@ -321,12 +329,15 @@ export default function GeneratorSidebar() {
                 </div>
 
                 <div className="space-y-1">
-                  {chatHistory.filter((c: any) => c.category === "trashed").length === 0 ? (
+                  {chatHistory.filter((c: any) => c.category === "trashed")
+                    .length === 0 ? (
                     <div className="text-center py-10">
                       <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gray-100 dark:bg-dark-secondary mb-3">
                         <i className="fas fa-leaf text-gray-400 text-xl"></i>
                       </div>
-                      <p className="text-sm text-gray-500 dark:text-gray-400">Recycle Bin is empty</p>
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        Recycle Bin is empty
+                      </p>
                     </div>
                   ) : (
                     chatHistory
@@ -344,7 +355,7 @@ export default function GeneratorSidebar() {
                               {new Date(chat.lastActive).toLocaleDateString()}
                             </span>
                           </div>
-                          
+
                           <div className="flex opacity-0 group-hover:opacity-100 transition-opacity">
                             <button
                               onClick={(e) => {
@@ -719,21 +730,20 @@ export default function GeneratorSidebar() {
                     className="w-full flex items-center justify-center gap-2 py-3 bg-red-50 hover:bg-red-100 text-red-600 dark:bg-red-500/10 dark:hover:bg-red-500/20 dark:text-red-400 rounded-xl font-medium transition"
                   >
                     <i className="fas fa-trash"></i>
-                    Clear All History
+                    Clear All History{" "}
                   </button>
                 </div>
               </div>
             )}
           </div>
 
-          {/* Global Action Footer */}
-          <div className="p-4 border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-dark-primary">
+          <div className="shrink-0 p-3 md:p-4 border-t border-gray-100 dark:border-gray-800 bg-white dark:bg-dark-primary">
             <button
               onClick={createNewChat}
               className="w-full flex items-center justify-center gap-2 py-3 bg-primary-500 hover:bg-primary-600 text-white rounded-full font-medium transition shadow-sm hover:shadow-md"
             >
               <i className="fas fa-plus"></i>
-              New Chat
+              New Chat{" "}
             </button>
           </div>
         </div>

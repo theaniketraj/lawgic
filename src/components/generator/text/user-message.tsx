@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { AutoGrowingTextArea } from '@/components/ui/inputs/textarea';
-import { PencilIcon } from '@/icons/icons';
-import { cn } from '@/lib/utils';
-import { useState } from 'react';
+import { AutoGrowingTextArea } from "@/components/ui/inputs/textarea";
+import { PencilIcon } from "@/icons/icons";
+import { cn } from "@/lib/utils";
+import { useState } from "react";
 
 type PropsType = {
   message: string;
   showActions?: boolean;
   onEdit: (
     newMessage: string,
-    options?: { isSubmitting: boolean }
+    options?: { isSubmitting: boolean },
   ) => Promise<void>;
 };
 
@@ -34,7 +34,7 @@ export default function UserMessage({
     try {
       await onEdit(value, { isSubmitting });
     } catch (error) {
-      console.error('Error while editing message:', error);
+      console.error("Error while editing message:", error);
     } finally {
       setIsSubmitting(false);
       setShowEditInput(false);
@@ -45,8 +45,8 @@ export default function UserMessage({
     <div>
       <div
         className={cn(
-          'shadow-theme-xs bg-primary-100 dark:bg-white/10 rounded-2xl rounded-tr-sm py-2.5 px-4 max-w-md ml-auto w-fit',
-          showEditInput && 'max-w-none w-full'
+          "shadow-theme-xs bg-primary-100 dark:bg-white/10 rounded-2xl rounded-tr-sm py-2.5 px-4 max-w-md ml-auto w-fit",
+          showEditInput && "max-w-none w-full",
         )}
       >
         {!showEditInput ? (
@@ -56,7 +56,7 @@ export default function UserMessage({
             onChange={(value) => setValue(value)}
             value={value}
             onKeyDown={(e) => {
-              if (e.key === 'Escape') {
+              if (e.key === "Escape") {
                 handleCancel();
               }
             }}
@@ -94,7 +94,7 @@ export default function UserMessage({
             className="bg-primary-500 rounded-full px-4.5 py-2 font-medium text-white hover:opacity-90 text-sm disabled:pointer-events-none disabled:opacity-70"
             disabled={isSubmitting}
           >
-            {isSubmitting ? 'Saving...' : 'Save'}
+            {isSubmitting ? "Saving..." : "Save"}
           </button>
         </div>
       )}

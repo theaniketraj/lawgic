@@ -1,6 +1,6 @@
-import type { UIMessage } from 'ai';
-import { type ClassValue, clsx } from 'clsx';
-import { twMerge } from 'tailwind-merge';
+import type { UIMessage } from "ai";
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -11,16 +11,18 @@ export const getCurrentYear = (): number => {
 };
 
 export function getMostRecentUserMessage(messages: any[]) {
-  const userMessages = messages.filter((message) => message.role === 'user' || message.sender === 'user');
+  const userMessages = messages.filter(
+    (message) => message.role === "user" || message.sender === "user",
+  );
   return userMessages.at(-1);
 }
 
 export function errorHandler(error: unknown) {
   if (error == null) {
-    return 'unknown error';
+    return "unknown error";
   }
 
-  if (typeof error === 'string') {
+  if (typeof error === "string") {
     return error;
   }
 

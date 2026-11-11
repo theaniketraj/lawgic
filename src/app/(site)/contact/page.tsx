@@ -1,10 +1,10 @@
-import { Input } from '@/components/ui/inputs';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/inputs/textarea';
-import type { Metadata } from 'next';
+import { Input } from "@/components/ui/inputs";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/inputs/textarea";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: 'Contact',
+  title: "Contact",
 };
 
 export default function ContactPage() {

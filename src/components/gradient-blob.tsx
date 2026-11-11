@@ -7,8 +7,8 @@ export function GradientBlob({
 }: Readonly<{ className?: string }>) {
   return (
     <div className={`overflow-visible pointer-events-none ${className}`}>
-      <GradientBlob2 
-        className="absolute bottom-0 left-1/2 z-10 -translate-x-1/2 opacity-80 max-w-none! w-[200vw] md:w-[150vw] h-[50vh]" 
+      <GradientBlob2
+        className="absolute bottom-0 left-1/2 z-10 -translate-x-1/2 opacity-80 max-w-none! w-[200vw] md:w-[150vw] h-[50vh]"
         preserveAspectRatio="none"
       />
     </div>

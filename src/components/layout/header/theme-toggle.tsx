@@ -1,13 +1,13 @@
 "use client";
 
-import { useTheme } from 'next-themes';
+import { useTheme } from "next-themes";
 
 const ThemeToggle = () => {
   const { setTheme, resolvedTheme } = useTheme();
 
   return (
     <button
-      onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+      onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
       className="relative flex items-center justify-center size-10 text-gray-500 hover:text-primary-500 dark:text-gray-400 dark:hover:text-primary-400 transition-colors focus:outline-none"
       aria-label="Toggle Dark Mode"
     >
